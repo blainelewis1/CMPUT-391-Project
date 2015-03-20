@@ -1,6 +1,6 @@
 <?php
 
-include("../misc/utils.php");
+include_once("misc/utils.php");
 
 /*
 	Ensures there is a user currently logged in
@@ -34,7 +34,21 @@ function getUserName() {
 
 function login($user_name, $password) {
 	//TODO: simple where clause
-	return false;
+	$_SESSION['USER'] = "blaine";
+	return true;
+}
+
+function logout() {
+	unset($_SESSION['USER']);
+}
+
+function isAdmin() {
+	//TODO: return a real value here
+	return true;
+}
+
+function isRadiologist() {
+	return true;
 }
 
 ?>

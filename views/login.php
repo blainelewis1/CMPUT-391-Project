@@ -2,7 +2,7 @@
 
 <?php 
 
-$title = "Hub";
+$title = "Login";
 
 include("head.php");
 
@@ -13,12 +13,15 @@ include("head.php");
 	<?php include("header.php"); ?>
 
 	<div id="content">
+		
 		<?php
-			if ($failed):
+			if (isset($failed) && $failed):
 		?>
+		
 			<div class="failure">
 				Incorrect username or password
 			</div>
+		
 		<?php
 			endif;
 		?>
@@ -27,7 +30,9 @@ include("head.php");
 			
 			<label>Username: </label>
 
-			<input type="text" name="username" value="<?= $username ?>" />	
+			<input type="text" name="username" value="<?= isset($username) ? $username : '' ?>" />	
+
+			<br />
 
 			<label>Password: </label>
 			

@@ -5,8 +5,10 @@
 	redirect point was set
 */
 
-function redirect(){
-	header('Location: '.$_SESSION['REDIRECT_TO']);
+function redirect($default = "index.php"){
+	$new_location = isset($_SESSION['REDIRECT_TO']) ? $_SESSION['REDIRECT_TO'] : $default;
+
+	header('Location: '.$new_location);
 }
 
 /*

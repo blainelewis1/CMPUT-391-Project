@@ -1,16 +1,17 @@
 <?php
-include("models/user.php");
-include("misc/utils.php");
+
+include_once("models/user.php");
+include_once("misc/utils.php");
 
 //Check if we are currently submitting, if we are try logging in
 //If it succeeds redirect to wherever you started
 //Otherwise we want to set the login view to the failed state and 
 
 if(isUserLoggedIn()){
-	redirect();
+	redirect("index.php");
 }
 
-if(isset($_POST['submitted'])){
+if(isset($_POST['submit'])){
 
 	if(login($_POST['username'], $_POST['password'])){
 
@@ -19,7 +20,7 @@ if(isset($_POST['submitted'])){
 	} else {
 		
 		//Auto fill the username
-		$$username = $_POST['user_name'];
+		$username = $_POST['username'];
 		$failed = true;
 
 	}

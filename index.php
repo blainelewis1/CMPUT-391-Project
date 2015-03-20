@@ -1,10 +1,12 @@
 <?php
 
-include('models/user.php');
+include_once('models/user.php');
 
 ensureUserLoggedIn();
 
-$user = getUserName();
+$admin = isAdmin();
+$radiologist = isRadiologist();
+
 include("landing.php");
 
 ?>
