@@ -2,6 +2,7 @@
 
 session_start();
 
+include_once("misc/database.php");
 include_once("misc/utils.php");
 
 /*
