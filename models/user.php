@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include_once("misc/utils.php");
 
 /*
@@ -12,6 +14,7 @@ function ensureUserLoggedIn() {
 
 		setRedirect($_SERVER['REQUEST_URI']);
 		header('Location: login.php');
+
 	} 
 }
 

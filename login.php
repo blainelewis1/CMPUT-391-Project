@@ -11,11 +11,12 @@ if(isUserLoggedIn()){
 	redirect("index.php");
 }
 
+
 if(isset($_POST['submit'])){
 
 	if(login($_POST['username'], $_POST['password'])){
 
-		redirect();
+		redirect("index.php");
 
 	} else {
 		

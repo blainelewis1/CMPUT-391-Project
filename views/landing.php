@@ -14,9 +14,10 @@ include("head.php");
 
 	<div id="content">
 		
-		<a href="user_settings.php">User</a>
 		
-		<!-- TODO: display only the ones available to a given user -->
+		<h3
+			<a href="user_settings.php">User</a>
+		</h3>
 		
 		<?php if($admin): ?>
 

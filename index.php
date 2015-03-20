@@ -7,6 +7,6 @@ ensureUserLoggedIn();
 $admin = isAdmin();
 $radiologist = isRadiologist();
 
-include("landing.php");
+include("views/landing.php");
 
 ?>
