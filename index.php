@@ -2,10 +2,9 @@
 
 include('models/user.php');
 
-userLoggedIn();
+ensureUserLoggedIn();
 
 $user = getUserName();
-
-showView("landing.php");
+include("landing.php");
 
 ?>

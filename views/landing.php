@@ -2,7 +2,7 @@
 
 <?php 
 
-$title = "Hub";
+$title = "Landing";
 
 include("head.php");
 
@@ -13,7 +13,7 @@ include("head.php");
 	<?php include("header.php"); ?>
 
 	<div id="content">
-		<a href="">XXX Module</a>
+		<a href="search.php">Search</a>
 		<a href="">XXX Module</a>
 		<a href="">XXX Module</a>
 	</div>
