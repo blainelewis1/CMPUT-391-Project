@@ -2,10 +2,7 @@
 
 include_once('models/user.php');
 
-ensureUserLoggedIn();
-
-$admin = isAdmin();
-$radiologist = isRadiologist();
+$user = User::getLoggedInUser();
 
 include("views/landing.php");
 

@@ -19,7 +19,7 @@ include("head.php");
 			<a href="user_settings.php">User</a>
 		</h3>
 		
-		<?php if($admin): ?>
+		<?php if($user->isAdmin()): ?>
 
 		<h3>
 			<a href="user_management.php">User Management</a>
@@ -36,7 +36,7 @@ include("head.php");
 
 		<?php endif; ?>
 
-		<?php if($radiologist): ?>
+		<?php if($user->isRadiologist()): ?>
 
 		<h3>
 			<a href="uploading.php">Uploading</a>

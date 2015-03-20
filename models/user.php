@@ -5,54 +5,84 @@ session_start();
 include_once("misc/database.php");
 include_once("misc/utils.php");
 
-/*
-	Ensures there is a user currently logged in
-	If there is not then we redirect
-	But we remember the page and set a redirect point
-*/
-function ensureUserLoggedIn() {
-	if(!isset($_SESSION['USER'])) {
 
-		setRedirect($_SERVER['REQUEST_URI']);
-		header('Location: login.php');
+class User {
 
-	} 
+	private $username = "";
+
+	public static function getLoggedInUser(){
+		return new User();
+	}
+
+
+	public static function isUserLoggedIn() {
+		return isset($_SESSION['USER']);
+	}	
+
+	private function __construct() {
+		$this->ensureUserLoggedIn();
+		$this->username = $_SESSION['USER'];
+	}
+
+	/*
+		Ensures there is a user currently logged in
+		If there is not then we redirect
+		But we remember the page and set a redirect point
+	*/
+	private function ensureUserLoggedIn() {
+		if(!isset($_SESSION['USER'])) {
+
+			setRedirect($_SERVER['REQUEST_URI']);
+			header('Location: login.php');
+			die();
+
+		} 
+	}
+
+	public function isAdmin() {
+		//TODO: return a real value here
+		return true;
+	}
+
+	public function isRadiologist() {
+		//TODO: return a real value here
+		return true;
+	}
+
+	public function getUserName() {
+		return $this->username;
+	}
+
+	/*
+		Returns true if the login succeeds, false if it doesn't
+	*/
+
+	public static function login($username, $password) {
+		$db = getPDOInstance();
+
+		$query = $db->prepare("SELECT users.user_name 
+							   FROM users
+							   WHERE users.user_name = ? AND users.password = ?");
+		$query->bindValue(1, $username);
+		$query->bindValue(2, $password);
+		$query->execute();
+
+		if($query->rowCount()) {
+
+			$_SESSION['USER'] = $username;
+			return true;
+
+		}
+
+		return false;
+	}
+
+
+	public static function logout() {
+		unset($_SESSION['USER']);
+	}
+
 }
 
-function isUserLoggedIn() {
-	return isset($_SESSION['USER']);
-}
-
-/*
-	Extracts the username from the session
-*/
-
-function getUserName() {
-	return $_SESSION['USER'];
-}
-
-
-/*
-	Returns true if the login succeeds, false if it doesn't
-*/
-
-function login($user_name, $password) {
-	//TODO: simple where clause
-	$_SESSION['USER'] = "blaine";
-	return true;
-}
-
-function logout() {
-	unset($_SESSION['USER']);
-}
-
-function isAdmin() {
-	//TODO: return a real value here
-	return true;
-}
-
-function isRadiologist() {
-	return true;
-}
 
 ?>

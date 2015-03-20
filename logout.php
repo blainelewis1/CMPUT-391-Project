@@ -2,7 +2,7 @@
 
 include("models/user.php");
 
-logout();
+User::logout();
 
 header("Location: login.php");
 

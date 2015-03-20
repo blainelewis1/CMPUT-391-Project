@@ -2,7 +2,7 @@
 
 <?php 
 
-$title = "Landing";
+$title = "User Settings";
 
 include("head.php");
 

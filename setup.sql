@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS radiology;
+USE radiology;
+
+
 /*
  *  File name:  setup.sql
  *  Function:   to create the initial database schema for the CMPUT 391 project,
@@ -22,7 +26,7 @@ CREATE TABLE persons (
    phone      char(10),
    PRIMARY KEY(person_id),
    UNIQUE (email)
-);
+) ENGINE=INNODB;
 
 /*
  *  To store the log-in information
@@ -37,8 +41,8 @@ CREATE TABLE users (
    date_registered date,
    CHECK (class in ('a','p','d','r')),
    PRIMARY KEY(user_name),
-   FOREIGN KEY (person_id) REFERENCES persons
-);
+   FOREIGN KEY (person_id) REFERENCES persons(person_id)
+) ENGINE=INNODB;
 
 /*
  *  to indicate who is whose family doctor.
@@ -46,10 +50,10 @@ CREATE TABLE users (
 CREATE TABLE family_doctor (
    doctor_id    int,
    patient_id   int,
-   FOREIGN KEY(doctor_id) REFERENCES persons,
-   FOREIGN KEY(patient_id) REFERENCES persons,
+   FOREIGN KEY(doctor_id) REFERENCES persons(person_id),
+   FOREIGN KEY(patient_id) REFERENCES persons(person_id),
    PRIMARY KEY(doctor_id,patient_id)
-);
+) ENGINE=INNODB;
 
 /*
  *  to store the radiology records
@@ -65,10 +69,10 @@ CREATE TABLE radiology_record (
    diagnosis    varchar(128),
    description   varchar(1024),
    PRIMARY KEY(record_id),
-   FOREIGN KEY(patient_id) REFERENCES persons,
-   FOREIGN KEY(doctor_id) REFERENCES  persons,
-   FOREIGN KEY(radiologist_id) REFERENCES  persons
-);
+   FOREIGN KEY(patient_id) REFERENCES persons(person_id),
+   FOREIGN KEY(doctor_id) REFERENCES  persons(person_id),
+   FOREIGN KEY(radiologist_id) REFERENCES  persons(person_id)
+) ENGINE=INNODB;
 
 /*
  *  to store the pacs images
@@ -80,5 +84,5 @@ CREATE TABLE pacs_images (
    regular_size blob,
    full_size    blob,
    PRIMARY KEY(record_id,image_id),
-   FOREIGN KEY(record_id) REFERENCES radiology_record
-);
+   FOREIGN KEY(record_id) REFERENCES radiology_record(record_id)
+) ENGINE=INNODB;

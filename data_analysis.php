@@ -2,11 +2,13 @@
 
 include_once('models/user.php');
 
-ensureUserLoggedIn();
+$user = User::getLoggedInUser();
 
-if(!isAdmin()){
+if($user->isAdmin()){
+
 	include("views/denied.php");
 	die();
+	
 }
 
 include("views/data_analysis.php");

@@ -2,7 +2,7 @@
 
 include_once('models/user.php');
 
-ensureUserLoggedIn();
+$user = User::getLoggedInUser();
 
 
 include("views/user_settings.php");

@@ -9,6 +9,7 @@ function redirect($default = "index.php"){
 	$new_location = isset($_SESSION['REDIRECT_TO']) ? $_SESSION['REDIRECT_TO'] : $default;
 
 	header('Location: '.$new_location);
+	die();
 }
 
 /*

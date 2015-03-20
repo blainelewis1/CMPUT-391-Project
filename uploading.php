@@ -2,9 +2,9 @@
 
 include_once('models/user.php');
 
-ensureUserLoggedIn();
+$user = User::getLoggedInUser();
 
-if(!isRadiologist()){
+if(!$user->isRadiologist()){
 	include("views/denied.php");
 	die();
 }

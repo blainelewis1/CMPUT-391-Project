@@ -7,14 +7,14 @@ include_once("misc/utils.php");
 //If it succeeds redirect to wherever you started
 //Otherwise we want to set the login view to the failed state and 
 
-if(isUserLoggedIn()){
+if(User::isUserLoggedIn()){
 	redirect("index.php");
 }
 
 
 if(isset($_POST['submit'])){
 
-	if(login($_POST['username'], $_POST['password'])){
+	if(User::login($_POST['username'], $_POST['password'])){
 
 		redirect("index.php");
 

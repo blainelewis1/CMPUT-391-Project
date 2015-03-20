@@ -2,15 +2,20 @@
 
 
 
-getPDOInstance() {
+function getPDOInstance() {
 
-	$username = "XXXX";
-	$password = "XXXX";
-	$dbname = "XXXX";
-	$host = "XXXX";
-	$dbtype = "XXXX";
+	static $instance = null;
+	
+	if(!$instance) {
+		include_once("dbpass.php");
 
-	static $instance = new PDO(".$dbtype.":host=".$host.";dbname=".$dbname.";charset=utf8", $username, $password);
+		$conn = $dbtype.":host=".$host.";dbname=".$dbname.";charset=utf8";
+
+
+		$instance = new PDO($conn, $username, $password);
+		$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	}
+
 	return $instance;
 }
 
