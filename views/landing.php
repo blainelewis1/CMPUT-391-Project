@@ -15,7 +15,7 @@ include("head.php");
 	<div id="content">
 		
 		
-		<h3
+		<h3>
 			<a href="user_settings.php">User</a>
 		</h3>
 		
