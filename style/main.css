@@ -1,0 +1,28 @@
+body {
+	font-family: helvetica;
+}
+
+#content {
+	width:960px;
+	margin:auto;
+}
+
+#login {
+	text-align: center;
+}
+
+.row .label {
+	width:100px;
+}
+
+.row input {
+	width:200px;
+}
+
+.label {
+	display:inline-block;
+}
+
+.row {
+	padding:5px;
+}

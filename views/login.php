@@ -26,22 +26,32 @@ include("head.php");
 			endif;
 		?>
 
-		<form action="login.php" method="POST">
-			
-			<label>Username: </label>
+		<div id="login">
 
-			<input type="text" name="username" value="<?= isset($username) ? $username : '' ?>" />	
+			<form action="login.php" method="POST">
+				<div class="row">
 
-			<br />
+					<div class="label">
+						<label>Username: </label>
+					</div>
 
-			<label>Password: </label>
-			
-			<input type="password" name="password" />
+					<input type="text" autofocus name="username" value="<?= isset($username) ? $username : '' ?>" />	
+				</div>
+				
+				<div class="row">
 
-			<input type="submit" name="submit" value="submit" />
+					<div class="label">
+						<label>Password: </label>
+					</div>	
 
-		</form>
+					<input type="password" name="password" />
 
+					</div>
+
+				<input type="submit" name="submit" value="submit" />
+
+			</form>
+		</div>
 	</div>
 
 	<?php include("footer.php"); ?>
