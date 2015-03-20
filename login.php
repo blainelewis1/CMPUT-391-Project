@@ -19,7 +19,8 @@ if(isset($_POST['submit'])){
 		redirect("index.php");
 
 	} else {
-		
+		//TODO: this should be out of scope... why isn't it
+
 		//Auto fill the username
 		$username = $_POST['username'];
 		$failed = true;
