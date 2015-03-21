@@ -5,12 +5,15 @@ session_start();
 include_once("misc/database.php");
 include_once("misc/utils.php");
 
+//TODO: changing your username means that you login as a different person
 
 class User {
 	const PASSWORD = "password";
 	const USER_NAME = "user_name";
+	const CLASS_NAME = "class";
 	const CHANGE_PASSWORD = "change_password";
 	const LOGIN = "login";
+	const SUBMIT = "submit";
 
 	const LOGIN_QUERY = "SELECT users.user_name 
 				   		 FROM users
@@ -22,21 +25,135 @@ class User {
 							 SET password = :password
 							 WHERE users.user_name = :user_name";
 
-	private $username = "";
+	const SELECT_ALL_USERS_QUERY = "SELECT users.user_name,
+										   users.person_id,
+										   users.class,
+										   users.date_registered
+									FROM users";
+	
+	//TODO: CURDATE will probably cause problems when moving to oracle									
+	const INSERT = "INSERT INTO users 
+					(person_id, user_name, class, password, date_registered)
+					VALUES (:person_id, :user_name, :class, :password, CURDATE())";
+
+	const SELECT_FROM_USER_NAME = "SELECT users.user_name,
+										   users.person_id,
+										   users.class,
+										   users.date_registered
+									FROM users
+									WHERE users.user_name = :user_name
+									LIMIT 1";
+
+	public $class;
+	public $user_name = "";
+	private $new = false; 
+	public $person_id;
+
+	public static function getAllUsers() {
+		$db = getPDOInstance();
+
+		$query = $db->prepare(User::SELECT_ALL_USERS_QUERY);
+		$query->execute();	
+
+		return $query->fetchAll();
+	}
+
+	public static function fromUsername($user_name) {
+		$user = new User();
+
+
+		$user->user_name = $user_name;
+		$user->selectFromUsername();
+
+		return $user;
+	}
+	/*
+	public static function fromPersonIdNew($person_id){
+		$user = new User();
+		$user->new = true;
+		$user->person_id = $person_id;
+	}
+	*/
 
 	public static function getLoggedInUser(){
-		return new User();
+		$user = new User();
+		$user->ensureUserLoggedIn();
+		$user->user_name = $_SESSION[User::USER_NAME];
+		return $user;
+
 	}
 
 
 	public static function isUserLoggedIn() {
-		return isset($_SESSION['USER']);
+		return isset($_SESSION[User::USER_NAME]);
 	}	
 
+	public function __construct() {
+		$this->new = true;
+	}
 
-	private function __construct() {
-		$this->ensureUserLoggedIn();
-		$this->username = $_SESSION['USER'];
+	public function saveToDatabase() {
+		try {
+			if($this->new){
+				$this->insert();
+			} else {
+				$this->update();
+			}
+			return true;
+		} catch(PDOException $e) {
+			if($e->errorInfo[1] == -803 || $e->errorInfo[1] == 1062){
+				return false;
+			} 
+		}
+		
+	}
+
+	public function isNew() {
+		return $this->new;
+	}
+
+	private function selectFromUsername() {
+		$db = getPDOInstance();
+
+		$query = $db->prepare(User::SELECT_FROM_USER_NAME);
+
+		$query->bindValue("user_name", $this->user_name);
+		
+		$query->execute();	
+
+		$this->populateFromRow($query->fetch());
+	
+	}
+
+	private function populateFromRow($row) {
+		$this->class = $row->class;
+		$this->user_name = $row->user_name;
+		$this->person_id = $row->person_id;
+	}
+	
+	private function update(){
+		$db = getPDOInstance();
+
+		$query = $db->prepare(User::UPDATE);
+
+		$query->bindValue("user_name", $this->user_name);
+		$query->bindValue("class", $this->class);
+		$query->bindValue("person_id", $this->person_id);
+		
+		$query->execute();
+	}
+
+	private function insert(){
+		$db = getPDOInstance();
+
+		$query = $db->prepare(User::INSERT);
+
+		$query->bindValue("user_name", $this->user_name);
+		$query->bindValue("class", $this->class);
+		$query->bindValue("person_id", $this->person_id);
+		$query->bindValue("password", $this->password);
+		
+		$query->execute();
 	}
 
 	/*
@@ -45,7 +162,7 @@ class User {
 		But we remember the page and set a redirect point
 	*/
 	private function ensureUserLoggedIn() {
-		if(!isset($_SESSION['USER'])) {
+		if(!isset($_SESSION[User::USER_NAME])) {
 
 			setRedirect($_SERVER['REQUEST_URI']);
 			header('Location: login.php');
@@ -58,7 +175,7 @@ class User {
 		$db = getPDOInstance();
 
 		$query = $db->prepare(User::CHANGE_PASSWORD_QUERY);
-		$query->bindValue("user_name", $this->username);
+		$query->bindValue("user_name", $this->user_name);
 		$query->bindValue("password", $password);
 		$query->execute();
 	}
@@ -67,17 +184,17 @@ class User {
 		Returns true if the login succeeds, false if it doesn't
 	*/
 
-	public static function login($username, $password) {
+	public static function login($user_name, $password) {
 		$db = getPDOInstance();
 
 		$query = $db->prepare(User::LOGIN_QUERY);
-		$query->bindValue("user_name", $username);
+		$query->bindValue("user_name", $user_name);
 		$query->bindValue("password", $password);
 		$query->execute();
 
 		if($query->rowCount()) {
 
-			$_SESSION['USER'] = $username;
+			$_SESSION[User::USER_NAME] = $user_name;
 			return true;
 
 		}
@@ -96,11 +213,11 @@ class User {
 	}
 
 	public function getUserName() {
-		return $this->username;
+		return $this->user_name;
 	}
 
 	public static function logout() {
-		unset($_SESSION['USER']);
+		unset($_SESSION[User::USER_NAME]);
 	}
 
 }

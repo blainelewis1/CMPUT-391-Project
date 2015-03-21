@@ -10,13 +10,6 @@ if(!$user->isAdmin()){
 	die();
 }
 
-//TODO: is delete required
-/*
-if(isset($_GET[Person::DELETE])) {
-	Person::delete($_GET[Person::DELETE]);
-}
-*/
-
 $people = Person::getAllPeople();
 
 include("views/list_people.php");

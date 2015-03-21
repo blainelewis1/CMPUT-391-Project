@@ -48,22 +48,10 @@ class Person {
 
 	const DELETE_QUERY = "DELETE FROM persons WHERE persons.person_id = :person_id";
 
-	const GET_ALL_PEOPLE_QUERY = "SELECT persons.first_name, 
+	const SELECT_ALL_QUERY = "SELECT persons.first_name, 
 										persons.last_name, 
-										persons.person_id,
-										user_accounts.user_names,
-										user_accounts.class_names
-				   FROM persons LEFT JOIN
-				   (
-					  SELECT users.person_id,
-					         GROUP_CONCAT(classes.class_name) AS class_names,
-					         GROUP_CONCAT(users.user_name) AS user_names
-					  FROM users JOIN classes ON users.class = classes.class_id
-					  GROUP BY users.person_id
-
-					) as user_accounts
-					    ON user_accounts.person_id = persons.person_id";
-
+										persons.person_id
+								  FROM persons";
 
 
 	public $first_name;
@@ -80,19 +68,10 @@ class Person {
 	public static function getAllPeople() {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(Person::GET_ALL_PEOPLE_QUERY);
+		$query = $db->prepare(Person::SELECT_ALL_QUERY);
 		$query->execute();	
 
 		return $query->fetchAll();
-	}
-
-	//TODO: is delete required
-	public static function delete($person_id) {
-		$db = getPDOInstance();
-		$query = $db->prepare(Person::DELETE_QUERY);
-
-		$query->bindValue("person_id", $person_id);
-		$query->execute();
 	}
 
 	public static function fromUserName($user_name) {
@@ -156,10 +135,17 @@ class Person {
 	}
 
 	public function saveToDatabase() {
-		if($this->new){
-			$this->insert();
-		} else {
-			$this->update();
+		try {
+			if($this->new){
+				$this->insert();
+			} else {
+				$this->update();
+			}
+			return true;
+		} catch(PDOException $e) {
+			if($e->errorInfo[1] == -803 || $e->errorInfo[1] == 1062){
+				return false;
+			} 
 		}
 	}
 

@@ -2,18 +2,16 @@
 
 <?php 
 
-$title = "User Settings";
+$title = "Create or Edit User";
 
 include("head.php");
 
 ?>
 
 <body>
-
 	<?php include("header.php"); ?>
 
-	<div id="content">
-
+	<div class="content">
 		<?php
 			if (!empty($message)):
 		?>
@@ -26,17 +24,7 @@ include("head.php");
 			endif;
 		?>
 
-		<div id="personal_information">
-
-			<!-- TODO: autofocus the errored field -->
-
-			<?php include("edit_person.php"); ?>
-			
-			<hr />
-			
-			<?php include('change_password.php'); ?>
-		</div>
-
+		<?php include("views/edit_user.php"); ?>
 	</div>
 
 	<?php include("footer.php"); ?>

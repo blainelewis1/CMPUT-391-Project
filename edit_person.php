@@ -26,9 +26,13 @@ if(isset($_POST[Person::SUBMIT])) {
 	$message = applyAndValidatePersonFields($person);
 
 	if($message == ""){
-		$person->saveToDatabase();
-		header('Location: user_management.php');
-		die();
+		if($person->saveToDatabase()) {
+			header('Location: manage_people.php');
+			die();
+		} else {
+			$message .= "Person ID already exists!";
+		}
+		
 	}
 }
 

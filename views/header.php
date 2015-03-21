@@ -10,4 +10,7 @@
 		<?= $user->getUserName() ?>
 		</span>
 	<?php endif; ?>
+
+	<?php include("navigation.php") ?>
+
 </div>

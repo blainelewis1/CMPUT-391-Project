@@ -12,12 +12,11 @@ include("head.php");
 
 	<?php include("header.php"); ?>
 	<?php include("user_management_sub_nav.php"); ?>
-
 	<div id="content">
 	
 	<h3>
-		<a href="edit_person.php">
-			Create Person
+		<a href="edit_user.php">
+			Create User
 		</a>
 	</h3>
 
@@ -25,33 +24,39 @@ include("head.php");
 		<th>
 			Person ID
 		</th>
+		
 		<th>
-			First Name
+			User Name
 		</th>
+		
 		<th>
-			Last Name
+			Class
 		</th>
+		
 		<th>
-			Edit
+			Registration Date
 		</th>
 
-		<?php foreach($people as $person ): ?>
+		<?php foreach($users as $user ): ?>
 			
 			<tr>
 				<td>
-					<?= $person->person_id; ?>
+					<?= $user->person_id; ?>
 				</td>
 
 				<td>
-					<?= $person->first_name; ?>
+					<?= $user->user_name; ?>
 				</td>
 
 				<td>
-					<?= $person->last_name; ?>
+					<?= $user->class; ?>
+				</td>
+				<td>
+					<?= $user->date_registered; ?>
 				</td>
 
 				<td>
-					<a href="edit_person.php?<?= Person::PERSON_ID.'='.$person->person_id; ?>">
+					<a href="edit_user.php?<?= User::USER_NAME.'='.$user->user_name.'&'.Person::PERSON_ID.'='.$user->person_id; ?>">
 						edit
 					</a>
 				</td>
