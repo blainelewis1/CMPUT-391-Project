@@ -9,7 +9,6 @@ include_once('controllers/user.php');
 $user = User::getLoggedInUser();
 $person = new Person($user->getUserName());
 
-//TODO: More data validation?
 
 if(isset($_POST[Person::SUBMIT])) {
 	$message = applyAndValidatePersonFields($person);

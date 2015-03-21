@@ -13,6 +13,7 @@ DROP TABLE pacs_images;
 DROP TABLE radiology_record;
 DROP TABLE users;
 DROP TABLE persons;
+DROP TABLE classes;
 
 /*
  *  To store the personal information
@@ -86,3 +87,20 @@ CREATE TABLE pacs_images (
    PRIMARY KEY(record_id,image_id),
    FOREIGN KEY(record_id) REFERENCES radiology_record(record_id)
 ) ENGINE=INNODB;
+
+
+/*
+ * Maps classes to readable strings
+ */
+
+CREATE TABLE classes (
+   class_name varchar(24),
+   class_id char(1),
+   PRIMARY KEY(class_id, class_name)
+) ENGINE=INNODB;
+
+INSERT INTO classes (class_name, class_id) VALUES 
+('admin', 'a'), 
+('patient', 'p'), 
+('doctor', 'd'), 
+('radiologist', 'r');

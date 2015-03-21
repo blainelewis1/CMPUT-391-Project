@@ -3,9 +3,11 @@
 /*
 	
 	This poorly named function takes a person and applies
-	the fields to it.	
+	the fields to it.
 
 */
+
+//TODO: More data validation?
 
 function applyAndValidatePersonFields($person) {
 	$message = "";

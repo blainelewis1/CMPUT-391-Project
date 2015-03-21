@@ -13,10 +13,10 @@ class User {
 	const LOGIN = "login";
 
 	const LOGIN_QUERY = "SELECT users.user_name 
-				   FROM users
-				   WHERE users.user_name = :user_name AND 
-				         users.password = :password
-				   LIMIT 1";
+				   		 FROM users
+						 WHERE users.user_name = :user_name AND 
+						       users.password = :password
+						 LIMIT 1";
 
 	const CHANGE_PASSWORD_QUERY = "UPDATE users
 							 SET password = :password
@@ -32,6 +32,7 @@ class User {
 	public static function isUserLoggedIn() {
 		return isset($_SESSION['USER']);
 	}	
+
 
 	private function __construct() {
 		$this->ensureUserLoggedIn();
