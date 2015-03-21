@@ -22,6 +22,9 @@ include("head.php");
 
 	<table class="users">
 		<th>
+			Person ID
+		</th>
+		<th>
 			First Name
 		</th>
 		<th>

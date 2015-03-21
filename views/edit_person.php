@@ -1,4 +1,6 @@
 <form action="" method="POST">
+	
+<?php if($person->isNew()): ?>
 	<div class="row">
 
 		<div class="label">
@@ -7,7 +9,7 @@
 
 		<input type="text" name="<?= Person::PERSON_ID; ?>" value="<?= isset($person->person_id) ? $person->person_id : '' ?>" />	
 	</div>
-
+<?php endif; ?>
 	<div class="row">
 
 		<div class="label">

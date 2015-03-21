@@ -100,13 +100,20 @@ class Person {
 		$person->user_name = $user_name;
 		$person->selectFromUsername();
 		$person->new = false;
+	
+		return $person;
 	}
+
 
 	public static function fromId($person_id) {
 		$person = new Person();
+		
 		$person->person_id = $person_id;
+
 		$person->selectFromId();
 		$person->new = false;
+
+		return $person;
 	}
 
 	public function __construct(){
@@ -130,11 +137,12 @@ class Person {
 		$db = getPDOInstance();
 		$query = $db->prepare(Person::SELECT_ID);
 
-		$query->bindValue("user_name", $this->person_id);
+		$query->bindValue("person_id", $this->person_id);
 		$query->execute();
 
 		$row = $query->fetch();
-		populateFromRow($row);
+
+		$this->populateFromRow($row);
 
 	}
 
