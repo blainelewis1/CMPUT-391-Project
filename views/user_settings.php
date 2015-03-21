@@ -15,7 +15,7 @@ include("head.php");
 	<div id="content">
 
 		<?php
-			if (isset($failed) && $failed):
+			if (!empty($message)):
 		?>
 		
 			<div class="failure">
@@ -26,71 +26,26 @@ include("head.php");
 			endif;
 		?>
 
-		<div id="login">
+		<div id="personal_information">
 
 			<!-- TODO: autofocus the errored field -->
 
-			<form action="user_settings.php" method="POST">
-				<div class="row">
-
-					<div class="label">
-						<label>First Name: </label>
-					</div>
-
-					<input type="text" autofocus name="first_name" value="<?= isset($personalInformation->first_name) ? $personalInformation->first_name : '' ?>" />	
-				</div>
-				
-				<div class="row">
-
-					<div class="label">
-						<label>Last Name: </label>
-					</div>
-
-					<input type="text" name="last_name" value="<?= isset($personalInformation->last_name) ? $personalInformation->last_name : '' ?>" />	
-				</div>
-
-				<div class="row">
-
-					<div class="label">
-						<label>Address: </label>
-					</div>
-
-					<input type="text" name="address" value="<?= isset($personalInformation->address) ? $personalInformation->address : '' ?>" />	
-				</div>
-
-				<div class="row">
-
-					<div class="label">
-						<label>Phone: </label>
-					</div>
-
-					<input type="text" name="phone" value="<?= isset($personalInformation->phone) ? $personalInformation->phone : '' ?>" />	
-				</div>
-				
-				<div class="row">
-
-					<div class="label">
-						<label>Email: </label>
-					</div>
-
-					<input type="text" name="email" value="<?= isset($personalInformation->email) ? $personalInformation->email: '' ?>" />	
-				</div>
-
-
-				<input type="submit" name="submit" value="Submit" />
-
+				<?php include("edit_person.php"); ?>
+			
 				<hr />
+			<form action="" method="POST">
 
 				<div class="row">
 					<div class="label">
 						<label>Password: </label>
 					</div>
 
-					<input type="password" name="password" />	
+					<input type="password" name="<?= User::PASSWORD; ?>" />	
 				</div>
-				<input type="submit" name="change_password" value="Change Password" />
+				<input type="submit" name="<?= User::CHANGE_PASSWORD; ?>" value="Change Password" />
 
 			</form>
+		</div>
 
 	</div>
 

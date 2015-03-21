@@ -2,7 +2,15 @@
 
 include_once("misc/database.php");
 
-class PersonalInformation {
+class Person {
+	const FIRST_NAME = "first_name";
+	const LAST_NAME = "last_name";
+	const ADDRESS = "address";
+	const EMAIL = "email";
+	const PHONE = "phone";
+	const SUBMIT = "submit";
+
+
 	const SELECT = "SELECT persons.first_name, 
 						   persons.last_name, 
 						   persons.address,
@@ -22,6 +30,10 @@ class PersonalInformation {
 					    phone = :phone
 					WHERE persons.person_id = :person_id";
 
+	const INSERT = "INSERT INTO persons
+					(first_name, last_name, address, email, phone)
+					VALUES (:first_name, :last_name, :address, :email, :phone)";
+
 	public $first_name;
 	public $last_name;
 	public $address; 
@@ -38,7 +50,7 @@ class PersonalInformation {
 
 	private function select() {
 		$db = getPDOInstance();
-		$query = $db->prepare(PersonalInformation::SELECT);
+		$query = $db->prepare(Person::SELECT);
 
 		$query->bindValue("user_name", $this->user_name);
 		$query->execute();
@@ -57,7 +69,7 @@ class PersonalInformation {
 	public function update(){
 		$db = getPDOInstance();
 
-		$query = $db->prepare(PersonalInformation::UPDATE);
+		$query = $db->prepare(Person::UPDATE);
 
 		$query->bindValue("first_name", $this->first_name);
 		$query->bindValue("last_name", $this->last_name);
@@ -67,7 +79,20 @@ class PersonalInformation {
 		$query->bindValue("person_id", $this->person_id);
 		
 		$query->execute();
+	}
 
+	public function insert(){
+		$db = getPDOInstance();
+
+		$query = $db->prepare(Person::INSERT);
+
+		$query->bindValue("first_name", $this->first_name);
+		$query->bindValue("last_name", $this->last_name);
+		$query->bindValue("address", $this->address);
+		$query->bindValue("email", $this->email);
+		$query->bindValue("phone", $this->phone);
+		
+		$query->execute();
 	}
 
 }

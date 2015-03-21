@@ -7,13 +7,18 @@ include_once("misc/utils.php");
 
 
 class User {
-	const LOGIN = "SELECT users.user_name 
+	const PASSWORD = "password";
+	const USER_NAME = "user_name";
+	const CHANGE_PASSWORD = "change_password";
+	const LOGIN = "login";
+
+	const LOGIN_QUERY = "SELECT users.user_name 
 				   FROM users
 				   WHERE users.user_name = :user_name AND 
 				         users.password = :password
 				   LIMIT 1";
 
-	const CHANGE_PASSWORD = "UPDATE users
+	const CHANGE_PASSWORD_QUERY = "UPDATE users
 							 SET password = :password
 							 WHERE users.user_name = :user_name";
 
@@ -51,7 +56,7 @@ class User {
 	public function updatePassword($password){
 		$db = getPDOInstance();
 
-		$query = $db->prepare(User::CHANGE_PASSWORD);
+		$query = $db->prepare(User::CHANGE_PASSWORD_QUERY);
 		$query->bindValue("user_name", $this->username);
 		$query->bindValue("password", $password);
 		$query->execute();
@@ -64,7 +69,7 @@ class User {
 	public static function login($username, $password) {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(User::LOGIN);
+		$query = $db->prepare(User::LOGIN_QUERY);
 		$query->bindValue("user_name", $username);
 		$query->bindValue("password", $password);
 		$query->execute();
