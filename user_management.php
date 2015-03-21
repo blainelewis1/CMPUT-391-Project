@@ -11,9 +11,11 @@ if(!$user->isAdmin()){
 }
 
 //TODO: is delete required
+/*
 if(isset($_GET[Person::DELETE])) {
 	Person::delete($_GET[Person::DELETE]);
 }
+*/
 
 $people = Person::getAllPeople();
 

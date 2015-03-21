@@ -13,7 +13,7 @@ class Person {
 	const PERSON_ID = "person_id";
 
 
-	const SELECT = "SELECT persons.first_name, 
+	const SELECT_USER_NAME = "SELECT persons.first_name, 
 						   persons.last_name, 
 						   persons.address,
 						   persons.person_id, 
@@ -22,6 +22,16 @@ class Person {
 					FROM persons JOIN users 
 					ON persons.person_id = users.person_id
 					WHERE users.user_name = :user_name
+					LIMIT 1";
+
+	const SELECT_ID = "SELECT persons.first_name, 
+						   persons.last_name, 
+						   persons.address,
+						   persons.person_id, 
+						   persons.email, 
+						   persons.phone
+					FROM persons
+					WHERE persons.person_id = :person_id
 					LIMIT 1";
 	
 	const UPDATE = "UPDATE persons
@@ -33,8 +43,8 @@ class Person {
 					WHERE persons.person_id = :person_id";
 
 	const INSERT = "INSERT INTO persons
-					(first_name, last_name, address, email, phone)
-					VALUES (:first_name, :last_name, :address, :email, :phone)";
+					(person_id, first_name, last_name, address, email, phone)
+					VALUES (:person_id, :first_name, :last_name, :address, :email, :phone)";
 
 	const DELETE_QUERY = "DELETE FROM persons WHERE persons.person_id = :person_id";
 
@@ -43,7 +53,7 @@ class Person {
 										persons.person_id,
 										user_accounts.user_names,
 										user_accounts.class_names
-				   FROM persons JOIN
+				   FROM persons LEFT JOIN
 				   (
 					  SELECT users.person_id,
 					         GROUP_CONCAT(classes.class_name) AS class_names,
@@ -64,7 +74,7 @@ class Person {
 	public $person_id;
 
 	private $user_name;
-
+	private $new;
 
 
 	public static function getAllPeople() {
@@ -85,31 +95,67 @@ class Person {
 		$query->execute();
 	}
 
-	public function __construct($user_name){
-		$this->user_name = $user_name;
-		$this->select();
+	public static function fromUserName($user_name) {
+		$person = new Person();
+		$person->user_name = $user_name;
+		$person->selectFromUsername();
+		$person->new = false;
+	}
+
+	public static function fromId($person_id) {
+		$person = new Person();
+		$person->person_id = $person_id;
+		$person->selectFromId();
+		$person->new = false;
+	}
+
+	public function __construct(){
+		$this->new = true;
 	}
 
 
-	private function select() {
+	private function selectFromUsername() {
 		$db = getPDOInstance();
-		$query = $db->prepare(Person::SELECT);
+		$query = $db->prepare(Person::SELECT_USER_NAME);
 
 		$query->bindValue("user_name", $this->user_name);
 		$query->execute();
 
 		$row = $query->fetch();
+		populateFromRow($row);
 
+	}
+
+	private function selectFromId() {
+		$db = getPDOInstance();
+		$query = $db->prepare(Person::SELECT_ID);
+
+		$query->bindValue("user_name", $this->person_id);
+		$query->execute();
+
+		$row = $query->fetch();
+		populateFromRow($row);
+
+	}
+
+	private function populateFromRow($row) {
 		$this->first_name = $row->first_name;
 		$this->last_name = $row->last_name;
 		$this->address = $row->address;
 		$this->email = $row->email;
 		$this->phone = $row->phone;
 		$this->person_id = $row->person_id;
-
 	}
 
-	public function update(){
+	public function saveToDatabase() {
+		if($this->new){
+			$this->insert();
+		} else {
+			$this->update();
+		}
+	}
+
+	private function update(){
 		$db = getPDOInstance();
 
 		$query = $db->prepare(Person::UPDATE);
@@ -124,11 +170,12 @@ class Person {
 		$query->execute();
 	}
 
-	public function insert(){
+	private function insert(){
 		$db = getPDOInstance();
 
 		$query = $db->prepare(Person::INSERT);
 
+		$query->bindValue("person_id", $this->person_id);
 		$query->bindValue("first_name", $this->first_name);
 		$query->bindValue("last_name", $this->last_name);
 		$query->bindValue("address", $this->address);
@@ -136,6 +183,10 @@ class Person {
 		$query->bindValue("phone", $this->phone);
 		
 		$query->execute();
+	}
+
+	public function isNew() {
+		return $this->new;
 	}
 
 }

@@ -2,10 +2,19 @@
 	<div class="row">
 
 		<div class="label">
+			<label>Person ID: </label>
+		</div>
+
+		<input type="text" name="<?= Person::PERSON_ID; ?>" value="<?= isset($person->person_id) ? $person->person_id : '' ?>" />	
+	</div>
+
+	<div class="row">
+
+		<div class="label">
 			<label>First Name: </label>
 		</div>
 
-		<input type="text" autofocus name="<?= Person::FIRST_NAME; ?>" value="<?= isset($person->first_name) ? $person->first_name : '' ?>" />	
+		<input type="text" name="<?= Person::FIRST_NAME; ?>" value="<?= isset($person->first_name) ? $person->first_name : '' ?>" />	
 	</div>
 	
 	<div class="row">

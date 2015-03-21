@@ -15,7 +15,7 @@ include("head.php");
 	<div id="content">
 	
 	<h3>
-		<a href="edit_user.php">
+		<a href="edit_person.php">
 			Create User
 		</a>
 	</h3>
@@ -33,9 +33,11 @@ include("head.php");
 		<th>
 			Edit
 		</th>
+		<!-- TODO: is delete required? 
 		<th>
 			Delete
 		</th>
+		-->
 
 		<?php foreach($people as $person ): ?>
 			

@@ -31,13 +31,26 @@ function applyAndValidatePersonFields($person) {
 		$message .= "Email cannot be empty <br />";
 	}
 
+	if($person->isNew()){
+		//TODO: validate it is a number
+		if(empty($_POST[Person::PERSON_ID])){
+			$message .= "Person ID cannot be empty <br />";
+		}
+	}
+
 	if(!$message){
 		$person->first_name = $_POST[Person::FIRST_NAME];
 		$person->last_name = $_POST[Person::LAST_NAME];
 		$person->address = $_POST[PERSON::ADDRESS];
 		$person->phone = $_POST[Person::PHONE];
 		$person->email = $_POST[Person::EMAIL];
+
+		if($person->isNew()){
+			$person->person_id = $_POST[Person::PERSON_ID];
+		}
 	}
+
+	return $message;
 }
 
 ?>
