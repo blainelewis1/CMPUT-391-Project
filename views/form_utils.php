@@ -15,11 +15,42 @@
 </div>
 <?php } 
 
-function textInput($label, $name, &$default){?>
+function textInput($label, $name, &$default){ ?>
 <div class="row">
 	<div class="label">
 		<label><?= $label.':' ?></label>
 	</div>
 <input type="text" name="<?= $name; ?>" value="<?= $default ?>" />
 </div>
-<?php } ?>
+<?php } 
+
+function emailInput($label, $name, &$default){ ?>
+
+<div class="row">
+	<div class="label">
+		<label><?= $label.':' ?></label>
+	</div>
+<input type="email" name="<?= $name; ?>" value="<?= $default ?>" />
+</div>
+<?php } 
+
+
+function dateInput($label, $name, &$default){ ?>
+
+<div class="row">
+	<div class="label">
+		<label><?= $label.':' ?></label>
+	</div>
+<input type="date" name="<?= $name; ?>" value="<?= $default ?>" />
+</div>
+<?php } 
+
+function textArea($label, $name, &$default){ ?>
+
+<div class="row">
+	<div class="label">
+		<label><?= $label.':' ?></label>
+	</div>
+<textarea name="<?= $name; ?>" value="<?= $default ?>"></textarea>
+</div>
+<?php } 

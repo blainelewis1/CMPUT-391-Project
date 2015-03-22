@@ -32,24 +32,28 @@ include_once('models/person.php');
 			$record->test_type); 
 	?>
 
+
 	<?= 
-		textInput('Test Type', 
-			RadiologyRecord::TEST_TYPE, 
-			$record->test_type); 
+		dateInput('Prescribing Date', 
+			RadiologyRecord::PRESCRIBING_DATE, 
+			$record->prescribing_date); 
 	?>
+
 	<?= 
-		textInput('Test Type', 
-			RadiologyRecord::TEST_TYPE, 
-			$record->test_type); 
+		dateInput('Test Date', 
+			RadiologyRecord::TEST_DATE, 
+			$record->test_date); 
 	?>
+
 	<?= 
-		textInput('Test Type', 
-			RadiologyRecord::TEST_TYPE, 
-			$record->test_type); 
+		textInput('Diagnosis', 
+			RadiologyRecord::DIAGNOSIS, 
+			$record->diagnosis); 
 	?>
-	<?= 
-		textInput('Test Type', 
-			RadiologyRecord::TEST_TYPE, 
-			$record->test_type); 
+
+		<?= 
+		textArea('Description', 
+			RadiologyRecord::DESCRIPTION, 
+			$record->description); 
 	?>
 </form>

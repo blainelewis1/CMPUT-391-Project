@@ -127,7 +127,7 @@ class Person {
 		$query->execute();
 
 		$row = $query->fetch();
-		populateFromRow($row);
+		$this->populateFromRow($row);
 
 	}
 

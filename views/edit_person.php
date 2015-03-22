@@ -34,7 +34,7 @@
 
 	
 	<?= 
-		textInput('Email', 
+		emailInput('Email', 
 			Person::EMAIL, 
 			$person->email); 
 	?>
