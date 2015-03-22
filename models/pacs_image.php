@@ -1,10 +1,12 @@
 <?php
 
-include('misc/database.php');
+include_once('misc/database.php');
 
 class PACSImage {
 
-	const INSERT = "INSERT INTO pacs_images (pacs_images.thumbnail, pacs_images.";
+	const INSERT = "INSERT INTO pacs_images 
+			(pacs_images.record_id, pacs_images.thumbnail, pacs_images.regular_size, pacs_images.full_size)
+			VALUES (:record_id, :thumbnail, :regular_size, :full_size)";
 	const UPDATE = "UPDATE pacs_image";
 
 	const SELECT_IMAGE = "SELECT pacs_images.:image_size
@@ -72,7 +74,6 @@ class PACSImage {
 		$query = $db->prepare(PACSImage::INSERT);
 
 		$query->bindValue("record_id", $this->record_id);
-		$query->bindValue("image_id", $this->image_id);
 		$query->bindValue("thumbnail", $thumb, PDO::PARAM_LOB);
 		$query->bindValue("regular_size", $regular, PDO::PARAM_LOB);
 		$query->bindValue("full_size", $full, PDO::PARAM_LOB);
@@ -81,7 +82,7 @@ class PACSImage {
 	}
 
 	private function resize($image, $width) {
-
+		
 	}
 
 

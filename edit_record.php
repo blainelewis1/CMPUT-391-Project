@@ -22,6 +22,7 @@ if(isset($_GET[RadiologyRecord::RECORD_ID])){
 	$record = new RadiologyRecord();
 }
 
+
 if(isset($_POST[RadiologyRecord::SUBMIT])) {
 	//TODO: date conversion
 

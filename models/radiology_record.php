@@ -15,20 +15,29 @@ class RadiologyRecord {
 	const SUBMIT = "submit";
 
 
-	const SELECT_BY_ID = "SELECT DISTINCT radiology_records.record_id,
-								 radiology_records.patient_id,
-								 radiology_records.doctor_id,
-								 radiology_records.radiologist_id,
-								 radiology_records.test_type,
-								 radiology_records.prescribing_date,
-								 radiology_records.test_date,
-								 radiology_records.diagnosis,
-								 radiology_records.description
-						  FROM radiology_records
-						  WHERE radiology_records.record_id = :record_id
+	const SELECT_BY_ID = "SELECT DISTINCT radiology_record.record_id,
+								 radiology_record.patient_id,
+								 radiology_record.doctor_id,
+								 radiology_record.radiologist_id,
+								 radiology_record.test_type,
+								 radiology_record.prescribing_date,
+								 radiology_record.test_date,
+								 radiology_record.diagnosis,
+								 radiology_record.description
+						  FROM radiology_record
+						  WHERE radiology_record.record_id = :record_id
 						  GROUP BY persons.person_id";
 
+	const INSERT = "INSERT INTO radiology_record (patient_id,
+					doctor_id, radiologist_id, test_type, 
+					prescribing_date, test_date, diagnosis,
+					description)
+					VALUES (:patient_id, :doctor_id,
+					:radiologist_id, :test_type, :prescribing_date,
+					:test_date, :diagnosis, :description)";
+
 	public $record_id;
+
 	public $patient_id;
 	public $doctor_id;
 	public $radiologist_id;
@@ -53,14 +62,33 @@ class RadiologyRecord {
 	}
 
 	public function savetoDatabase() {
-
+		try {
+			if($this->new){
+				$this->insert();
+			} else {
+				$this->update();
+			}
+			return true;
+		} catch(PDOException $e) {
+			if($e->errorInfo[1] == -803 || $e->errorInfo[1] == 1062){
+				return false;
+			} 
+		}
 	}
 
 	private function insert() {
 		$db = getPDOInstance();
 		$query = $db->prepare(RadiologyRecord::INSERT);
 
-		$query->bindValue("record_id", $this->record_id);
+		$query->bindValue("patient_id", $this->patient_id);
+		$query->bindValue("doctor_id", $this->doctor_id);
+		$query->bindValue("radiologist_id", $this->radiologist_id);
+		$query->bindValue("test_type", $this->test_type);
+		$query->bindValue("test_date", $this->test_date);
+		$query->bindValue("prescribing_date", $this->prescribing_date);
+		$query->bindValue("diagnosis", $this->diagnosis);
+		$query->bindValue("description", $this->description);
+
 		$query->execute();
 	}
 
