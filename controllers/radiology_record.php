@@ -29,4 +29,21 @@ function applyAndValidateRecordFields($record) {
 	return $message;
 }
 
+function validateDiagnosisFormFields(){
+
+	/*TODO: 
+		Empty diagnosis should display all records between the two dates.
+		Empty start date should display all records up until end_date
+		Empty end date should display all records after start date*/
+
+
+	$message = "";
+
+	$message .= notEmpty($_POST, RadiologyRecord::DIAGNOSIS, 'diagnosis');
+	$message .= notEmpty($_POST, RadiologyRecord::TEST_START_DATE, 'start date');
+	$message .= notEmpty($_POST, RadiologyRecord::TEST_END_DATE, 'end date');
+
+	return $message;
+}
+
 ?>

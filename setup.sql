@@ -84,7 +84,7 @@ CREATE TABLE pacs_images (
    thumbnail   blob,
    regular_size blob,
    full_size    blob,
-   PRIMARY KEY(record_id,image_id),
+   PRIMARY KEY(image_id),
    FOREIGN KEY(record_id) REFERENCES radiology_record(record_id)
 ) ENGINE=INNODB;
 
