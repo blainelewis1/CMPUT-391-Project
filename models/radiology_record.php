@@ -11,8 +11,11 @@ class RadiologyRecord {
 	const TEST_DATE = "test_date";
 	const DIAGNOSIS = "diagnosis";
 	const DESCRIPTION = "description";
+	const TEST_START_DATE = "test_start_date";
+	const TEST_END_DATE = "test_end_date";
 
 	const SUBMIT = "submit";
+	const SEARCH = "search";
 
 
 	const SELECT_BY_ID = "SELECT DISTINCT radiology_records.record_id,
@@ -28,6 +31,14 @@ class RadiologyRecord {
 						  WHERE radiology_records.record_id = :record_id
 						  GROUP BY persons.person_id";
 
+	const SELECT_ALL_BY_DIAGNOSIS_AND_DATE = "SELECT p.first_name,
+							 	p.address, p.phone, t.test_date
+						FROM radiology_records r, persons p
+						WHERE p.person_id = r.patient_id 
+						AND r.diagnosis = :diagnosis 
+						AND r.test_date >= :start_date 
+						AND r.test_date <= :end_date";
+
 	public $record_id;
 	public $patient_id;
 	public $doctor_id;
@@ -37,6 +48,9 @@ class RadiologyRecord {
 	public $test_date;
 	public $diagnosis;
 	public $description;
+
+	public $start_date;
+	public $end_date;
 
 	private $new;
 
@@ -54,6 +68,21 @@ class RadiologyRecord {
 
 	public function savetoDatabase() {
 
+	}
+
+	public static function selectByDiagnosisAndDate($diagnosis, $start_date, $end_date) {
+		$db = getPDOInstance();
+
+		$query = $db->prepare(RadiologyRecord::SELECT_ALL_BY_DIAGNOSIS_AND_DATE);
+
+		$query->bindValue("diagnosis", $diagnosis);
+		$query->bindValue("start_date", $start_date);
+		$query->bindValue("end_date", $end_date);
+		
+		$query->execute();	
+
+		return $query->fetchAll();
+	//	$this->populateFromRow($query->fetch());
 	}
 
 	private function insert() {
