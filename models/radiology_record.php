@@ -90,6 +90,8 @@ class RadiologyRecord {
 		$query->bindValue("description", $this->description);
 
 		$query->execute();
+
+		$this->record_id = $query->lastInsertId();
 	}
 
 	private function selectFromId() {

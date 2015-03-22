@@ -9,7 +9,7 @@ class PACSImage {
 			VALUES (:record_id, :thumbnail, :regular_size, :full_size)";
 	const UPDATE = "UPDATE pacs_image";
 
-	const SELECT_IMAGE = "SELECT pacs_images.:image_size
+	const SELECT_IMAGE = "SELECT pacs_images.image_size
 						  FROM pacs_images
 						  WHERE pacs_images.image_id = :image_id";
 
@@ -17,11 +17,16 @@ class PACSImage {
 	const THUMBNAIL = "thumbnail";
 	const FULL = "full_size";
 
+	const IMAGE = "image";
+
 	const IMAGE_ID = "image_id";
 	const SIZE = "size";
 
 	const SUBMIT = "submit";
 	const SUBMIT_ANOTHER = "submit";
+
+	const MAX_THUMB_WIDTH = 250;
+	const MAX_REGULAR_WIDTH = 400;
 
 	public $record_id;
 	public $image_id;
@@ -49,26 +54,30 @@ class PACSImage {
 
 	private function selectImage($size) {
 		$db = getPDOInstance();
-		$query = $db->prepare(PACSImage::SELECT_IMAGE);
+		
+		$select = PACSImage::SELECT_IMAGE;
+		$select = str_replace('image_size', $size, $select);
+
+		$query = $db->prepare($select);
 
 		$query->bindValue("image_id", $this->image_id);
-		$query->bindValue("image_size", $size);
 		$query->execute();
 
 		//http://php.net/manual/en/pdo.lobs.php [03/21/2015 blaine1]
-		$image;
 
 		$query->bindColumn(1, $image, PDO::PARAM_LOB);
+
 		$query->fetch(PDO::FETCH_BOUND);
 
 		return $image;
 	}
 
 	public function insert() {
+		//VALIDATE is a jpeg
 
-		$thumb = resize($this->image, PACSImage::MAX_THUMB_WIDTH);
-		$regular = resize($this->image, PACSImage::MAX_REGULAR_WIDTH);
-		$full = $this->image;
+		$thumb = fopen($this->resize($this->image, PACSImage::MAX_THUMB_WIDTH),'rb');
+		$regular = fopen($this->resize($this->image, PACSImage::MAX_REGULAR_WIDTH), 'rb');
+		$full = fopen($this->image, 'rb');
 
 		$db = getPDOInstance();
 		$query = $db->prepare(PACSImage::INSERT);
@@ -81,8 +90,26 @@ class PACSImage {
 		$query->execute();
 	}
 
-	private function resize($image, $width) {
-		
+	private function resize($image, $newwidth) {
+		//http://php.net/manual/en/function.imagecopyresized.php [22/03/2015] blaine1
+
+		// Get new sizes
+		list($width, $height) = getimagesize($image);
+
+		$ratio = $width/$height;
+
+		$newheight = $width / $ratio;
+
+		// Load
+		$newimage = imagecreatetruecolor($newwidth, $newheight);
+		$source = imagecreatefromjpeg($image);
+
+		// Resize
+		imagecopyresized($newimage, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+		imagejpeg($newimage, $image.$newwidth);
+
+		return $image.$newwidth;
 	}
 
 

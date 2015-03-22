@@ -20,17 +20,24 @@ if(!isset($_GET[RadiologyRecord::RECORD_ID])){
 	die();
 } else {
 	$pacs_image = new PACSImage();
+	$pacs_image->record_id = $_GET[RadiologyRecord::RECORD_ID];
 }
 
 if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER])) {
+	//TODO: validation
+	$message = "";
 
 	if($message == ""){
-		if($pacs_image->saveToDatabase()) {
+		$pacs_image->image = $_FILES[PACSImage::IMAGE]["tmp_name"];
+
+		if($pacs_image->insert()) {
+
 			if(isset($_POST[PACSImage::SUBMIT_ANOTHER])){
 				//TODO: redirect somewhere?
 				header('Location: upload.php?'.RadiologyRecord::RECORD_ID.'='.$record->record_id);
 				die();
 			} else {
+
 				//TODO: this won't work in the future
 				header('Location: edit_record.php');
 				die();
