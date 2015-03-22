@@ -20,6 +20,7 @@ $editting_user;
 
 if(isset($_GET[User::USER_NAME])){
 	$editting_user = User::fromUserName($_GET[User::USER_NAME]);
+	$editting_user->old_user_name = $_GET[User::USER_NAME];
 } else {
 	$editting_user = new User();
 }
