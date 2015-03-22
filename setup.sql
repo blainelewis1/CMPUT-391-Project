@@ -8,12 +8,12 @@ USE radiology;
  *              Winter Term, 2015
  *  Author:     Prof. Li-Yan Yuan
  */
-DROP TABLE family_doctor;
-DROP TABLE pacs_images;
-DROP TABLE radiology_record;
-DROP TABLE users;
-DROP TABLE persons;
-DROP TABLE classes;
+DROP TABLE if exists family_doctor;
+DROP TABLE if exists pacs_images;
+DROP TABLE if exists radiology_record;
+DROP TABLE if exists users;
+DROP TABLE if exists persons;
+DROP TABLE if exists classes;
 
 /*
  *  To store the personal information
