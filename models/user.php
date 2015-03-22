@@ -36,6 +36,11 @@ class User {
 					(person_id, user_name, class, password, date_registered)
 					VALUES (:person_id, :user_name, :class, :password, CURDATE())";
 
+	const UPDATE = "UPDATE users 
+					SET user_name = ;
+					VALUES (:user_name, :class, :password, CURDATE())
+					WHERE users.user_name = :old_user_name";
+
 	const SELECT_FROM_USER_NAME = "SELECT users.user_name,
 										   users.person_id,
 										   users.class,
@@ -121,8 +126,8 @@ class User {
 		
 		$query->execute();	
 
+		$this->new = false;
 		$this->populateFromRow($query->fetch());
-	
 	}
 
 	private function populateFromRow($row) {

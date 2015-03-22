@@ -11,33 +11,20 @@
 
 function applyAndValidatePersonFields($person) {
 	$message = "";
-	if(empty($_POST[Person::FIRST_NAME])){
-		$message .= "First name cannot be empty <br />";
-	}
 
-	if(empty($_POST[Person::LAST_NAME])){
-		$message .= "Last name cannot be empty <br />";
-	}
-
-	if(empty($_POST[Person::ADDRESS])){
-		$message .= "Address cannot be empty <br />";
-	}
-
-	if(empty($_POST[Person::PHONE])){
-		$message .= "Phone cannot be empty <br />";
-	}
-
-	if(empty($_POST[Person::EMAIL])){
-		$message .= "Email cannot be empty <br />";
-	}
+	$message .= notEmpty($_POST, Person::FIRST_NAME, 'First name');
+	$message .= notEmpty($_POST, Person::LAST_NAME, 'Last name');
+	$message .= notEmpty($_POST, Person::ADDRESS, 'Address');
+	$message .= notEmpty($_POST, Person::PHONE, 'Phone');
+	$message .= notEmpty($_POST, Person::EMAIL, 'Email');
 
 	if($person->isNew()){
 		//TODO: validate it is a number
-		if(empty($_POST[Person::PERSON_ID])){
-			$message .= "Person ID cannot be empty <br />";
-		}
+		$message .= notEmpty($_POST, Person::PERSON_ID, 'Person ID');
 	}
 
+
+	//TODO: we should apply these no matter what 
 	if(!$message){
 		$person->first_name = $_POST[Person::FIRST_NAME];
 		$person->last_name = $_POST[Person::LAST_NAME];

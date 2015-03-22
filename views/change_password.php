@@ -8,5 +8,4 @@
 		<input type="password" name="<?= User::PASSWORD; ?>" />	
 	</div>
 	<input type="submit" name="<?= User::CHANGE_PASSWORD; ?>" value="Change Password" />
-
 </form>

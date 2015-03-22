@@ -7,7 +7,7 @@ include_once('controllers/user.php');
 
 
 $user = User::getLoggedInUser();
-$person = new Person($user->getUserName());
+$person = Person::fromUsername($user->getUserName());
 
 
 if(isset($_POST[Person::SUBMIT])) {

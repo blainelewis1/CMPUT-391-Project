@@ -4,7 +4,7 @@
 
 $title = "User Settings";
 
-include("head.php");
+include("views/head.php");
 
 ?>
 
@@ -28,18 +28,16 @@ include("head.php");
 
 		<div id="personal_information">
 
-			<!-- TODO: autofocus the errored field -->
-
-			<?php include("edit_person.php"); ?>
+			<?php include("views/edit_person.php"); ?>
 			
 			<hr />
 			
-			<?php include('change_password.php'); ?>
+			<?php include('views/change_password.php'); ?>
 		</div>
 
 	</div>
 
-	<?php include("footer.php"); ?>
+	<?php include("views/footer.php"); ?>
 
 </body>
 </html>

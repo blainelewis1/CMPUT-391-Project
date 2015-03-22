@@ -12,6 +12,10 @@ class Person {
 	const DELETE = "delete";
 	const PERSON_ID = "person_id";
 
+	const DOCTOR = "d";
+	const ADMIN = "a";
+	const PATIENT = "p";
+	const RADIOLOGIST = "r";
 
 	const SELECT_USER_NAME = "SELECT persons.first_name, 
 						   persons.last_name, 
@@ -52,7 +56,11 @@ class Person {
 										persons.last_name, 
 										persons.person_id
 								  FROM persons";
-
+	const SELECT_ALL_BY_CLASS = "SELECT persons.first_name, 
+										persons.last_name, 
+										persons.person_id
+								  FROM persons JOIN users ON persons.person_id = users.person_id
+								  WHERE class = :class";
 
 	public $first_name;
 	public $last_name;
@@ -69,6 +77,17 @@ class Person {
 		$db = getPDOInstance();
 
 		$query = $db->prepare(Person::SELECT_ALL_QUERY);
+		$query->execute();	
+
+		return $query->fetchAll();
+	}
+
+	public static function getAllByClass($class) {
+		$db = getPDOInstance();
+
+		$query = $db->prepare(Person::SELECT_ALL_BY_CLASS);
+		$query->bindValue("class", $class);
+
 		$query->execute();	
 
 		return $query->fetchAll();
@@ -108,7 +127,7 @@ class Person {
 		$query->execute();
 
 		$row = $query->fetch();
-		populateFromRow($row);
+		$this->populateFromRow($row);
 
 	}
 

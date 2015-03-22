@@ -91,6 +91,7 @@ CREATE TABLE pacs_images (
 
 /*
  * Maps classes to readable strings
+ * TODO: remove if not needed
  */
 
 CREATE TABLE classes (
