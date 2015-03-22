@@ -6,9 +6,9 @@ include_once('controllers/radiology_record.php');
 
 $user = User::getLoggedInUser();
 
-if($user->isRadiologist()){
-	/*include("views/denied.php");
-	die();*/
+if(!$user->isAdmin()){
+	include("views/denied.php");
+	die();
 }
 
 $records = [];

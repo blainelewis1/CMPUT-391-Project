@@ -32,8 +32,8 @@ class RadiologyRecord {
 						  GROUP BY persons.person_id";
 
 	const SELECT_ALL_BY_DIAGNOSIS_AND_DATE = "SELECT p.first_name,
-							 	p.address, p.phone, t.test_date
-						FROM radiology_records r, persons p
+							 	p.address, p.phone, r.test_date
+						FROM radiology_record r, persons p
 						WHERE p.person_id = r.patient_id 
 						AND r.diagnosis = :diagnosis 
 						AND r.test_date >= :start_date 
@@ -103,7 +103,6 @@ class RadiologyRecord {
 		$query->execute();	
 
 		return $query->fetchAll();
-	//	$this->populateFromRow($query->fetch());
 	}
 
 	private function insert() {
