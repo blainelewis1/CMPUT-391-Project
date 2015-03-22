@@ -1,36 +1,24 @@
-	<form action="" method="POST">
+<?php include('form_utils.php'); ?>
+
+<form action="" method="POST">
 
 	<?php
-			 if($editting_user->isNew()): ?>
+	 if($editting_user->isNew()) { 
 
-	<div class="row">
-		<div class="label">
-			<label>Person: </label>
-		</div>
-
-		<?php
-			$person_id = $editting_user->person_id;
-			include('select_person.php');
-		?>
-
-
-	</div>
-
-	<?php endif; ?>
-
+		selectPerson('Person',
+			Person::PERSON_ID, 
+			Person::getAllPeople(), 
+			$editting_user->person_id); 
+	}
+	?>
 	
-	<div class="row">
-
-		<div class="label">
-			<label>Username: </label>
-		</div>
-
-		<input type="text" name="<?= User::USER_NAME; ?>" value="<?= isset($editting_user->user_name) ? $editting_user->user_name : '' ?>" />	
-	</div>
+	<?= 
+		textInput('Username', 
+			User::USER_NAME, 
+			$editting_user->user_name); 
+	?>
 
 	<div class="row">
-
-		
 		<div class="label">
 			<label>Class: </label>
 		</div>
