@@ -6,7 +6,7 @@ include_once('models/person.php');
 
 
 	<?=
-	    selectPerson('Patien',
+	    selectPerson('Patient',
 	    	RadiologyRecord::PATIENT_ID, 
 		Person::getAllByClass(Person::PATIENT), 
 		$record->patient_id); 

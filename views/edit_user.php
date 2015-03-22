@@ -39,7 +39,7 @@
 		  </option>
 		</select>
 
-		<?php print_r($editting_user); if($editting_user->isNew()): ?>
+		<?php if($editting_user->isNew()): ?>
 			<div class="row">
 				<div class="label">
 					<label>Password: </label>

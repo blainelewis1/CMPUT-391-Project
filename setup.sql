@@ -60,7 +60,7 @@ CREATE TABLE family_doctor (
  *  to store the radiology records
  */
 CREATE TABLE radiology_record (
-   record_id   int,
+   record_id   int AUTO_INCREMENT,
    patient_id  int,
    doctor_id   int,
    radiologist_id int,
@@ -80,7 +80,7 @@ CREATE TABLE radiology_record (
  */
 CREATE TABLE pacs_images (
    record_id   int,
-   image_id    int,
+   image_id    int AUTO_INCREMENT,
    thumbnail   blob,
    regular_size blob,
    full_size    blob,

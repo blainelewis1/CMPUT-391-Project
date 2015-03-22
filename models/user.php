@@ -37,8 +37,8 @@ class User {
 					VALUES (:person_id, :user_name, :class, :password, CURDATE())";
 
 	const UPDATE = "UPDATE users 
-					SET user_name = ;
-					VALUES (:user_name, :class, :password, CURDATE())
+					SET user_name = :user_name,
+					class = :class
 					WHERE users.user_name = :old_user_name";
 
 	const SELECT_FROM_USER_NAME = "SELECT users.user_name,
@@ -142,8 +142,8 @@ class User {
 		$query = $db->prepare(User::UPDATE);
 
 		$query->bindValue("user_name", $this->user_name);
+		$query->bindValue("old_user_name", $this->old_user_name);
 		$query->bindValue("class", $this->class);
-		$query->bindValue("person_id", $this->person_id);
 		
 		$query->execute();
 	}

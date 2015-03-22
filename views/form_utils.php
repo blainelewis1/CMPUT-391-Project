@@ -51,6 +51,6 @@ function textArea($label, $name, &$default){ ?>
 	<div class="label">
 		<label><?= $label.':' ?></label>
 	</div>
-<textarea name="<?= $name; ?>" value="<?= $default ?>"></textarea>
+<textarea name="<?= $name; ?>"><?= $default ?></textarea>
 </div>
 <?php } 
