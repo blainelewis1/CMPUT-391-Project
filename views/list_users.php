@@ -56,7 +56,7 @@ include("head.php");
 				</td>
 
 				<td>
-					<a href="edit_user.php?<?= User::USER_NAME.'='.$user->user_name.'&'.Person::PERSON_ID.'='.$user->person_id; ?>">
+					<a href="edit_user.php?<?= User::USER_NAME.'='.$user->user_name; ?>">
 						edit
 					</a>
 				</td>

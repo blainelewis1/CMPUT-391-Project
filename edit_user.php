@@ -21,7 +21,6 @@ $editting_user;
 if(isset($_GET[User::USER_NAME])){
 	$editting_user = User::fromUserName($_GET[User::USER_NAME]);
 } else {
-	//TODO: dropdown in new user table
 	$editting_user = new User();
 }
 
@@ -35,8 +34,6 @@ if(isset($_POST[User::SUBMIT])) {
 		} else {
 			$message .= "Username already exists!";
 		}
-		
-
 	}
 }
 

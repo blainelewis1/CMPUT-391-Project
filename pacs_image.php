@@ -2,8 +2,10 @@
 include('models/pacs_image.php');
 
 //TODO: validation
-$image = new PACSImage($_GET[PACSImage::RECORD_ID]);
-$size = isset($_GET[PACSImage::RECORD_ID]) ? $_GET[PACSImage::RECORD_ID] : PACSImage::REGULARS;
+$image = new PACSImage($_GET[PACSImage::IMAGE_ID]);
+
+$size = isset($_GET[PACSImage::SIZE]) ? $_GET[PACSImage::SIZE] : PACSImage::REGULAR;
+
 $image->getImage($size);
 
 

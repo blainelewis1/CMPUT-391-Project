@@ -39,7 +39,7 @@
 		  </option>
 		</select>
 
-		<?php if($editting_user->isNew()): ?>
+		<?php print_r($editting_user); if($editting_user->isNew()): ?>
 			<div class="row">
 				<div class="label">
 					<label>Password: </label>
@@ -54,6 +54,5 @@
 	<input type="submit" name="<?= User::SUBMIT; ?>" value="Submit" />
 
 	<?php if(!$editting_user->isNew()) include('change_password.php') ?>
-
 
 </form>

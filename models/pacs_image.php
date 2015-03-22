@@ -1,20 +1,28 @@
 <?php
 
+include('misc/database.php');
+
 class PACSImage {
 
-	const INSERT = "INSERT INTO pacs_images";
-	const UPDATE;
+	const INSERT = "INSERT INTO pacs_images (pacs_images.thumbnail, pacs_images.";
+	const UPDATE = "UPDATE pacs_image";
 
 	const SELECT_IMAGE = "SELECT pacs_images.:image_size
 						  FROM pacs_images
-						  WHERE pacs_images.record_id = :record_id";
+						  WHERE pacs_images.image_id = :image_id";
 
 	const REGULAR = "regular_size";
 	const THUMBNAIL = "thumbnail";
 	const FULL = "full_size";
 
-	private $record_id;
-	private $image_id;
+	const IMAGE_ID = "image_id";
+	const SIZE = "size";
+
+	const SUBMIT = "submit";
+	const SUBMIT_ANOTHER = "submit";
+
+	public $record_id;
+	public $image_id;
 
 	private $thumbnail;
 	private $regular_size;
@@ -22,7 +30,9 @@ class PACSImage {
 
 	private $new;
 
-	public __construct($image_id = null) {
+	public $image;
+
+	public function __construct($image_id = null) {
 		if($image_id == null) {
 			$this->new = true;
 		} else {
@@ -39,7 +49,7 @@ class PACSImage {
 		$db = getPDOInstance();
 		$query = $db->prepare(PACSImage::SELECT_IMAGE);
 
-		$query->bindValue("record_id", $this->record_id);
+		$query->bindValue("image_id", $this->image_id);
 		$query->bindValue("image_size", $size);
 		$query->execute();
 

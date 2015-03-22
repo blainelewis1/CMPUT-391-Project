@@ -51,9 +51,10 @@ include_once('models/person.php');
 			$record->diagnosis); 
 	?>
 
-		<?= 
+	<?= 
 		textArea('Description', 
 			RadiologyRecord::DESCRIPTION, 
 			$record->description); 
 	?>
+	<input type="submit" name="<?= RadiologyRecord::SUBMIT; ?>" value="Submit" />
 </form>
