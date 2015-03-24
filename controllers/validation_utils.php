@@ -1,5 +1,7 @@
 <?php
 
+//If we pass by reference to not empty it might just make it empty.....
+
 function notEmpty($source, $index, $name) {
 	if(empty($source[$index])) {
 		return '<span class="error">'.$name.' cannot be empty.</span>';

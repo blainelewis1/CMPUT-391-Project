@@ -56,7 +56,7 @@ class Person {
 										persons.last_name, 
 										persons.person_id
 								  FROM persons";
-	const SELECT_ALL_BY_CLASS = "SELECT persons.first_name, 
+	const SELECT_ALL_BY_CLASS = "SELECT DISTINCT persons.first_name, 
 										persons.last_name, 
 										persons.person_id
 								  FROM persons JOIN users ON persons.person_id = users.person_id
