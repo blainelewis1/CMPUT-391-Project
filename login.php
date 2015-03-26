@@ -12,9 +12,9 @@ if(User::isUserLoggedIn()){
 }
 
 
-if(isset($_POST['submit'])){
+if(isset($_POST[User::LOGIN])){
 
-	if(User::login($_POST['username'], $_POST['password'])){
+	if(User::login($_POST[User::USER_NAME], $_POST[User::PASSWORD])){
 
 		redirect("index.php");
 
@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
 		//TODO: this should be out of scope... why isn't it
 
 		//Auto fill the username
-		$username = $_POST['username'];
+		$username = $_POST[User::USER_NAME];
 		$failed = true;
 
 	}

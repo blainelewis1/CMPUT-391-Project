@@ -5,6 +5,7 @@
 $title = "Login";
 
 include("head.php");
+include("form_utils.php")
 
 ?>
 
@@ -26,32 +27,27 @@ include("head.php");
 			endif;
 		?>
 
-		<div id="login">
+		<form action="" method="POST">
+			
+			<?= 
+				textInput('Username', 
+					User::USER_NAME, 
+					$username); 
+			?>
+			
+			<div class="row">
 
-			<form action="login.php" method="POST">
-				<div class="row">
+				<div class="label">
+					<label>Password: </label>
+				</div>	
 
-					<div class="label">
-						<label>Username: </label>
-					</div>
+				<input type="password" name="password" />
 
-					<input type="text" autofocus name="username" value="<?= isset($username) ? $username : '' ?>" />	
 				</div>
-				
-				<div class="row">
 
-					<div class="label">
-						<label>Password: </label>
-					</div>	
+			<input type="submit" name="<?= User::LOGIN?>" value="Login!" />
 
-					<input type="password" name="password" />
-
-					</div>
-
-				<input type="submit" name="submit" value="submit" />
-
-			</form>
-		</div>
+		</form>
 	</div>
 
 	<?php include("footer.php"); ?>
