@@ -38,7 +38,7 @@
 
 	<li>
  		<h2>
-			<a href="uploading.php">Uploading</a>
+			<a href="edit_record.php">Uploading</a>
 		</h2>
 	</li>
 

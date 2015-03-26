@@ -18,7 +18,10 @@ include("head.php");
 		<?php include("views/diagnosis_form.php"); ?>
 			
 	</div>
-	<hr />
+	<div class="light-separator"></div>
+	<?php if(sizeof($records) == 0): ?>
+		<div class="failure">Sorry no records were found!</div>
+	<?php else: ?>
 	<table class="records">
 		<th>
 			Name
@@ -58,7 +61,7 @@ include("head.php");
 		<?php endforeach; ?>
 
 	</table>
-
+	<?php endif; ?>
 	</div>
 
 	<?php include("footer.php"); ?>

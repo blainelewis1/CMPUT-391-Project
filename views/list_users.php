@@ -40,6 +40,10 @@ include("head.php");
 			Registration Date
 		</th>
 
+		<th>
+			Edit
+		</th>
+
 		<?php foreach($users as $user ): ?>
 			
 			<tr>

@@ -132,8 +132,16 @@ a, a:visited {
 	border-color: #8D8DFE;
 	border-style: solid;
 	border-bottom-width: 2px;
+
+	margin-bottom:10px;
 }
 
+.failure {
+	background-color: #FFAAAA;
+	color: black;
+	border: 1px AA3939 solid;
+	padding:5px;
+}
 
 #login {
 	text-align: left;

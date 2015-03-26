@@ -120,7 +120,7 @@ class RadiologyRecord {
 
 		$query->execute();
 
-		$this->record_id = $query->lastInsertId();
+		$this->record_id = $db->lastInsertId();
 	}
 
 	private function selectFromId() {
