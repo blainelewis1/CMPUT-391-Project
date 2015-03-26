@@ -16,7 +16,9 @@ include("head.php");
 	
 	<h3>
 		<a href="edit_family_doctor.php">
-			Create Family Doctor
+			<span class="button">
+				Create Family Doctor
+			</span>		
 		</a>
 	</h3>
 

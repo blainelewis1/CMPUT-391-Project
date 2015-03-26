@@ -1,7 +1,8 @@
 <?php if(isset($user)): ?>
 <div id="nav">
 <ul>
- 	
+ 	<!-- TODO: bold or identify the page you are on now -->
+
  	<!--
  	<li>
  		<h2>

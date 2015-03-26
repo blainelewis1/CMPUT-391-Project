@@ -16,8 +16,11 @@ include("head.php");
 	<div id="content">
 	
 	<h3>
+
 		<a href="edit_person.php">
-			Create Person
+			<span class="button">
+				Create Person
+			</span>
 		</a>
 	</h3>
 

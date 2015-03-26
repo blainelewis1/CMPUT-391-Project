@@ -40,17 +40,37 @@ tr:nth-child(even) {
 }
 
 #sub-nav h3 {
+
 	padding:0px;
 	margin:0px;
 	display: inline-block;
+
 }
 
 #sub-nav ul, li {
+
 	padding: 0px;
 	margin: 0px;
 	list-style: none;
 	display:inline;
 	text-align: center;
+
+}
+
+.button, input[type="submit"] {
+	cursor:pointer;
+	border:none;
+	background-color:#6A62FF;
+	color:#FEFEFF;
+	display:inline-block;
+	padding:10px;
+
+}
+
+#sub-nav li {
+	margin-right: 10px;
+	list-style: none;
+	display: inline-block;
 }
 
 #nav {
@@ -71,6 +91,8 @@ tr:nth-child(even) {
 	list-style: none;
 	display: inline-block;
 }
+
+
 
 #nav h2 {
 	font-size:20px;
@@ -100,6 +122,7 @@ a, a:visited {
 	border-style: solid;
 	border-bottom-width: 4px;
 	clear:both;
+	margin-bottom: 20px;
 }
 
 .light-separator {

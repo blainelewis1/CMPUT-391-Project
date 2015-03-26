@@ -16,8 +16,11 @@ include("head.php");
 	
 	<h3>
 		<a href="edit_user.php">
-			Create User
+			<span class="button">
+				Create User
+			</span>
 		</a>
+
 	</h3>
 
 	<table class="users">
