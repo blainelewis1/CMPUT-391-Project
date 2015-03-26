@@ -1,24 +1,34 @@
-
 <?php if(isset($user)): ?>
 <div id="nav">
 <ul>
+ 	
+ 	<!--
  	<li>
-		<a href="user_settings.php">User</a>
+ 		<h2>
+			<a href="user_settings.php">User</a>
+		</h2>
 	</li>
-	
+	-->
+
 	<?php if($user->isAdmin()): ?>
 
 	<li>
-		<a href="manage_users.php">User Management</a>
+ 		<h2>
+			<a href="manage_users.php">User Management</a>
+		</h2>
 	</li>
 	
 	
 	<li>
-		<a href="report_generating.php">Report Generating</a>
+	 	<h2>
+			<a href="report_generating.php">Report Generating</a>
+		</h2>
 	</li>
 	
 	<li>
-		<a href="data_analysis.php">Data Analysis</a>
+ 		<h2>
+			<a href="data_analysis.php">Data Analysis</a>
+		</h2>
 	</li>
 
 	<?php endif; ?>
@@ -26,13 +36,17 @@
 	<?php if($user->isRadiologist()): ?>
 
 	<li>
-		<a href="uploading.php">Uploading</a>
+ 		<h2>
+			<a href="uploading.php">Uploading</a>
+		</h2>
 	</li>
 
 	<?php endif; ?>
 	
 	<li>
-		<a href="search.php">Search</a>
+ 		<h2>
+			<a href="search.php">Search</a>
+		</h2>
 	</li>
 </div>
 <?php endif; ?>

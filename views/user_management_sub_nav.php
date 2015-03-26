@@ -1,13 +1,19 @@
-<div id="subnav">
+<div id="sub-nav">
 	<ul>
 		<li>
-			<a href="manage_users.php">Users</a>
+			<h3>
+				<a href="manage_users.php">Users</a>
+			</h3>
 		</li>
 		<li>
-			<a href="manage_people.php">People</a>
+			<h3>
+				<a href="manage_people.php">People</a>
+			</h3>
 		</li>
 		<li>
-			<a href="manage_family_doctors.php">Family Doctors</a>
+			<h3>
+				<a href="manage_family_doctors.php">Family Doctors</a>
+			</h3>
 		</li>
 	</ul>
 </div>
