@@ -5,11 +5,7 @@ include_once('models/family_doctor.php');
 
 $user = User::getLoggedInUser();
 
-if(!$user->isAdmin()){
-	include("views/denied.php");
-	die();
-}
-
+$user->isAdmin();
 
 
 if(isset($_GET[FamilyDoctor::DOCTOR_ID]) && isset($_GET[FamilyDoctor::PATIENT_ID])){
@@ -24,7 +20,7 @@ if(isset($_GET[FamilyDoctor::DOCTOR_ID]) && isset($_GET[FamilyDoctor::PATIENT_ID
 
 $family_doctors = FamilyDoctor::getAllFamilyDoctors();
 
-$content = "views/list_family_doctors.php";
-include("views/template.php");
+$content = "views/lists/family_doctors.php";
+include("views/templates/template.php");
 
 ?>

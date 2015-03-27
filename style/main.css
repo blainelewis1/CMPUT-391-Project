@@ -1,13 +1,37 @@
+/* Uses code from http://mystrd.at/modern-clean-css-sticky-footer/ [2015-03-26 blaine1] */
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    height: 40px;
+    width: 960px;
+    margin:auto;
+    overflow:hidden;
+}
+
+#footer p {
+	margin:0px;
+	margin-top:10px;
+}
+
+
 body {
 	font-family: helvetica;
 	background-color: #FEFEFF;
 	width:960px;
 	margin:auto;
+	margin-bottom:40px;
 	color: #050051;
+}
+
+html{
+	position: relative;
+    min-height: 100%;
 }
 
 #content {
 	margin: auto;
+	margin-top: 20px;
 }
 
 table {
@@ -130,7 +154,6 @@ a, a:visited {
 	border-bottom-width: 4px;
 	clear:both;
 
-	margin-bottom: 20px;
 }
 
 .light-separator {
@@ -163,12 +186,6 @@ a, a:visited {
 	font-weight: bold;
 }
 
-#content {
-	clear:both;
-	margin: 0px auto;
-	display: inline-block;
-}
-
 .row .label {
 	display:block;
 }
@@ -199,3 +216,4 @@ textarea, select {
 	padding:5px;
 	font-size: 15px;
 }
+

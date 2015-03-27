@@ -32,7 +32,7 @@ if(isset($_POST[Person::SUBMIT])) {
 		
 	}
 }
-$content = "views/person.php";
-include("views/template.php");
+$content = "views/forms/person.php";
+include("views/templates/template.php");
 
 ?>

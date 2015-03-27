@@ -9,7 +9,7 @@ $user->isAdmin();
 
 $people = Person::getAllPeople();
 
-$content = "views/list_people.php";
-include("views/template.php");
+$content = "views/lists/people.php";
+include("views/templates/template.php");
 
 ?>

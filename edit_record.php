@@ -34,8 +34,8 @@ if(isset($_POST[RadiologyRecord::SUBMIT])) {
 		
 	}
 }
-$content = "views/record.php";
-include("views/template.php");
+$content = "views/forms/record.php";
+include("views/templates/template.php");
 
 
 ?>

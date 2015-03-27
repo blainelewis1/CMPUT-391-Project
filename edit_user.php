@@ -41,7 +41,7 @@ if(isset($_POST[User::SUBMIT])) {
 }
 
 
-$content = "views/user.php";
-include("views/template.php");
+$content = "views/forms/user.php";
+include("views/templates/template.php");
 
 ?>

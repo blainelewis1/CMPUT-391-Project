@@ -1,18 +1,6 @@
-<?php
-	if (!empty($message)):
-?>
-
-<div class="failure">
-	<?= $message ?>
-</div>
-
-<?php
-	endif;
-?>
-
 <div id="personal_information">
 
-	<?php include("views/edit_person.php"); ?>
+	<?php include("views/person.php"); ?>
 	
 	<div class="light-separator"></div>
 	

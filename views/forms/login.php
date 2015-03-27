@@ -1,5 +1,5 @@
 <?php 
-include("form_utils.php")
+include("misc/form_utils.php")
 ?>
 <?php
 	//TODO: adopt message style

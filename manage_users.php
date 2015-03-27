@@ -13,7 +13,7 @@ if(isset($_GET[User::USER_NAME])) {
 
 $users = User::getAllUsers();
 
-$content = "views/list_users.php";
-include("views/template.php");
+$content = "views/lists/users.php";
+include("views/templates/template.php");
 
 ?>

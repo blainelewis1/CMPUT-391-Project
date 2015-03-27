@@ -28,7 +28,7 @@ if(isset($_POST[User::LOGIN])){
 	}
 } 
 
-$content = "views/login.php";
-include("views/template.php");
+$content = "views/forms/login.php";
+include("views/templates/template.php");
 
 ?>

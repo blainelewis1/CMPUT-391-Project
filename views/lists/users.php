@@ -1,4 +1,4 @@
-<?php include("user_management_sub_nav.php"); ?>
+<?php include("views/templates/user_management_sub_nav.php"); ?>
 
 <h3>
 	<a href="edit_user.php">

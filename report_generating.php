@@ -27,6 +27,6 @@ if(isset($_POST[RadiologyRecord::SEARCH])) {
 
 $content = "views/report_generator.php";
 
-include("views/template.php");
+include("views/templates/template.php");
 
 ?>

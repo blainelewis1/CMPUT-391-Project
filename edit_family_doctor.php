@@ -37,6 +37,6 @@ if(isset($_POST[FamilyDoctor::SUBMIT])) {
 	}
 }
 
-$content = 'views/family_doctor.php';
+$content = 'views/forms/family_doctor.php';
 
-include("views/template.php");
+include("views/templates/template.php");
