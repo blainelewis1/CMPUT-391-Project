@@ -84,9 +84,9 @@ class User {
 	*/
 
 	public static function getLoggedInUser(){
-		$user = new User();
-		$user->ensureUserLoggedIn();
-		$user->user_name = $_SESSION[User::USER_NAME];
+
+		User::ensureUserLoggedIn();
+		$user = User::fromUsername($_SESSION[User::USER_NAME]);
 		return $user;
 
 	}
@@ -169,7 +169,7 @@ class User {
 		If there is not then we redirect
 		But we remember the page and set a redirect point
 	*/
-	private function ensureUserLoggedIn() {
+	private static function ensureUserLoggedIn() {
 		if(!isset($_SESSION[User::USER_NAME])) {
 
 			setRedirect($_SERVER['REQUEST_URI']);
@@ -219,15 +219,28 @@ class User {
 		return false;
 	}
 
-	public function isAdmin() {
-		//TODO: return a real value here
-		//TODO: show a denied page?
-		return true;
+	private function isClass($class, $redirect=true){
+	
+		if($this->class == $class) {
+			return true;
+		} else if($redirect == false) {
+			return false;
+		} else {
+
+			$content = "views/denied.php";
+			include("views/templates/template.php");
+			die();
+
+		}
+
 	}
 
-	public function isRadiologist() {
-		//TODO: return a real value here
-		return true;
+	public function isAdmin($redirect=true) {
+		return $this->isClass("a", $redirect);
+	}
+
+	public function isRadiologist($redirect=true) {
+		return $this->isClass("r", $redirect);
 	}
 
 	public function getUserName() {

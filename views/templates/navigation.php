@@ -11,7 +11,7 @@
 	</li>
 	-->
 
-	<?php if($user->isAdmin()): ?>
+	<?php if($user->isAdmin(false)): ?>
 
 	<li>
  		<h2>
@@ -34,11 +34,11 @@
 
 	<?php endif; ?>
 
-	<?php if($user->isRadiologist()): ?>
+	<?php if($user->isRadiologist(false)): ?>
 
 	<li>
  		<h2>
-			<a href="edit_record.php">Uploading</a>
+			<a href="record.php">Uploading</a>
 		</h2>
 	</li>
 
