@@ -6,6 +6,10 @@ body {
 	color: #050051;
 }
 
+#content {
+	margin: auto;
+}
+
 table {
 	border-collapse: collapse;
 }
@@ -124,6 +128,7 @@ a, a:visited {
 	border-style: solid;
 	border-bottom-width: 4px;
 	clear:both;
+
 	margin-bottom: 20px;
 }
 
@@ -133,7 +138,8 @@ a, a:visited {
 	border-style: solid;
 	border-bottom-width: 2px;
 
-	margin-bottom:10px;
+	margin-bottom:20px;
+	margin-top: 20px;
 }
 
 .failure {
@@ -150,6 +156,11 @@ a, a:visited {
 
 }
 
+form {
+	margin:auto;
+	display:inline-block;
+}
+
 .username {
 	font-size: 20px;
 	font-weight: bold;
@@ -162,17 +173,19 @@ a, a:visited {
 }
 
 .row .label {
-	width:100px;
+	display:block;
 }
 
 .row input {
 	width:200px;
 }
-
-.label {
-	display:inline-block;
-}
-
 .row {
 	padding:5px;
+}
+form input[type="submit"] {
+	width:200px;
+	margin:5px;
+}
+input, select {
+	width: 200px;
 }
