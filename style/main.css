@@ -188,7 +188,7 @@ input, select {
 table .icon img {
 	width:20px;
 }
-input[type="text"],input[type="number"], input[type="password"], input[type="email"] {
+input[type="text"],input[type="number"], input[type="password"], input[type="email"], input[type="date"] {
 	padding:5px;
 	font-size: 17px;
 }

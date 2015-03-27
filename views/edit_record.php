@@ -50,7 +50,7 @@ include_once('models/person.php');
 		textInput('Diagnosis', 
 			RadiologyRecord::DIAGNOSIS, 
 			$record->diagnosis,
-			24); 
+			128); 
 	?>
 
 	<?= 

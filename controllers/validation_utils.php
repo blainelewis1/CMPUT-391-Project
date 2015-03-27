@@ -17,8 +17,10 @@ function maxLength($val, $length, $name) {
 	}
 }
 
-function isValidDate($val, $name) {
-	return '<div class="error">'.$name.' must be a valid date.</div>';
+function validDate($val, $name) {
+	return "";
+	//TODO: test dates
+	#'<div class="error">'.$name.' must be a valid date.</div>';
 }
 
 function isNumber($val, $name) {
