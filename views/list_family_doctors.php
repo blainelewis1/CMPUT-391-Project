@@ -22,7 +22,11 @@ include("head.php");
 		</a>
 	</h3>
 
-	<table class="users">
+	<?php if(sizeof($family_doctors) == 0): ?>
+		<div class="failure">Sorry no family doctors were found!</div>
+	<?php else: ?>
+
+	<table>
 		<th>
 			Doctor
 		</th>
@@ -52,7 +56,7 @@ include("head.php");
 					</a>
 				</td>
 				<td class="icon">
-					<a href="manage_family_doctors.php?delete=true<?= '&'.FamilyDoctor::PATIENT_ID.'='.$family_doctor->patient_id.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
+					<a href="manage_family_doctors.php?<?= '&'.FamilyDoctor::PATIENT_ID.'='.$family_doctor->patient_id.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
 						<img src="/images/delete.png" />
 					</a>
 				</td>
@@ -61,6 +65,8 @@ include("head.php");
 		<?php endforeach; ?>
 
 	</table>
+
+	<?php endif; ?>
 
 	</div>
 

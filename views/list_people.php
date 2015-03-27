@@ -24,6 +24,10 @@ include("head.php");
 		</a>
 	</h3>
 
+	<?php if(sizeof($people) == 0): ?>
+		<div class="failure">Sorry no peoples were found!</div>
+	<?php else: ?>
+
 	<table class="users">
 		<th>
 			Person ID
@@ -61,6 +65,8 @@ include("head.php");
 		<?php endforeach; ?>
 
 	</table>
+
+	<?php endif; ?>
 
 	</div>
 

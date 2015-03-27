@@ -10,7 +10,7 @@ class FamilyDoctor {
 					SET patient_id = :patient_id, doctor_id = :doctor_id 
 					WHERE patient_id = :old_patient_id AND doctor_id=:old_doctor_id";
 
-	const DELETE = "DELETE family_doctor
+	const DELETE = "DELETE FROM family_doctor
 					WHERE patient_id = :patient_id AND doctor_id=:doctor_id";
 
 	const SELECT_ALL = "SELECT doctor_id, patient_id, 
@@ -41,7 +41,12 @@ class FamilyDoctor {
 		$family_doctor->old_doctor_id = $doctor;
 		$family_doctor->old_patient_id = $patient;
 
+		$family_doctor->doctor_id = $doctor;
+		$family_doctor->patient_id = $patient;
+
 		$family_doctor->new = false;
+
+		return $family_doctor;
 	}
 
 	public function __construct() {

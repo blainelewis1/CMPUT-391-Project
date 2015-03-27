@@ -10,8 +10,15 @@ if(!$user->isAdmin()){
 	die();
 }
 
-if(isset($_GET[FamilyDoctor::DELETE])) {
 
+
+if(isset($_GET[FamilyDoctor::DOCTOR_ID]) && isset($_GET[FamilyDoctor::PATIENT_ID])){
+	print('yo yo');
+	$family_doctor = FamilyDoctor::fromIds($_GET[FamilyDoctor::PATIENT_ID], $_GET[FamilyDoctor::DOCTOR_ID]);
+	$family_doctor->deleteRecord();
+
+	#header("Location: manage_family_doctors.php");
+	#die():
 }
 
 $family_doctors = FamilyDoctor::getAllFamilyDoctors();
