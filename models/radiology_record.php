@@ -39,6 +39,11 @@ class RadiologyRecord {
 						AND r.test_date >= :start_date 
 						AND r.test_date <= :end_date";
 
+	const SELECT_ALL = "SELECT p.first_name,
+							 	p.address, p.phone, r.test_date
+						FROM radiology_record r, persons p
+						WHERE p.person_id = r.patient_id ";
+
 	const INSERT = "INSERT INTO radiology_record (patient_id,
 					doctor_id, radiologist_id, test_type, 
 					prescribing_date, test_date, diagnosis,
@@ -94,11 +99,37 @@ class RadiologyRecord {
 	public static function selectByDiagnosisAndDate($diagnosis, $start_date, $end_date) {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(RadiologyRecord::SELECT_ALL_BY_DIAGNOSIS_AND_DATE);
+		$query_string = RadiologyRecord::SELECT_ALL;
+		$delimiter = " AND ";
 
-		$query->bindValue("diagnosis", $diagnosis);
-		$query->bindValue("start_date", $start_date);
-		$query->bindValue("end_date", $end_date);
+		if($diagnosis != "") {
+			$query_string .= $delimiter;
+			$query_string .= "r.diagnosis = :diagnosis";
+
+		} else if($start_date != "") {
+
+			$query_string .= $delimiter;
+			$query_string .= "r.test_date >= :start_date";
+
+		} else if($end_date != "") {
+			$query_string .= $delimiter;
+			$query_string .= "r.test_date <= :end_date";
+		}
+
+
+		$query = $db->prepare($query_string);
+
+		if($diagnosis != ""){
+			$query->bindValue("diagnosis", $diagnosis);
+		}
+		
+		if($start_date != ""){
+			$query->bindValue("start_date", $start_date);
+		}
+		
+		if($end_date != ""){
+			$query->bindValue("end_date", $end_date);
+		}
 		
 		$query->execute();	
 

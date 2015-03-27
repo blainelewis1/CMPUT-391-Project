@@ -1,6 +1,6 @@
 <div id="personal_information">
 
-	<?php include("views/person.php"); ?>
+	<?php include("views/forms/person.php"); ?>
 	
 	<div class="light-separator"></div>
 	

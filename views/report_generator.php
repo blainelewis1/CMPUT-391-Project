@@ -1,7 +1,7 @@
 <div id="personal_information">
 
 <?php include('misc/form_utils.php'); ?>
-<form action="" method="POST">
+<form action="" method="GET">
 
 	<?= 
 		textInput('Diagnosis', 

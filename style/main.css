@@ -27,6 +27,9 @@ body {
 html{
 	position: relative;
     min-height: 100%;
+    /* http://stackoverflow.com/questions/1417934/how-to-prevent-scrollbar-from-repositioning-web-page [2015-03-26 blaine1] */
+    overflow-y: scroll;
+
 }
 
 #content {

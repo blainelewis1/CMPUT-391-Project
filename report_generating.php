@@ -10,19 +10,17 @@ $user->isAdmin();
 
 $records = [];
 
-$diagnosis = isset($_POST[RadiologyRecord::DIAGNOSIS]) ? 
-	$_POST[RadiologyRecord::DIAGNOSIS] : "";
-$start_date = isset($_POST[RadiologyRecord::TEST_START_DATE]) ? 
-	$_POST[RadiologyRecord::TEST_START_DATE] : "";
-$end_date = isset($_POST[RadiologyRecord::TEST_END_DATE]) ? 
-	$_POST[RadiologyRecord::TEST_END_DATE] : "";
+$diagnosis = isset($_GET[RadiologyRecord::DIAGNOSIS]) ? 
+	$_GET[RadiologyRecord::DIAGNOSIS] : "";
+$start_date = isset($_GET[RadiologyRecord::TEST_START_DATE]) ? 
+	$_GET[RadiologyRecord::TEST_START_DATE] : "";
+$end_date = isset($_GET[RadiologyRecord::TEST_END_DATE]) ? 
+	$_GET[RadiologyRecord::TEST_END_DATE] : "";
 
-if(isset($_POST[RadiologyRecord::SEARCH])) {
+if(isset($_GET[RadiologyRecord::SEARCH])) {
 	$message = validateDiagnosisFormFields($records);
 
-	if($message == ""){
-		$records = RadiologyRecord::selectByDiagnosisAndDate($diagnosis, $start_date, $end_date);
-	}
+	$records = RadiologyRecord::selectByDiagnosisAndDate($diagnosis, $start_date, $end_date);
 }
 
 $content = "views/report_generator.php";
