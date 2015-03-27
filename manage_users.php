@@ -5,10 +5,7 @@ include_once('models/person.php');
 
 $user = User::getLoggedInUser();
 
-if(!$user->isAdmin()){
-	include("views/denied.php");
-	die();
-}
+$user->isAdmin();
 
 if(isset($_GET[User::USER_NAME])) {
 	User::deleteRecord($_GET[User::USER_NAME]);
@@ -16,6 +13,7 @@ if(isset($_GET[User::USER_NAME])) {
 
 $users = User::getAllUsers();
 
-include("views/list_users.php");
+$content = "views/list_users.php";
+include("views/template.php");
 
 ?>

@@ -1,43 +1,20 @@
-<html>
-
-<?php 
-
-$title = "User Settings";
-
-include("views/head.php");
-
+<?php
+	if (!empty($message)):
 ?>
 
-<body>
+<div class="failure">
+	<?= $message ?>
+</div>
 
-	<?php include("header.php"); ?>
+<?php
+	endif;
+?>
 
-	<div id="content">
+<div id="personal_information">
 
-		<?php
-			if (!empty($message)):
-		?>
-		
-			<div class="failure">
-				<?= $message ?>
-			</div>
-		
-		<?php
-			endif;
-		?>
-
-		<div id="personal_information">
-
-			<?php include("views/edit_person.php"); ?>
-			
-			<div class="light-separator"></div>
-			
-			<?php include('views/change_password.php'); ?>
-		</div>
-
-	</div>
-
-	<?php include("views/footer.php"); ?>
-
-</body>
-</html>
+	<?php include("views/edit_person.php"); ?>
+	
+	<div class="light-separator"></div>
+	
+	<?php include('views/change_password.php'); ?>
+</div>

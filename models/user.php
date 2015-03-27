@@ -221,6 +221,7 @@ class User {
 
 	public function isAdmin() {
 		//TODO: return a real value here
+		//TODO: show a denied page?
 		return true;
 	}
 

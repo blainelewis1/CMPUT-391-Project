@@ -1,58 +1,32 @@
-<html>
+<h3>
+	<a href="user_settings.php">User</a>
+</h3>
 
-<?php 
+<?php if($user->isAdmin()): ?>
 
-$title = "Landing";
+<h3>
+	<a href="user_management.php">User Management</a>
+</h3>
 
-include("head.php");
 
-?>
+<h3>
+	<a href="report_generating.php">Report Generating</a>
+</h3>
 
-<body>
+<h3>
+	<a href="data_analysis.php">Data Analysis</a>
+</h3>
 
-	<?php include("header.php"); ?>
+<?php endif; ?>
 
-	<div id="content">
-		
-		
-		<h3>
-			<a href="user_settings.php">User</a>
-		</h3>
-		
-		<?php if($user->isAdmin()): ?>
+<?php if($user->isRadiologist()): ?>
 
-		<h3>
-			<a href="user_management.php">User Management</a>
-		</h3>
-		
-		
-		<h3>
-			<a href="report_generating.php">Report Generating</a>
-		</h3>
-		
-		<h3>
-			<a href="data_analysis.php">Data Analysis</a>
-		</h3>
+<h3>
+	<a href="uploading.php">Uploading</a>
+</h3>
 
-		<?php endif; ?>
+<?php endif; ?>
 
-		<?php if($user->isRadiologist()): ?>
-
-		<h3>
-			<a href="uploading.php">Uploading</a>
-		</h3>
-
-		<?php endif; ?>
-		
-		<h3>
-			<a href="search.php">Search</a>
-		</h3>
-		
-		
-
-	</div>
-
-	<?php include("footer.php"); ?>
-
-</body>
-</html>
+<h3>
+	<a href="search.php">Search</a>
+</h3>

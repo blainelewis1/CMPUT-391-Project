@@ -1,5 +1,3 @@
-
-
 <?php 
 
 //TODO: these can all be collapsed

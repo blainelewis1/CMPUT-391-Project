@@ -1,33 +1,64 @@
-<html>
-
-<?php 
-
-$title = "Create or Edit User";
-
-include("head.php");
-
+<?php
+include('form_utils.php'); 
+include('form_error.php');
+include_once('models/person.php');
 ?>
+<form action="" method="POST">
 
-<body>
-	<?php include("header.php"); ?>
 
-	<div class="content">
-		<?php
-			if (!empty($message)):
-		?>
-		
-			<div class="failure">
-				<?= $message ?>
-			</div>
-		
-		<?php
-			endif;
-		?>
+	<?=
+	    selectPerson('Patient',
+	    	RadiologyRecord::PATIENT_ID, 
+		Person::getAllByClass(Person::PATIENT), 
+		$record->patient_id); 
+	?>
 
-		<?php include("views/edit_record.php"); ?>
-	</div>
+	<?=
+	    selectPerson('Doctor',
+		    RadiologyRecord::DOCTOR_ID, 
+			Person::getAllByClass(Person::DOCTOR), 
+			$record->doctor_id); 
+	?>
 
-	<?php include("footer.php"); ?>
+	<?= 
+		selectPerson('Radiologist',
+			RadiologyRecord::RADIOLOGIST_ID, 
+			Person::getAllByClass(Person::RADIOLOGIST), 
+			$record->radiologist_id); 
+	?>
 
-</body>
-</html>
+	<?= 
+		textInput('Test Type', 
+			RadiologyRecord::TEST_TYPE, 
+			$record->test_type,
+			24); 
+	?>
+
+
+	<?= 
+		dateInput('Prescribing Date', 
+			RadiologyRecord::PRESCRIBING_DATE, 
+			$record->prescribing_date); 
+	?>
+
+	<?= 
+		dateInput('Test Date', 
+			RadiologyRecord::TEST_DATE, 
+			$record->test_date); 
+	?>
+
+	<?= 
+		textInput('Diagnosis', 
+			RadiologyRecord::DIAGNOSIS, 
+			$record->diagnosis,
+			128); 
+	?>
+
+	<?= 
+		textArea('Description', 
+			RadiologyRecord::DESCRIPTION, 
+			$record->description,
+			1024); 
+	?>
+	<input type="submit" name="<?= RadiologyRecord::SUBMIT; ?>" value="Submit" />
+</form>

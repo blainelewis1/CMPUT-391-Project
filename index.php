@@ -4,6 +4,7 @@ include_once('models/user.php');
 
 $user = User::getLoggedInUser();
 
-include("views/landing.php");
+$content = "views/landing.php";
+include("views/template.php");
 
 ?>

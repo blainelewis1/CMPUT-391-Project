@@ -9,10 +9,7 @@ include_once('models/person.php');
 
 $user = User::getLoggedInUser();
 
-if(!$user->isAdmin()){
-	include("views/denied.php");
-	die();
-}
+$user->isAdmin();
 
 
 $family_doctor;
@@ -40,4 +37,6 @@ if(isset($_POST[FamilyDoctor::SUBMIT])) {
 	}
 }
 
-include("views/family_doctor.php");
+$content = 'views/family_doctor.php';
+
+include("views/template.php");

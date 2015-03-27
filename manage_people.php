@@ -5,13 +5,11 @@ include_once('models/person.php');
 
 $user = User::getLoggedInUser();
 
-if(!$user->isAdmin()){
-	include("views/denied.php");
-	die();
-}
+$user->isAdmin();
 
 $people = Person::getAllPeople();
 
-include("views/list_people.php");
+$content = "views/list_people.php";
+include("views/template.php");
 
 ?>

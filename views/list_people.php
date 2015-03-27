@@ -1,76 +1,53 @@
-<html>
+<?php include("user_management_sub_nav.php"); ?>
+<h3>
 
-<?php 
+	<a href="edit_person.php">
+		<span class="button">
+			Create Person
+		</span>
+	</a>
+</h3>
 
-$title = "User Management";
+<?php if(sizeof($people) == 0): ?>
+	<div class="failure">Sorry no peoples were found!</div>
+<?php else: ?>
 
-include("head.php");
+<table class="users">
+	<th>
+		Person ID
+	</th>
+	<th>
+		First Name
+	</th>
+	<th>
+		Last Name
+	</th>
+	<th></th>
 
-?>
+	<?php foreach($people as $person ): ?>
+		
+		<tr>
+			<td>
+				<?= $person->person_id; ?>
+			</td>
 
-<body>
+			<td>
+				<?= $person->first_name; ?>
+			</td>
 
-	<?php include("header.php"); ?>
-	<?php include("user_management_sub_nav.php"); ?>
+			<td>
+				<?= $person->last_name; ?>
+			</td>
 
-	<div id="content">
-	
-	<h3>
+			<td class="icon">
+				<a href="edit_person.php?<?= Person::PERSON_ID.'='.$person->person_id; ?>">
+					<img src="/images/edit.png" />
+				</a>
+			</td>
+		</tr>
 
-		<a href="edit_person.php">
-			<span class="button">
-				Create Person
-			</span>
-		</a>
-	</h3>
+	<?php endforeach; ?>
 
-	<?php if(sizeof($people) == 0): ?>
-		<div class="failure">Sorry no peoples were found!</div>
-	<?php else: ?>
+</table>
 
-	<table class="users">
-		<th>
-			Person ID
-		</th>
-		<th>
-			First Name
-		</th>
-		<th>
-			Last Name
-		</th>
-		<th></th>
-
-		<?php foreach($people as $person ): ?>
-			
-			<tr>
-				<td>
-					<?= $person->person_id; ?>
-				</td>
-
-				<td>
-					<?= $person->first_name; ?>
-				</td>
-
-				<td>
-					<?= $person->last_name; ?>
-				</td>
-
-				<td class="icon">
-					<a href="edit_person.php?<?= Person::PERSON_ID.'='.$person->person_id; ?>">
-						<img src="/images/edit.png" />
-					</a>
-				</td>
-			</tr>
-
-		<?php endforeach; ?>
-
-	</table>
-
-	<?php endif; ?>
-
-	</div>
-
-	<?php include("footer.php"); ?>
-
-</body>
-</html>
+<?php endif; ?>

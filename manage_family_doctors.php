@@ -24,6 +24,7 @@ if(isset($_GET[FamilyDoctor::DOCTOR_ID]) && isset($_GET[FamilyDoctor::PATIENT_ID
 
 $family_doctors = FamilyDoctor::getAllFamilyDoctors();
 
-include("views/list_family_doctors.php");
+$content = "views/list_family_doctors.php";
+include("views/template.php");
 
 ?>

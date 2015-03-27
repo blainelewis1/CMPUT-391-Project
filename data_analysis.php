@@ -4,13 +4,10 @@ include_once('models/user.php');
 
 $user = User::getLoggedInUser();
 
-if($user->isAdmin()){
+$user->isAdmin();
 
-	include("views/denied.php");
-	die();
-	
-}
+$content = 'data_analysis,php';
 
-include("views/data_analysis.php");
+include("views/template.php");
 
 ?>

@@ -28,6 +28,7 @@ if(isset($_POST[User::LOGIN])){
 	}
 } 
 
-include("views/login.php");
+$content = "views/login.php";
+include("views/template.php");
 
 ?>

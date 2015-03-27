@@ -6,10 +6,7 @@ include_once('controllers/radiology_record.php');
 
 $user = User::getLoggedInUser();
 
-if(!$user->isAdmin()){
-	include("views/denied.php");
-	die();
-}
+$user->isAdmin();
 
 $records = [];
 
@@ -25,11 +22,11 @@ if(isset($_POST[RadiologyRecord::SEARCH])) {
 
 	if($message == ""){
 		$records = RadiologyRecord::selectByDiagnosisAndDate($diagnosis, $start_date, $end_date);
-	} else {
-		print($message);
 	}
 }
 
-include("views/report_generator.php");
+$content = "views/report_generator.php";
+
+include("views/template.php");
 
 ?>

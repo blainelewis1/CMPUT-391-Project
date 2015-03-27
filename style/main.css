@@ -148,6 +148,7 @@ a, a:visited {
 	color: black;
 	border: 1px AA3939 solid;
 	padding:5px;
+	margin-bottom:5px;
 }
 
 #login {

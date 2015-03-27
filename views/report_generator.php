@@ -1,72 +1,51 @@
-<html>
+<div id="personal_information">
 
-<?php 
+	<?php include("views/diagnosis_form.php"); ?>
+		
+</div>
+<div class="light-separator"></div>
 
-$title = "Report Generating";
+<?php if(sizeof($records) == 0): ?>
+	<div class="failure">Sorry no records were found!</div>
+<?php else: ?>
 
-include("head.php");
-
-?>
-
-<body>
-
-	<?php include("header.php"); ?>
-	<div id="content">
+<table class="records">
+	<th>
+		Name
+	</th>
 	
-	<div id="personal_information">
-
-		<?php include("views/diagnosis_form.php"); ?>
-			
-	</div>
-	<div class="light-separator"></div>
-
-	<?php if(sizeof($records) == 0): ?>
-		<div class="failure">Sorry no records were found!</div>
-	<?php else: ?>
+	<th>
+		Address
+	</th>
 	
-	<table class="records">
-		<th>
-			Name
-		</th>
+	<th>
+		Phone Number
+	</th>
+	
+	<th>
+		Testing Date
+	</th>
+
+	<?php foreach($records as $record ): ?>
 		
-		<th>
-			Address
-		</th>
-		
-		<th>
-			Phone Number
-		</th>
-		
-		<th>
-			Testing Date
-		</th>
+		<tr>
+			<td>
+				<?= $record->first_name; ?>
+			</td>
 
-		<?php foreach($records as $record ): ?>
-			
-			<tr>
-				<td>
-					<?= $record->first_name; ?>
-				</td>
+			<td>
+				<?= $record->address; ?>
+			</td>
 
-				<td>
-					<?= $record->address; ?>
-				</td>
+			<td>
+				<?= $record->phone; ?>
+			</td>
+			<td>
+				<?= $record->test_date; ?>
+			</td>
+		</tr>
 
-				<td>
-					<?= $record->phone; ?>
-				</td>
-				<td>
-					<?= $record->test_date; ?>
-				</td>
-			</tr>
+	<?php endforeach; ?>
 
-		<?php endforeach; ?>
-
-	</table>
-	<?php endif; ?>
-	</div>
-
-	<?php include("footer.php"); ?>
-
-</body>
-</html>
+</table>
+<?php endif; ?>

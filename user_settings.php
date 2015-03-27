@@ -24,8 +24,8 @@ if(isset($_POST[Person::SUBMIT])) {
 	}
 }
 
-
-include("views/user_settings.php");
+$content = "views/user_settings.php";
+include("views/template.php");
 
 
 

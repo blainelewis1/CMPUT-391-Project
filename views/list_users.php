@@ -1,91 +1,70 @@
-<html>
+<?php include("user_management_sub_nav.php"); ?>
 
-<?php 
+<h3>
+	<a href="edit_user.php">
+		<span class="button">
+			Create User
+		</span>
+	</a>
 
-$title = "User Management";
+</h3>
 
-include("head.php");
+<?php if(sizeof($users) == 0): ?>
+	<div class="failure">Sorry no users were found!</div>
+<?php else: ?>
 
-?>
-
-<body>
-
-	<?php include("header.php"); ?>
-	<?php include("user_management_sub_nav.php"); ?>
-	<div id="content">
+<table>
+	<th>
+		Person ID
+	</th>
 	
-	<h3>
-		<a href="edit_user.php">
-			<span class="button">
-				Create User
-			</span>
-		</a>
+	<th>
+		User Name
+	</th>
+	
+	<th>
+		Class
+	</th>
+	
+	<th>
+		Registration Date
+	</th>
 
-	</h3>
+	<th></th>
+	<th></th>
 
-	<?php if(sizeof($users) == 0): ?>
-		<div class="failure">Sorry no users were found!</div>
-	<?php else: ?>
-
-	<table>
-		<th>
-			Person ID
-		</th>
+	<?php foreach($users as $user ): ?>
 		
-		<th>
-			User Name
-		</th>
-		
-		<th>
-			Class
-		</th>
-		
-		<th>
-			Registration Date
-		</th>
+		<tr>
+			<td>
+				<?= $user->person_id; ?>
+			</td>
 
-		<th></th>
-		<th></th>
+			<td>
+				<?= $user->user_name; ?>
+			</td>
 
-		<?php foreach($users as $user ): ?>
-			
-			<tr>
-				<td>
-					<?= $user->person_id; ?>
-				</td>
+			<td>
+				<?= $user->class; ?>
+			</td>
+			<td>
+				<?= $user->date_registered; ?>
+			</td>
 
-				<td>
-					<?= $user->user_name; ?>
-				</td>
+			<td class="icon">
+				<a href="edit_user.php?<?= User::USER_NAME.'='.$user->user_name; ?>">
+					<img src="/images/edit.png" />
+				</a>
+			</td>
+			<td class="icon">
+				<a href="manage_users.php?<?= User::USER_NAME.'='.$user->user_name; ?>">
+					<img src="/images/delete.png" />
+				</a>
+			</td>
+		</tr>
 
-				<td>
-					<?= $user->class; ?>
-				</td>
-				<td>
-					<?= $user->date_registered; ?>
-				</td>
+	<?php endforeach; ?>
 
-				<td class="icon">
-					<a href="edit_user.php?<?= User::USER_NAME.'='.$user->user_name; ?>">
-						<img src="/images/edit.png" />
-					</a>
-				</td>
-				<td class="icon">
-					<a href="manage_users.php?<?= User::USER_NAME.'='.$user->user_name; ?>">
-						<img src="/images/delete.png" />
-					</a>
-				</td>
-			</tr>
+</table>
 
-		<?php endforeach; ?>
-
-	</table>
-
-	<?php endif; ?>
-
-	</div>
-
-	<?php include("footer.php"); ?>
-
-</body>
-</html>
+<?php endif; ?>

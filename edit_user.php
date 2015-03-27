@@ -10,10 +10,7 @@ include_once('controllers/user.php');
 
 $user = User::getLoggedInUser();
 
-if(!$user->isAdmin()){
-	include("views/denied.php");
-	die();
-}
+$user->isAdmin();
 
 $editting_user;
 
@@ -43,6 +40,8 @@ if(isset($_POST[User::SUBMIT])) {
 	}
 }
 
-include("views/user.php");
+
+$content = "views/user.php";
+include("views/template.php");
 
 ?>

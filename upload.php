@@ -8,10 +8,7 @@ include_once('models/pacs_image.php');
 
 $user = User::getLoggedInUser();
 
-if(!$user->isRadiologist()){
-	include("views/denied.php");
-	die();
-}
+$user->isRadiologist();
 
 $record;
 
@@ -48,7 +45,9 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 	}
 }
 
-include("views/upload.php");
+$content = "views/upload.php";
+
+include("views/template.php");
 
 
 ?>

@@ -1,35 +1,23 @@
-<html>
-
 <?php 
-
-$title = "Create or Edit Family Doctor";
-
-include("head.php");
-
+include('form_utils.php'); 
+include('form_error.php');
 ?>
+<form action="" method="POST">
 
-<body>
+	<?=
+		selectPerson('Doctor',
+			FamilyDoctor::DOCTOR_ID, 
+			Person::getAllByClass(Person::DOCTOR), 
+			isset($family_doctor->doctor_id) ? $family_doctor->doctor_id : "");	
+	?>
 
-	<?php include("header.php"); ?>
+	<?=
+		selectPerson('Patient',
+			FamilyDoctor::PATIENT_ID,
+			Person::getAllByClass(Person::PATIENT), 
+			isset($family_doctor->patient_id) ? $family_doctor->patient_id : ""); 
+	?>
 
-	<div class="content">
-		<?php
-			if (!empty($message)):
-		?>
-		
-			<div class="failure">
-				<?= $message ?>
-			</div>
-		
-		<?php
-			endif;
-		?>
+	<input type="submit" name="<?= FamilyDoctor::SUBMIT; ?>" value="Submit" />
 
-		<?php include("views/edit_family_doctor.php"); ?>
-		
-	</div>
-
-	<?php include("footer.php"); ?>
-
-</body>
-</html>
+</form>
