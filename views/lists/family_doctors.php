@@ -1,6 +1,6 @@
 <?php include("views/templates/user_management_sub_nav.php"); ?>
 <h3>
-	<a href="edit_family_doctor.php">
+	<a href="family_doctor.php">
 		<span class="button">
 			Create Family Doctor
 		</span>		

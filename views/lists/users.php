@@ -1,7 +1,7 @@
 <?php include("views/templates/user_management_sub_nav.php"); ?>
 
 <h3>
-	<a href="edit_user.php">
+	<a href="user.php">
 		<span class="button">
 			Create User
 		</span>
