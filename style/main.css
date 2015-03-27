@@ -168,23 +168,22 @@ form {
 
 #content {
 	clear:both;
-	width:960px;
-	margin:auto;
+	margin: 0px auto;
+	display: inline-block;
 }
 
 .row .label {
 	display:block;
 }
 
-.row input {
-	width:200px;
+.label {
+	margin-bottom: 3px;
 }
 .row {
-	padding:5px;
+	margin-bottom: 10px;
 }
 form input[type="submit"] {
 	width:200px;
-	margin:5px;
 }
 input, select {
 	width: 200px;

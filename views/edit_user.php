@@ -11,12 +11,6 @@
 			$editting_user->person_id); 
 	}
 	?>
-	
-	<?= 
-		textInput('Username', 
-			User::USER_NAME, 
-			$editting_user->user_name); 
-	?>
 
 	<div class="row">
 		<div class="label">
@@ -38,6 +32,13 @@
 		  	Admin
 		  </option>
 		</select>
+	</div>
+	<?= 
+		textInput('Username', 
+			User::USER_NAME, 
+			$editting_user->user_name); 
+	?>
+
 
 		<?php if($editting_user->isNew()): ?>
 			<div class="row">
