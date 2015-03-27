@@ -69,6 +69,11 @@ include("head.php");
 						<img src="/images/edit.png" />
 					</a>
 				</td>
+				<td class="icon">
+					<a href="manage_users.php?<?= User::USER_NAME.'='.$user->user_name; ?>">
+						<img src="/images/edit.png" />
+					</a>
+				</td>
 			</tr>
 
 		<?php endforeach; ?>

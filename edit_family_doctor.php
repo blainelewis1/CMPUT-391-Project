@@ -7,10 +7,18 @@ include_once('models/user.php');
 include_once('models/person.php');
 
 
+$user = User::getLoggedInUser();
+
+if(!$user->isAdmin()){
+	include("views/denied.php");
+	die();
+}
+
+
 $family_doctor;
 
 if(isset($_GET[FamilyDoctor::DOCTOR_ID]) && isset($_GET[FamilyDoctor::PATIENT_ID])){
-	$family_doctor = FamilyDoctor::fromIds($_GET[FamilyDoctor::DOCTOR_ID],$_GET[FamilyDoctor::PATIENT_ID]);
+	$family_doctor = FamilyDoctor::fromIds($_GET[FamilyDoctor::PATIENT_ID], $_GET[FamilyDoctor::DOCTOR_ID]);
 } else {
 	$family_doctor = new FamilyDoctor();
 }
@@ -25,6 +33,8 @@ if(isset($_POST[FamilyDoctor::SUBMIT])) {
 			//TODO: show a success message?
 			header('Location: manage_family_doctors.php');
 			die();
+		} else {
+			$message = "This relationship already exists";
 		}
 		
 	}

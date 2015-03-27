@@ -13,12 +13,13 @@ if(!$user->isAdmin()){
 
 
 if(isset($_GET[FamilyDoctor::DOCTOR_ID]) && isset($_GET[FamilyDoctor::PATIENT_ID])){
-	print('yo yo');
 	$family_doctor = FamilyDoctor::fromIds($_GET[FamilyDoctor::PATIENT_ID], $_GET[FamilyDoctor::DOCTOR_ID]);
 	$family_doctor->deleteRecord();
 
-	#header("Location: manage_family_doctors.php");
-	#die():
+
+	//We redirect so that we don't accidentally refresh and delete again
+	header("Location: manage_family_doctors.php");
+	die();
 }
 
 $family_doctors = FamilyDoctor::getAllFamilyDoctors();

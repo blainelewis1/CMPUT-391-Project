@@ -26,6 +26,7 @@ include("head.php");
 		?>
 
 		<?php include("views/edit_family_doctor.php"); ?>
+		
 	</div>
 
 	<?php include("footer.php"); ?>
