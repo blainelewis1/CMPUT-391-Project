@@ -8,6 +8,7 @@ include_once("misc/utils.php");
 //TODO: changing your username means that you login as a different person
 
 class User {
+
 	const PASSWORD = "password";
 	const USER_NAME = "user_name";
 	const CLASS_NAME = "class";
@@ -48,6 +49,8 @@ class User {
 									FROM users
 									WHERE users.user_name = :user_name
 									LIMIT 1";
+
+	const DELETE = "DELETE FROM users WHERE users.user_name = :user_name";
 
 	public $class;
 	public $user_name = "";
@@ -182,6 +185,15 @@ class User {
 		$query = $db->prepare(User::CHANGE_PASSWORD_QUERY);
 		$query->bindValue("user_name", $this->user_name);
 		$query->bindValue("password", $password);
+		$query->execute();
+	}
+
+	public static function deleteRecord($user_name) {
+		$db = getPDOInstance();
+
+		$query = $db->prepare(User::DELETE);
+		$query->bindValue("user_name", $user_name);
+
 		$query->execute();
 	}
 

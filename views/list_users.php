@@ -71,7 +71,7 @@ include("head.php");
 				</td>
 				<td class="icon">
 					<a href="manage_users.php?<?= User::USER_NAME.'='.$user->user_name; ?>">
-						<img src="/images/edit.png" />
+						<img src="/images/delete.png" />
 					</a>
 				</td>
 			</tr>

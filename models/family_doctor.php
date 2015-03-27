@@ -1,6 +1,8 @@
 <?php
 
 class FamilyDoctor {
+//TODO: add order by clauses everywhere
+
 	const SUBMIT = "submit";
 	const INSERT = "INSERT INTO family_doctor
 						   (patient_id, doctor_id) 

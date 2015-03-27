@@ -1,28 +1,23 @@
 <?php
 
+include("validation_utils.php");
+
 function applyAndValidateUserFields($user) {
 
 	$message = "";
 
-	if($user->isNew() && empty($_POST[User::PASSWORD])) {
-		$message .= "Password cannot be empty <br />";
-	}
-
-	if($user->isNew() && empty($_POST[Person::PERSON_ID])) {
-		$message .= "Person cannot be empty <br />";
+	if($user->isNew()) {
+		$message .= notEmpty($_POST, User::PASSWORD, 'Password');
+		$message .= notEmpty($_POST, Person::PERSON_ID, 'Person');
 	}
 
 	//TODO: validate class is valid as well
-	if(empty($_POST[User::CLASS_NAME])){
-		$message .= "Class cannot be empty <br />";
-	}
+	$message .= notEmpty($_POST, User::CLASS_NAME, 'Class');
 
 	//TODO: validate user is unique
-	if(empty($_POST[User::USER_NAME])){
-		$message .= "User cannot be empty <br />";
-	}
+	$message .= notEmpty($_POST, User::USER_NAME, 'User name');
 
-
+	//TODO: apply these....
 	if($message == ""){
 		$user->class = $_POST[User::CLASS_NAME];
 		$user->user_name = $_POST[User::USER_NAME];

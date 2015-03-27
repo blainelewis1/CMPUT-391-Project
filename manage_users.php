@@ -10,6 +10,10 @@ if(!$user->isAdmin()){
 	die();
 }
 
+if(isset($_GET[User::USER_NAME])) {
+	User::deleteRecord($_GET[User::USER_NAME]);
+}
+
 $users = User::getAllUsers();
 
 include("views/list_users.php");
