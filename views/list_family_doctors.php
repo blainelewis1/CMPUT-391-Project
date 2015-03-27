@@ -31,13 +31,9 @@ include("head.php");
 			Patient
 		</th>
 		
-		<th>
-			Edit
-		</th>
+		<th></th>
 		
-		<th>
-			Delete
-		</th>
+		<th></th>
 
 		<?php foreach($family_doctors as $family_doctor): ?>
 			
@@ -50,14 +46,14 @@ include("head.php");
 					<?= $family_doctor->patient_name; ?>
 				</td>
 
-				<td>
+				<td class="icon">
 					<a href="edit_family_doctor.php?<?= FamilyDoctor::PATIENT_ID.'='.$family_doctor->patient_id.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
-						edit
+						<img src="/images/edit.png" />
 					</a>
 				</td>
-				<td>
+				<td class="icon">
 					<a href="manage_family_doctors.php?delete=true<?= '&'.FamilyDoctor::PATIENT_ID.'='.$family_doctor->patient_id.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
-						delete
+						<img src="/images/delete.png" />
 					</a>
 				</td>
 			</tr>

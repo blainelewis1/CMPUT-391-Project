@@ -34,9 +34,7 @@ include("head.php");
 		<th>
 			Last Name
 		</th>
-		<th>
-			Edit
-		</th>
+		<th></th>
 
 		<?php foreach($people as $person ): ?>
 			
@@ -53,9 +51,9 @@ include("head.php");
 					<?= $person->last_name; ?>
 				</td>
 
-				<td>
+				<td class="icon">
 					<a href="edit_person.php?<?= Person::PERSON_ID.'='.$person->person_id; ?>">
-						edit
+						<img src="/images/edit.png" />
 					</a>
 				</td>
 			</tr>

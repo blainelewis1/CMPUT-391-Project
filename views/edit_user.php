@@ -50,10 +50,7 @@
 			</div>
 		<?php endif; ?>
 	
-	</div>
-
 	<input type="submit" name="<?= User::SUBMIT; ?>" value="Submit" />
-
-	<?php if(!$editting_user->isNew()) include('change_password.php') ?>
-
 </form>
+
+<?php if(!$editting_user->isNew()) include('change_password.php') ?>

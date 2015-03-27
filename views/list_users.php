@@ -40,9 +40,7 @@ include("head.php");
 			Registration Date
 		</th>
 
-		<th>
-			Edit
-		</th>
+		<th></th>
 
 		<?php foreach($users as $user ): ?>
 			
@@ -62,9 +60,9 @@ include("head.php");
 					<?= $user->date_registered; ?>
 				</td>
 
-				<td>
+				<td class="icon">
 					<a href="edit_user.php?<?= User::USER_NAME.'='.$user->user_name; ?>">
-						edit
+						<img src="/images/edit.png" />
 					</a>
 				</td>
 			</tr>

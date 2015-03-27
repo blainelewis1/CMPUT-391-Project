@@ -70,6 +70,7 @@ tr:nth-child(even) {
 	padding:10px;
 	font-size: 19px;
 	font-weight: bold;
+	text-align: center;
 
 }
 
@@ -156,11 +157,6 @@ a, a:visited {
 
 }
 
-form {
-	margin:auto;
-	display:inline-block;
-}
-
 .username {
 	font-size: 20px;
 	font-weight: bold;
@@ -187,4 +183,8 @@ form input[type="submit"] {
 }
 input, select {
 	width: 200px;
+}
+
+table .icon img {
+	width:20px;
 }
