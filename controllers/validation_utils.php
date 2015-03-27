@@ -28,7 +28,7 @@ function isNumber($val, $name) {
 }
 
 function oneOf($val, $values, $name) {
-	if(in_array($val, $values)) {
+	if(!in_array($val, $values)) {
 		return '<div class="error">Not a valid '.$name.'.</div>';
 	}
 }

@@ -6,7 +6,7 @@ include_once('controllers/user.php');
 
 //TODO: check error conditions, eg. invalid id
 //TODO: change user name reject if not unique
-
+//TODO: we need to give success messages everywhere.....
 
 $user = User::getLoggedInUser();
 
@@ -35,6 +35,11 @@ if(isset($_POST[User::SUBMIT])) {
 		} else {
 			$message .= "Username already exists!";
 		}
+	}
+} else if(isset($_POST[User::CHANGE_PASSWORD])) {
+	$message = validatePassword();
+	if($message == "") {
+		$user->updatePassword($_POST[User::PASSWORD]);
 	}
 }
 

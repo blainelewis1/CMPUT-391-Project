@@ -1,6 +1,6 @@
 <?php
 
-include('validation_utils.php');
+include_once('validation_utils.php');
 
 /*
 	

@@ -1,4 +1,10 @@
-<?php function selectPerson($label, $name, $people, $default) { ?>
+
+
+<?php 
+
+//TODO: these can all be collapsed
+
+function selectPerson($label, $name, $people, $default) { ?>
 <div class="row">
 	<div class="label">
 		<label><?= $label.':' ?></label>
@@ -64,3 +70,13 @@ function textArea($label, $name, &$default, $maxlength=1024){ ?>
 <textarea maxlength="<?= $maxlength ?>" name="<?= $name; ?>"><?= $default ?></textarea>
 </div>
 <?php } 
+
+function passwordInput($label, $name, &$default, $maxlength=24){ ?>
+
+<div class="row">
+	<div class="label">
+		<label><?= $label.':' ?></label>
+	</div>
+<input type="password" name="<?= $name; ?>" value="<?= $default ?>" />
+</div>
+<?php } ?>

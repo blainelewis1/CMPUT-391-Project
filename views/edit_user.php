@@ -41,15 +41,13 @@
 	?>
 
 
-		<?php if($editting_user->isNew()): ?>
-			<div class="row">
-				<div class="label">
-					<label>Password: </label>
-				</div>	
-
-				<input type="password" name="<?= User::PASSWORD; ?>" />	
-			</div>
-		<?php endif; ?>
+		<?php if($editting_user->isNew()){
+			passwordInput('Password', 
+					 User::PASSWORD, 
+					 $user->password, 
+					 24);
+			}
+		?>
 	
 	<input type="submit" name="<?= User::SUBMIT; ?>" value="Submit" />
 </form>
