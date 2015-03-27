@@ -27,7 +27,9 @@ body {
 html{
 	position: relative;
     min-height: 100%;
+
     /* http://stackoverflow.com/questions/1417934/how-to-prevent-scrollbar-from-repositioning-web-page [2015-03-26 blaine1] */
+
     overflow-y: scroll;
 
 }
@@ -39,6 +41,7 @@ html{
 
 table {
 	border-collapse: collapse;
+	width:100%;
 }
 
 table, th, td {
@@ -206,8 +209,13 @@ input, select {
 	width: 200px;
 }
 
-table .icon img {
+.icon img {
 	width:20px;
+}
+
+td.icon {
+	width:20px;
+	max-width: 20px;
 }
 input[type="text"], input[type="number"], 
 input[type="password"], input[type="email"], 

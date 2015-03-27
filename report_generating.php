@@ -17,11 +17,9 @@ $start_date = isset($_GET[RadiologyRecord::TEST_START_DATE]) ?
 $end_date = isset($_GET[RadiologyRecord::TEST_END_DATE]) ? 
 	$_GET[RadiologyRecord::TEST_END_DATE] : "";
 
-if(isset($_GET[RadiologyRecord::SEARCH])) {
-	$message = validateDiagnosisFormFields($records);
+$message = validateDiagnosisFormFields($records);
 
-	$records = RadiologyRecord::selectByDiagnosisAndDate($diagnosis, $start_date, $end_date);
-}
+$records = RadiologyRecord::selectByDiagnosisAndDate($diagnosis, $start_date, $end_date);
 
 $content = "views/report_generator.php";
 
