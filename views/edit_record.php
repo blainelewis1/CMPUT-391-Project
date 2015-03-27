@@ -29,7 +29,8 @@ include_once('models/person.php');
 	<?= 
 		textInput('Test Type', 
 			RadiologyRecord::TEST_TYPE, 
-			$record->test_type); 
+			$record->test_type,
+			24); 
 	?>
 
 
@@ -48,13 +49,15 @@ include_once('models/person.php');
 	<?= 
 		textInput('Diagnosis', 
 			RadiologyRecord::DIAGNOSIS, 
-			$record->diagnosis); 
+			$record->diagnosis,
+			24); 
 	?>
 
 	<?= 
 		textArea('Description', 
 			RadiologyRecord::DESCRIPTION, 
-			$record->description); 
+			$record->description,
+			1024); 
 	?>
 	<input type="submit" name="<?= RadiologyRecord::SUBMIT; ?>" value="Submit" />
 </form>

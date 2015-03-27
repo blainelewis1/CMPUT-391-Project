@@ -20,23 +20,28 @@ function applyAndValidatePersonFields($person) {
 	$message .= notEmpty($_POST, Person::PHONE, 'Phone');
 	$message .= notEmpty($_POST, Person::EMAIL, 'Email');
 
+	$message .= maxLength($_POST[Person::FIRST_NAME], 24, 'First name');
+	$message .= maxLength($_POST[Person::LAST_NAME], 24, 'Last name');
+	$message .= maxLength($_POST[Person::ADDRESS], 128, 'Address');
+	$message .= maxLength($_POST[Person::EMAIL], 128, 'Email');
+	$message .= maxLength($_POST[Person::PHONE], 10, 'Phone');
+
 	if($person->isNew()){
 		//TODO: validate it is a number
 		$message .= notEmpty($_POST, Person::PERSON_ID, 'Person ID');
+		$message .= isNumber($_POST[Person::PERSON_ID], 'Person ID');
 	}
 
 
 	//TODO: we should apply these no matter what 
-	if(!$message){
-		$person->first_name = $_POST[Person::FIRST_NAME];
-		$person->last_name = $_POST[Person::LAST_NAME];
-		$person->address = $_POST[PERSON::ADDRESS];
-		$person->phone = $_POST[Person::PHONE];
-		$person->email = $_POST[Person::EMAIL];
+	$person->first_name = $_POST[Person::FIRST_NAME];
+	$person->last_name = $_POST[Person::LAST_NAME];
+	$person->address = $_POST[PERSON::ADDRESS];
+	$person->phone = $_POST[Person::PHONE];
+	$person->email = $_POST[Person::EMAIL];
 
-		if($person->isNew()){
-			$person->person_id = $_POST[Person::PERSON_ID];
-		}
+	if($person->isNew()){
+		$person->person_id = $_POST[Person::PERSON_ID];
 	}
 
 	return $message;

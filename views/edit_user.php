@@ -36,7 +36,8 @@
 	<?= 
 		textInput('Username', 
 			User::USER_NAME, 
-			$editting_user->user_name); 
+			$editting_user->user_name,
+			24); 
 	?>
 
 

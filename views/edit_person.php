@@ -3,7 +3,7 @@
 
 	<?php
 		if($person->isNew()){
-			textInput('Person ID', 
+			numberInput('Person ID', 
 				Person::PERSON_ID, 
 				$person->person_id); 
 		}
@@ -11,25 +11,29 @@
 	<?= 
 		textInput('First Name', 
 			Person::FIRST_NAME, 
-			$person->first_name); 
+			$person->first_name,
+			24); 
 	?>
 	
 	<?= 
 		textInput('Last Name', 
 			Person::LAST_NAME, 
-			$person->last_name); 
+			$person->last_name,
+			24); 
 	?>
 	
 	<?= 
-		textInput('Address', 
+		textArea('Address', 
 			Person::ADDRESS, 
-			$person->address); 
+			$person->address,
+			128); 
 	?>
 	
 	<?= 
 		textInput('Phone', 
 			Person::PHONE, 
-			$person->phone); 
+			$person->phone,
+			10); 
 	?>
 
 	

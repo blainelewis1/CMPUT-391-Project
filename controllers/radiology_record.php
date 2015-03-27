@@ -15,16 +15,13 @@ function applyAndValidateRecordFields($record) {
 	$message .= notEmpty($_POST, RadiologyRecord::DIAGNOSIS, 'Diagnosis');
 	$message .= notEmpty($_POST, RadiologyRecord::DESCRIPTION, 'Description');
 
-	if($message == ""){
-		$record->patient_id = $_POST[RadiologyRecord::PATIENT_ID];
-		$record->doctor_id = $_POST[RadiologyRecord::DOCTOR_ID];
-		$record->radiologist_id = $_POST[RadiologyRecord::RADIOLOGIST_ID];
-		$record->test_type = $_POST[RadiologyRecord::TEST_TYPE];
-		$record->prescribing_date = $_POST[RadiologyRecord::PRESCRIBING_DATE];
-		$record->test_date = $_POST[RadiologyRecord::TEST_DATE];
-		$record->diagnosis = $_POST[RadiologyRecord::DIAGNOSIS];
-		$record->description = $_POST[RadiologyRecord::DESCRIPTION];
-	}
+	$record->patient_id = $_POST[RadiologyRecord::PATIENT_ID];
+	$record->doctor_id = $_POST[RadiologyRecord::DOCTOR_ID];
+	$record->radiologist_id = $_POST[RadiologyRecord::RADIOLOGIST_ID];
+	$record->test_type = $_POST[RadiologyRecord::TEST_TYPE];
+	$record->prescribing_date = $_POST[RadiologyRecord::PRESCRIBING_DATE];
+	$record->test_date = $_POST[RadiologyRecord::TEST_DATE];
+	$record->diagnosis = $_POST[RadiologyRecord::DIAGNOSIS];
 
 	return $message;
 }

@@ -188,3 +188,11 @@ input, select {
 table .icon img {
 	width:20px;
 }
+input[type="text"],input[type="number"], input[type="password"], input[type="email"] {
+	padding:5px;
+	font-size: 17px;
+}
+textarea {
+	padding:5px;
+	font-size: 15px;
+}

@@ -15,14 +15,24 @@
 </div>
 <?php } 
 
-function textInput($label, $name, &$default){ ?>
+function textInput($label, $name, &$default, $maxlength=24){ ?>
 <div class="row">
 	<div class="label">
 		<label><?= $label.':' ?></label>
 	</div>
-<input type="text" name="<?= $name; ?>" value="<?= $default ?>" />
+<input type="text" name="<?= $name; ?>" maxlength="<?= $maxlength ?>" value="<?= $default ?>" />
 </div>
 <?php } 
+
+function numberInput($label, $name, &$default){ ?>
+<div class="row">
+	<div class="label">
+		<label><?= $label.':' ?></label>
+	</div>
+<input type="number" name="<?= $name; ?>" value="<?= $default ?>" />
+</div>
+<?php } 
+
 
 function emailInput($label, $name, &$default){ ?>
 
@@ -45,12 +55,12 @@ function dateInput($label, $name, &$default){ ?>
 </div>
 <?php } 
 
-function textArea($label, $name, &$default){ ?>
+function textArea($label, $name, &$default, $maxlength=1024){ ?>
 
 <div class="row">
 	<div class="label">
 		<label><?= $label.':' ?></label>
 	</div>
-<textarea name="<?= $name; ?>"><?= $default ?></textarea>
+<textarea maxlength="<?= $maxlength ?>" name="<?= $name; ?>"><?= $default ?></textarea>
 </div>
 <?php } 
