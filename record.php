@@ -28,8 +28,8 @@ if(isset($_POST[RadiologyRecord::SUBMIT])) {
 	if($message == ""){
 		if($record->saveToDatabase()) {
 			//TODO: redirect somewhere?
-			#header('Location: upload.php?'.RadiologyRecord::RECORD_ID.'='.$record->record_id);
-			#die();
+			header('Location: upload.php?'.RadiologyRecord::RECORD_ID.'='.$record->record_id);
+			die();
 		}
 		print($message);
 		
