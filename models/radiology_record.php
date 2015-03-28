@@ -113,11 +113,11 @@ class RadiologyRecord {
 		} else if($start_date != "") {
 
 			$query_string .= $delimiter;
-			$query_string .= "r.test_date >= TO_DATE(':start_date')";
+			$query_string .= "r.test_date >= TO_DATE(:start_date, 'YYYY-MM-DD')";
 
 		} else if($end_date != "") {
 			$query_string .= $delimiter;
-			$query_string .= "r.test_date <= TO_DATE(':end_date')";
+			$query_string .= "r.test_date <= TO_DATE(:end_date, 'YYYY-MM-DD')";
 		}
 
 
