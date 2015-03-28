@@ -9,7 +9,7 @@
 </h3>
 
 <?php if(sizeof($people) == 0): ?>
-	<div class="failure">Sorry no peoples were found!</div>
+	<div class="failure">Sorry no people were found!</div>
 <?php else: ?>
 
 <table class="users">
@@ -24,7 +24,7 @@
 	</th>
 	<th></th>
 
-	<?php foreach($people as $person ): ?>
+	<?php foreach($people as $person): $person = (object) $person;?>
 		
 		<tr>
 			<td>

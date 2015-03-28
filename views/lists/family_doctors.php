@@ -24,24 +24,24 @@
 	
 	<th></th>
 
-	<?php foreach($family_doctors as $family_doctor): ?>
+	<?php foreach($family_doctors as $family_doctor): $family_doctor = (object) $family_doctor; ?>
 		
 		<tr>
 			<td>
-				<?php echo  $family_doctor->doctor_name; ?>
+				<?php echo  $family_doctor->DOCTOR_NAME; ?>
 			</td>
 
 			<td>
-				<?php echo  $family_doctor->patient_name; ?>
+				<?php echo  $family_doctor->PATIENT_NAME; ?>
 			</td>
 
 			<td class="icon">
-				<a href="edit_family_doctor.php?<?php echo  FamilyDoctor::PATIENT_ID.'='.$family_doctor->patient_id.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
+				<a href="edit_family_doctor.php?<?php echo  FamilyDoctor::PATIENT_ID.'='.$family_doctor->PATIENT_ID.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
 					<img src="/~blaine1/images/edit.png" />
 				</a>
 			</td>
 			<td class="icon">
-				<a href="manage_family_doctors.php?<?php echo  '&'.FamilyDoctor::PATIENT_ID.'='.$family_doctor->patient_id.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
+				<a href="manage_family_doctors.php?<?php echo  '&'.FamilyDoctor::PATIENT_ID.'='.$family_doctor->PATIENT_ID.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
 					<img src="/~blaine1/images/delete.png" />
 				</a>
 			</td>

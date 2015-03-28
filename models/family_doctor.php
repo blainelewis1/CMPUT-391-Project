@@ -37,7 +37,7 @@ class FamilyDoctor {
 		oci_execute($query);	
 
 		$results;
-		oci_fetch_all($query, $results);
+		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
 		return $results;
 	}
 

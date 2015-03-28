@@ -33,7 +33,7 @@
 	<th></th>
 	<th></th>
 
-	<?php foreach($users as $user ): $user = (object) $user; print_r($user); ?>
+	<?php foreach($users as $user ): $user = (object) $user; ?>
 		
 		<tr>
 			<td>

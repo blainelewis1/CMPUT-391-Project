@@ -136,8 +136,8 @@ class RadiologyRecord {
 		$query->execute();	
 
 		$results;
-oci_fetch_all($query, $results);
-return (object) $results;
+		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
+		return $results;
 	}
 
 	private function insert() {
