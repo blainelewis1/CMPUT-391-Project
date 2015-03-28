@@ -131,7 +131,12 @@ class User {
 		oci_execute($query);	
 
 		$this->new = false;
-		$this->populateFromRow(oci_fetch_object($query));
+
+		$row = oci_fetch_object($query);
+		
+		print_r($row);
+
+		$this->populateFromRow($row);
 	}
 
 	private function populateFromRow($row) {
