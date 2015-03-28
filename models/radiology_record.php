@@ -160,7 +160,11 @@ class RadiologyRecord {
 		$query = oci_parse($db, RadiologyRecord::LAST_INSERT_ID);
 		oci_execute($query);
 
-		$this->record_id = oci_fetch_row($query)[0];
+		$row =  oci_fetch_row($query);
+
+		print($row);
+
+		$this->record_id = $row[0];
 	}
 
 	private function selectFromId() {
