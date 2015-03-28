@@ -6,7 +6,7 @@ class PACSImage {
 
 	const INSERT = "INSERT INTO pacs_images 
 			(pacs_images.record_id, pacs_images.thumbnail, pacs_images.regular_size, pacs_images.full_size)
-			VALUES (:record_id, EMPTY_CLOB(), EMPTY_CLOB(), EMPTY_CLOB())
+			VALUES (:record_id, EMPTY_BLOB(), EMPTY_BLOB(), EMPTY_BLOB())
 			RETURNING pacs_images.thumbnail, pacs_images.regular_size, pacs_images.full_size 
 			INTO :thumbnail, :regular_size, :full_size";
 	const UPDATE = "UPDATE pacs_image";
@@ -96,9 +96,9 @@ class PACSImage {
 
 
 		oci_bind_by_name($query, ":record_id", $this->record_id);
-		oci_bind_by_name($query, ":thumbnail", $thumb, -1, OCI_B_CLOB);
-		oci_bind_by_name($query, ":regular_size", $regular, -1, OCI_B_CLOB);
-		oci_bind_by_name($query, ":full_size", $full, -1, OCI_B_CLOB);
+		oci_bind_by_name($query, ":thumbnail", $thumb_clob, -1, OCI_B_BLOB);
+		oci_bind_by_name($query, ":regular_size", $regular_clob, -1, OCI_B_BLOB);
+		oci_bind_by_name($query, ":full_size", $full_clob, -1, OCI_B_BLOB);
 
 		oci_execute($query, OCI_DEFAULT);
 		
