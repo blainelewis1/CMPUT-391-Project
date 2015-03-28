@@ -133,7 +133,7 @@ class RadiologyRecord {
 			oci_bind_by_name($query, ":end_date", $end_date);
 		}
 		
-		$query->execute();	
+		oci_execute($query);;	
 
 		$results;
 		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
@@ -153,7 +153,7 @@ class RadiologyRecord {
 		oci_bind_by_name($query, ":diagnosis", $this->diagnosis);
 		oci_bind_by_name($query, ":description", $this->description);
 
-		$query->execute();
+		oci_execute($query);;
 
 		$this->record_id = $db->lastInsertId();
 	}
@@ -163,7 +163,7 @@ class RadiologyRecord {
 		$query = oci_parse($db, RadiologyRecord::SELECT_BY_ID);
 
 		oci_bind_by_name($query, ":record_id", $this->record_id);
-		$query->execute();
+		oci_execute($query);;
 
 		oci_fetch_object($query);
 
