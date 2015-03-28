@@ -144,6 +144,9 @@ class RadiologyRecord {
 		$db = getPDOInstance();
 		$query = oci_parse($db, RadiologyRecord::INSERT);
 
+		print($this->prescribing_date);
+		print($this->test_date);
+
 		oci_bind_by_name($query, ":patient_id", $this->patient_id);
 		oci_bind_by_name($query, ":doctor_id", $this->doctor_id);
 		oci_bind_by_name($query, ":radiologist_id", $this->radiologist_id);
