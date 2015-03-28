@@ -80,8 +80,8 @@ class Person {
 		oci_execute($query);	
 
 		$results;
-oci_fetch_all($query, $results);
-return (object) $results;
+		oci_fetch_all($query, $results);
+		return $results;
 	}
 
 	public static function getAllByClass($class) {
@@ -93,8 +93,8 @@ return (object) $results;
 		oci_execute($query);	
 
 		$results;
-oci_fetch_all($query, $results);
-return (object) $results;
+		oci_fetch_all($query, $results);
+		return $results;
 	}
 
 	public static function fromUserName($user_name) {

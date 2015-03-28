@@ -37,8 +37,8 @@ class FamilyDoctor {
 		oci_execute($query);	
 
 		$results;
-oci_fetch_all($query, $results);
-return (object) $results;
+		oci_fetch_all($query, $results);
+		return $results;
 	}
 
 	public static function fromIds($patient, $doctor) {

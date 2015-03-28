@@ -63,8 +63,8 @@ class User {
 		oci_execute($query);	
 
 		$results;
-oci_fetch_all($query, $results);
-return (object) $results;
+		oci_fetch_all($query, $results);
+		return $results;
 	}
 
 	public static function fromUsername($user_name) {
@@ -131,7 +131,7 @@ return (object) $results;
 		oci_execute($query);	
 
 		$this->new = false;
-		$this->populateFromRow($query->fetch());
+		$this->populateFromRow(oci_fetch_object($query));
 	}
 
 	private function populateFromRow($row) {
@@ -212,7 +212,7 @@ return (object) $results;
 		oci_bind_by_name($query, ":password", $password);
 		oci_execute($query);
 
-		if(oci_num_rows($query)) {
+		if(oci_fetch($query)) {
 
 			$_SESSION[User::USER_NAME] = $user_name;
 			return true;
