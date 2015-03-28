@@ -49,8 +49,8 @@ class RadiologyRecord {
 					prescribing_date, test_date, diagnosis,
 					description)
 					VALUES (:patient_id, :doctor_id,
-					:radiologist_id, :test_type, TO_DATE(:prescribing_date),
-					TO_DATE(:test_date), :diagnosis, :description)";
+					:radiologist_id, :test_type, TO_DATE(:prescribing_date, YYYY-MM-DD),
+					TO_DATE(:test_date, YYYY-MM-DD), :diagnosis, :description)";
 
 
 	public $record_id;
@@ -143,10 +143,7 @@ class RadiologyRecord {
 	private function insert() {
 		$db = getPDOInstance();
 		$query = oci_parse($db, RadiologyRecord::INSERT);
-
-		print($this->prescribing_date);
-		print($this->test_date);
-
+		
 		oci_bind_by_name($query, ":patient_id", $this->patient_id);
 		oci_bind_by_name($query, ":doctor_id", $this->doctor_id);
 		oci_bind_by_name($query, ":radiologist_id", $this->radiologist_id);
