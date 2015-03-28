@@ -17,11 +17,11 @@ class FamilyDoctor {
 					WHERE patient_id = :patient_id AND doctor_id=:doctor_id";
 
 	const SELECT_ALL = "SELECT doctor_id, patient_id, 
-						patient.first_name || ' ' || patient.last_name as patient_name,
-						doctor.first_name || ' ' || doctor.last_name  as doctor_name 
+						patient.first_name || ' ' || patient.last_name patient_name,
+						doctor.first_name || ' ' || doctor.last_name  doctor_name 
 						FROM family_doctor
-						JOIN persons as doctor ON doctor_id=doctor.person_id 
-						JOIN persons as patient ON patient_id=patient.person_id";
+						JOIN persons doctor ON doctor_id=doctor.person_id 
+						JOIN persons patient ON patient_id=patient.person_id";
 
 	const PATIENT_ID = "patient_id";
 	const DOCTOR_ID = "doctor_id";
