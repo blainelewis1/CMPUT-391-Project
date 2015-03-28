@@ -47,7 +47,7 @@ class User {
 										   users.date_registered
 									FROM users
 									WHERE users.user_name = :user_name
-									LIMIT 1";
+									";
 
 	const DELETE = "DELETE FROM users WHERE users.user_name = :user_name";
 

@@ -26,7 +26,9 @@ class Person {
 					FROM persons JOIN users 
 					ON persons.person_id = users.person_id
 					WHERE users.user_name = :user_name
-					LIMIT 1";
+					$results;
+oci_fetch_all($query, $results);
+";
 
 	const SELECT_ID = "SELECT persons.first_name, 
 						   persons.last_name, 
@@ -36,7 +38,9 @@ class Person {
 						   persons.phone
 					FROM persons
 					WHERE persons.person_id = :person_id
-					LIMIT 1";
+					$results;
+oci_fetch_all($query, $results);
+";
 	
 	const UPDATE = "UPDATE persons
 					SET first_name = :first_name, 
