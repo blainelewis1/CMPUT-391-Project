@@ -28,19 +28,19 @@
 		
 		<tr>
 			<td>
-				<?= $person->person_id; ?>
+				<?php echo  $person->person_id; ?>
 			</td>
 
 			<td>
-				<?= $person->first_name; ?>
+				<?php echo  $person->first_name; ?>
 			</td>
 
 			<td>
-				<?= $person->last_name; ?>
+				<?php echo  $person->last_name; ?>
 			</td>
 
 			<td class="icon">
-				<a href="edit_person.php?<?= Person::PERSON_ID.'='.$person->person_id; ?>">
+				<a href="edit_person.php?<?php echo  Person::PERSON_ID.'='.$person->person_id; ?>">
 					<img src="/images/edit.png" />
 				</a>
 			</td>
