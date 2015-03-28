@@ -129,7 +129,7 @@ class Person {
 		oci_bind_by_name($query, ":user_name", $this->user_name);
 		oci_execute($query);
 
-		oci_fetch_object($query);
+		$row = oci_fetch_object($query);
 		$this->populateFromRow($row);
 
 	}
@@ -141,7 +141,7 @@ class Person {
 		oci_bind_by_name($query, ":person_id", $this->person_id);
 		oci_execute($query);
 
-		oci_fetch_object($query);
+		$row = oci_fetch_object($query);
 
 		$this->populateFromRow($row);
 
