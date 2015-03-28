@@ -19,8 +19,7 @@ class User {
 	const LOGIN_QUERY = "SELECT users.user_name 
 				   		 FROM users
 						 WHERE users.user_name = :user_name AND 
-						       users.password = :password
-						 LIMIT 1";
+						       users.password = :password";
 
 	const CHANGE_PASSWORD_QUERY = "UPDATE users
 							 SET password = :password
@@ -205,13 +204,13 @@ class User {
 		$db = getPDOInstance();
 
 		print_r(oci_error());
-		
+
 		$query = oci_parse($db, User::LOGIN_QUERY);
 		oci_bind_by_name($query, ":user_name", $user_name);
 		oci_bind_by_name($query, ":password", $password);
 		oci_execute($query);
 
-		if($query->rowCount()) {
+		if(oci_num_rows($query)) {
 
 			$_SESSION[User::USER_NAME] = $user_name;
 			return true;
