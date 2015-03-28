@@ -52,7 +52,7 @@ class RadiologyRecord {
 					:radiologist_id, :test_type, TO_DATE(:prescribing_date, 'YYYY-MM-DD'),
 					TO_DATE(:test_date, 'YYYY-MM-DD'), :diagnosis, :description)";
 
-	const LAST_INSERT_ID = "SELECT record_seq.curval FROM dual";
+	const LAST_INSERT_ID = "SELECT record_seq.currval FROM dual";
 
 
 	public $record_id;
