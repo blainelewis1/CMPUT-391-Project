@@ -204,6 +204,8 @@ class User {
 	public static function login($user_name, $password) {
 		$db = getPDOInstance();
 
+		print_r(oci_error());
+		
 		$query = oci_parse($db, User::LOGIN_QUERY);
 		$query->bindValue("user_name", $user_name);
 		$query->bindValue("password", $password);
