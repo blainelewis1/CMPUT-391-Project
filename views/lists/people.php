@@ -41,7 +41,7 @@
 
 			<td class="icon">
 				<a href="edit_person.php?<?php echo  Person::PERSON_ID.'='.$person->person_id; ?>">
-					<img src="/images/edit.png" />
+					<img src="/~blaine1/images/edit.png" />
 				</a>
 			</td>
 		</tr>

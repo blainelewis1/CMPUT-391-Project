@@ -53,12 +53,12 @@
 
 			<td class="icon">
 				<a href="edit_user.php?<?php echo  User::USER_NAME.'='.$user->user_name; ?>">
-					<img src="/images/edit.png" />
+					<img src="/~blaine1/images/edit.png" />
 				</a>
 			</td>
 			<td class="icon">
 				<a href="manage_users.php?<?php echo  User::USER_NAME.'='.$user->user_name; ?>">
-					<img src="/images/delete.png" />
+					<img src="/~blaine1/images/delete.png" />
 				</a>
 			</td>
 		</tr>
