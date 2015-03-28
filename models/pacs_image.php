@@ -6,7 +6,9 @@ class PACSImage {
 
 	const INSERT = "INSERT INTO pacs_images 
 			(pacs_images.record_id, pacs_images.thumbnail, pacs_images.regular_size, pacs_images.full_size)
-			VALUES (:record_id, :thumbnail, :regular_size, :full_size)";
+			VALUES (:record_id, EMPTY_CLOB(), EMPTY_CLOB(), EMPTY_CLOB())
+			RETURNING pacs_images.thumbnail, pacs_images.regular_size, pacs_images.full_size 
+			INTO :thumbnail, :regular_size, :full_size";
 	const UPDATE = "UPDATE pacs_image";
 
 	const SELECT_IMAGE = "SELECT pacs_images.image_size
@@ -87,14 +89,24 @@ class PACSImage {
 		$db = getPDOInstance();
 		$query = oci_parse($db, PACSImage::INSERT);
 
+		$thumb_clob = oci_new_descriptor($conn, OCI_D_LOB);
+		$regular_clob = oci_new_descriptor($conn, OCI_D_LOB);
+		$full_clob = oci_new_descriptor($conn, OCI_D_LOB);
+
+
+
 		oci_bind_by_name($query, ":record_id", $this->record_id);
-		oci_bind_by_name($query, ":thumbnail", $thumb, PDO::PARAM_LOB);
-		oci_bind_by_name($query, ":regular_size", $regular, PDO::PARAM_LOB);
-		oci_bind_by_name($query, ":full_size", $full, PDO::PARAM_LOB);
+		oci_bind_by_name($query, ":thumbnail", $thumb, -1, OCI_B_CLOB);
+		oci_bind_by_name($query, ":regular_size", $regular, -1, OCI_B_CLOB);
+		oci_bind_by_name($query, ":full_size", $full, -1, OCI_B_CLOB);
+
+		oci_execute($query, OCI_DEFAULT);
 		
-		oci_execute($query);
-		print_r($db->errorInfo());
-		print_r($db->errorCode());
+		$thumb_clob->save($thumb);
+		$regular_clob->save($regular);
+		$full_clob->save($full);
+
+		oci_commit($db);
 
 	}
 
