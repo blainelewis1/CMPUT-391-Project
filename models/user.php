@@ -61,7 +61,7 @@ class User {
 		$db = getPDOInstance();
 
 		$query = oci_parse($db, User::SELECT_ALL_USERS_QUERY);
-		$query->execute();	
+		oci_execute($query);	
 
 		return $query->fetchAll();
 	}
@@ -125,9 +125,9 @@ class User {
 
 		$query = oci_parse($db, User::SELECT_FROM_USER_NAME);
 
-		$query->bindValue("user_name", $this->user_name);
+		oci_bind_by_name($query, "user_name", $this->user_name);
 		
-		$query->execute();	
+		oci_execute($query);	
 
 		$this->new = false;
 		$this->populateFromRow($query->fetch());
@@ -144,11 +144,11 @@ class User {
 
 		$query = oci_parse($db, User::UPDATE);
 
-		$query->bindValue("user_name", $this->user_name);
-		$query->bindValue("old_user_name", $this->old_user_name);
-		$query->bindValue("class", $this->class);
+		oci_bind_by_name($query, "user_name", $this->user_name);
+		oci_bind_by_name($query, "old_user_name", $this->old_user_name);
+		oci_bind_by_name($query, "class", $this->class);
 		
-		$query->execute();
+		oci_execute($query);
 	}
 
 	private function insert(){
@@ -156,12 +156,12 @@ class User {
 
 		$query = oci_parse($db, User::INSERT);
 
-		$query->bindValue("user_name", $this->user_name);
-		$query->bindValue("class", $this->class);
-		$query->bindValue("person_id", $this->person_id);
-		$query->bindValue("password", $this->password);
+		oci_bind_by_name($query, "user_name", $this->user_name);
+		oci_bind_by_name($query, "class", $this->class);
+		oci_bind_by_name($query, "person_id", $this->person_id);
+		oci_bind_by_name($query, "password", $this->password);
 		
-		$query->execute();
+		oci_execute($query);
 	}
 
 	/*
@@ -183,18 +183,18 @@ class User {
 		$db = getPDOInstance();
 
 		$query = oci_parse($db, User::CHANGE_PASSWORD_QUERY);
-		$query->bindValue("user_name", $this->user_name);
-		$query->bindValue("password", $password);
-		$query->execute();
+		oci_bind_by_name($query, "user_name", $this->user_name);
+		oci_bind_by_name($query, "password", $password);
+		oci_execute($query);
 	}
 
 	public static function deleteRecord($user_name) {
 		$db = getPDOInstance();
 
 		$query = oci_parse($db, User::DELETE);
-		$query->bindValue("user_name", $user_name);
+		oci_bind_by_name($query, "user_name", $user_name);
 
-		$query->execute();
+		oci_execute($query);
 	}
 
 	/*
@@ -205,11 +205,10 @@ class User {
 		$db = getPDOInstance();
 
 		print_r(oci_error());
-		
-		$query = oci_parse($db, User::LOGIN_QUERY);
-		$query->bindValue("user_name", $user_name);
-		$query->bindValue("password", $password);
-		$query->execute();
+
+		oci_bind_by_name($query, "user_name", $user_name);
+		oci_bind_by_name($query, "password", $password);
+		oci_execute($query);
 
 		if($query->rowCount()) {
 
