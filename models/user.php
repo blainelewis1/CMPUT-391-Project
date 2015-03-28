@@ -134,8 +134,6 @@ class User {
 
 		$row = oci_fetch_object($query);
 		
-		print_r($row);
-
 		$this->populateFromRow($row);
 	}
 
@@ -209,8 +207,6 @@ class User {
 
 	public static function login($user_name, $password) {
 		$db = getPDOInstance();
-
-		print_r(oci_error());
 
 		$query = oci_parse($db, User::LOGIN_QUERY);
 		oci_bind_by_name($query, ":user_name", $user_name);
