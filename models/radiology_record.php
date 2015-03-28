@@ -155,14 +155,14 @@ class RadiologyRecord {
 		oci_bind_by_name($query, ":diagnosis", $this->diagnosis);
 		oci_bind_by_name($query, ":description", $this->description);
 
-		oci_execute($query);;
+		oci_execute($query);
 
 		$query = oci_parse($db, RadiologyRecord::LAST_INSERT_ID);
 		oci_execute($query);
 
 		$row =  oci_fetch_row($query);
 
-		print($row);
+		print_r($row);
 
 		$this->record_id = $row[0];
 	}
@@ -172,7 +172,7 @@ class RadiologyRecord {
 		$query = oci_parse($db, RadiologyRecord::SELECT_BY_ID);
 
 		oci_bind_by_name($query, ":record_id", $this->record_id);
-		oci_execute($query);;
+		oci_execute($query);
 
 		oci_fetch_object($query);
 
