@@ -20,17 +20,17 @@ class User {
 				   		 FROM users
 						 WHERE users.user_name = :user_name AND 
 						       users.password = :password
-						 LIMIT 1;";
+						 LIMIT 1";
 
 	const CHANGE_PASSWORD_QUERY = "UPDATE users
 							 SET password = :password
-							 WHERE users.user_name = :user_name;";
+							 WHERE users.user_name = :user_name";
 
 	const SELECT_ALL_USERS_QUERY = "SELECT users.user_name,
 										   users.person_id,
 										   classes.class_name,
 										   users.date_registered
-									FROM users JOIN classes ON classes.class_id = users.class;";
+									FROM users JOIN classes ON classes.class_id = users.class";
 	
 	//TODO: CURDATE will probably cause problems when moving to oracle									
 	const INSERT = "INSERT INTO users 
@@ -125,7 +125,7 @@ class User {
 
 		$query = oci_parse($db, User::SELECT_FROM_USER_NAME);
 
-		oci_bind_by_name($query, "user_name", $this->user_name);
+		oci_bind_by_name($query, ":user_name", $this->user_name);
 		
 		oci_execute($query);	
 
@@ -144,9 +144,9 @@ class User {
 
 		$query = oci_parse($db, User::UPDATE);
 
-		oci_bind_by_name($query, "user_name", $this->user_name);
-		oci_bind_by_name($query, "old_user_name", $this->old_user_name);
-		oci_bind_by_name($query, "class", $this->class);
+		oci_bind_by_name($query, ":user_name", $this->user_name);
+		oci_bind_by_name($query, ":old_user_name", $this->old_user_name);
+		oci_bind_by_name($query, ":class", $this->class);
 		
 		oci_execute($query);
 	}
@@ -156,10 +156,10 @@ class User {
 
 		$query = oci_parse($db, User::INSERT);
 
-		oci_bind_by_name($query, "user_name", $this->user_name);
-		oci_bind_by_name($query, "class", $this->class);
-		oci_bind_by_name($query, "person_id", $this->person_id);
-		oci_bind_by_name($query, "password", $this->password);
+		oci_bind_by_name($query, ":user_name", $this->user_name);
+		oci_bind_by_name($query, ":class", $this->class);
+		oci_bind_by_name($query, ":person_id", $this->person_id);
+		oci_bind_by_name($query, ":password", $this->password);
 		
 		oci_execute($query);
 	}
@@ -183,8 +183,8 @@ class User {
 		$db = getPDOInstance();
 
 		$query = oci_parse($db, User::CHANGE_PASSWORD_QUERY);
-		oci_bind_by_name($query, "user_name", $this->user_name);
-		oci_bind_by_name($query, "password", $password);
+		oci_bind_by_name($query, ":user_name", $this->user_name);
+		oci_bind_by_name($query, ":password", $password);
 		oci_execute($query);
 	}
 
@@ -192,7 +192,7 @@ class User {
 		$db = getPDOInstance();
 
 		$query = oci_parse($db, User::DELETE);
-		oci_bind_by_name($query, "user_name", $user_name);
+		oci_bind_by_name($query, ":user_name", $user_name);
 
 		oci_execute($query);
 	}
@@ -204,10 +204,11 @@ class User {
 	public static function login($user_name, $password) {
 		$db = getPDOInstance();
 
+		print_r(oci_error());
+		
 		$query = oci_parse($db, User::LOGIN_QUERY);
-
-		oci_bind_by_name($query, "user_name", $user_name);
-		oci_bind_by_name($query, "password", $password);
+		oci_bind_by_name($query, ":user_name", $user_name);
+		oci_bind_by_name($query, ":password", $password);
 		oci_execute($query);
 
 		if($query->rowCount()) {
