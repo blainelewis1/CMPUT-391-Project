@@ -34,7 +34,7 @@ class User {
 	//TODO: CURDATE will probably cause problems when moving to oracle									
 	const INSERT = "INSERT INTO users 
 					(person_id, user_name, class, password, date_registered)
-					VALUES (:person_id, :user_name, :class, :password, CURDATE())";
+					VALUES (:person_id, :user_name, :class, :password, SYSDATE)";
 
 	const UPDATE = "UPDATE users 
 					SET user_name = :user_name,
