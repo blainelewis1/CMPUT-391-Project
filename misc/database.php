@@ -8,13 +8,15 @@ function getPDOInstance() {
 	
 	if(!$instance) {
 		include_once("dbpass.php");
+		
+		$instance = oci_connect($username, $password);
+		if (!$conn) {
+		   $e = oci_error();
+		   #trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+		}
 
-		$conn = $dbtype.":host=".$host.";dbname=".$dbname.";charset=utf8";
-
-
-		$instance = new PDO($conn, $username, $password);
-		$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$instance->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		#$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		#$instance->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 	}
 
 
