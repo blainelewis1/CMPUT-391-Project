@@ -19,7 +19,7 @@ $image = $image->getImage($size);
 
 header("Content-Type: image/jpeg");
 
-print($image);
+#print($image);
 
 
 ?>

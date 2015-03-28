@@ -72,6 +72,8 @@ class PACSImage {
 
 		$row = oci_fetch_row($query);
 
+		print_r($row);
+
 		return $row[0];
 	}
 
