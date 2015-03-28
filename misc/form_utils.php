@@ -8,11 +8,11 @@ function selectPerson($label, $name, $people, $default) { ?>
 		<label><?php echo  $label.':' ?></label>
 	</div>
 <select name="<?php echo  $name ?>">
-	<?php foreach($people  as $person): ?>
+	<?php foreach($people  as $person): $person = (object) $person; ?>
 		<option 
-		<?php echo  $person->person_id == $default ? "selected" : "";?>
-		value="<?php echo  $person->person_id; ?>">
-			<?php echo  $person->person_id.' - '.$person->first_name.', '.$person->last_name; ?>
+		<?php echo  $person->PERSON_ID == $default ? "selected" : "";?>
+		value="<?php echo  $person->PERSON_ID; ?>">
+			<?php echo  $person->PERSON_ID.' - '.$person->FIRST_NAME.', '.$person->LAST_NAME; ?>
 		</option>
 	<?php endforeach; ?>
 </select>
