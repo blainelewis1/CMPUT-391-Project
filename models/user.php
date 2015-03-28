@@ -62,7 +62,9 @@ class User {
 		$query = oci_parse($db, User::SELECT_ALL_USERS_QUERY);
 		oci_execute($query);	
 
-		return $query->fetchAll();
+		$results;
+oci_fetch_all($query, $results);
+return (object) $results;
 	}
 
 	public static function fromUsername($user_name) {

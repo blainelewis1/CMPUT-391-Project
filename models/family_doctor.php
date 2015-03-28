@@ -33,10 +33,12 @@ class FamilyDoctor {
 	public static function getAllFamilyDoctors() {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(FamilyDoctor::SELECT_ALL);
-		$query->execute();	
+		$query = oci_parse($db, FamilyDoctor::SELECT_ALL);
+		oci_execute($query);	
 
-		return $query->fetchAll();
+		$results;
+oci_fetch_all($query, $results);
+return (object) $results;
 	}
 
 	public static function fromIds($patient, $doctor) {
@@ -76,36 +78,36 @@ public function saveToDatabase() {
 	private function insert() {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(FamilyDoctor::INSERT);
+		$query = oci_parse($db, FamilyDoctor::INSERT);
 
-		$query->bindValue("patient_id", $this->patient_id);
-		$query->bindValue("doctor_id", $this->doctor_id);
+		oci_bind_by_name($query, ":patient_id", $this->patient_id);
+		oci_bind_by_name($query, ":doctor_id", $this->doctor_id);
 		
-		$query->execute();
+		oci_execute($query);
 	}
 
 	private function update(){
 		$db = getPDOInstance();
 
-		$query = $db->prepare(FamilyDoctor::UPDATE);
+		$query = oci_parse($db, FamilyDoctor::UPDATE);
 
-		$query->bindValue("old_patient_id", $this->old_patient_id);
-		$query->bindValue("old_doctor_id", $this->old_doctor_id);
-		$query->bindValue("patient_id", $this->patient_id);
-		$query->bindValue("doctor_id", $this->doctor_id);
+		oci_bind_by_name($query, ":old_patient_id", $this->old_patient_id);
+		oci_bind_by_name($query, ":old_doctor_id", $this->old_doctor_id);
+		oci_bind_by_name($query, ":patient_id", $this->patient_id);
+		oci_bind_by_name($query, ":doctor_id", $this->doctor_id);
 		
-		$query->execute();
+		oci_execute($query);
 	}
 
 	public function deleteRecord() {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(FamilyDoctor::DELETE);
+		$query = oci_parse($db, FamilyDoctor::DELETE);
 
-		$query->bindValue("patient_id", $this->patient_id);
-		$query->bindValue("doctor_id", $this->doctor_id);
+		oci_bind_by_name($query, ":patient_id", $this->patient_id);
+		oci_bind_by_name($query, ":doctor_id", $this->doctor_id);
 		
-		$query->execute();
+		oci_execute($query);
 	}
 
 }

@@ -76,21 +76,25 @@ class Person {
 	public static function getAllPeople() {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(Person::SELECT_ALL_QUERY);
-		$query->execute();	
+		$query = oci_parse($db, Person::SELECT_ALL_QUERY);
+		oci_execute($query);	
 
-		return $query->fetchAll();
+		$results;
+oci_fetch_all($query, $results);
+return (object) $results;
 	}
 
 	public static function getAllByClass($class) {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(Person::SELECT_ALL_BY_CLASS);
-		$query->bindValue("class", $class);
+		$query = oci_parse($db, Person::SELECT_ALL_BY_CLASS);
+		oci_bind_by_name($query, ":class", $class);
 
-		$query->execute();	
+		oci_execute($query);	
 
-		return $query->fetchAll();
+		$results;
+oci_fetch_all($query, $results);
+return (object) $results;
 	}
 
 	public static function fromUserName($user_name) {
@@ -121,24 +125,24 @@ class Person {
 
 	private function selectFromUsername() {
 		$db = getPDOInstance();
-		$query = $db->prepare(Person::SELECT_USER_NAME);
+		$query = oci_parse($db, Person::SELECT_USER_NAME);
 
-		$query->bindValue("user_name", $this->user_name);
-		$query->execute();
+		oci_bind_by_name($query, ":user_name", $this->user_name);
+		oci_execute($query);
 
-		$row = $query->fetch();
+		oci_fetch_object($query);
 		$this->populateFromRow($row);
 
 	}
 
 	private function selectFromId() {
 		$db = getPDOInstance();
-		$query = $db->prepare(Person::SELECT_ID);
+		$query = oci_parse($db, Person::SELECT_ID);
 
-		$query->bindValue("person_id", $this->person_id);
-		$query->execute();
+		oci_bind_by_name($query, ":person_id", $this->person_id);
+		oci_execute($query);
 
-		$row = $query->fetch();
+		oci_fetch_object($query);
 
 		$this->populateFromRow($row);
 
@@ -171,31 +175,31 @@ class Person {
 	private function update(){
 		$db = getPDOInstance();
 
-		$query = $db->prepare(Person::UPDATE);
+		$query = oci_parse($db, Person::UPDATE);
 
-		$query->bindValue("first_name", $this->first_name);
-		$query->bindValue("last_name", $this->last_name);
-		$query->bindValue("address", $this->address);
-		$query->bindValue("email", $this->email);
-		$query->bindValue("phone", $this->phone);
-		$query->bindValue("person_id", $this->person_id);
+		oci_bind_by_name($query, ":first_name", $this->first_name);
+		oci_bind_by_name($query, ":last_name", $this->last_name);
+		oci_bind_by_name($query, ":address", $this->address);
+		oci_bind_by_name($query, ":email", $this->email);
+		oci_bind_by_name($query, ":phone", $this->phone);
+		oci_bind_by_name($query, ":person_id", $this->person_id);
 		
-		$query->execute();
+		oci_execute($query);
 	}
 
 	private function insert(){
 		$db = getPDOInstance();
 
-		$query = $db->prepare(Person::INSERT);
+		$query = oci_parse($db, Person::INSERT);
 
-		$query->bindValue("person_id", $this->person_id);
-		$query->bindValue("first_name", $this->first_name);
-		$query->bindValue("last_name", $this->last_name);
-		$query->bindValue("address", $this->address);
-		$query->bindValue("email", $this->email);
-		$query->bindValue("phone", $this->phone);
+		oci_bind_by_name($query, ":person_id", $this->person_id);
+		oci_bind_by_name($query, ":first_name", $this->first_name);
+		oci_bind_by_name($query, ":last_name", $this->last_name);
+		oci_bind_by_name($query, ":address", $this->address);
+		oci_bind_by_name($query, ":email", $this->email);
+		oci_bind_by_name($query, ":phone", $this->phone);
 		
-		$query->execute();
+		oci_execute($query);
 	}
 
 	public function isNew() {

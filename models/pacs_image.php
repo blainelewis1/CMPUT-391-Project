@@ -63,10 +63,10 @@ class PACSImage {
 		$select = PACSImage::SELECT_IMAGE;
 		$select = str_replace('image_size', $size, $select);
 
-		$query = $db->prepare($select);
+		$query = oci_parse($db, $select);
 
-		$query->bindValue("image_id", $this->image_id);
-		$query->execute();
+		oci_bind_by_name($query, ":image_id", $this->image_id);
+		oci_execute($query);
 
 		//http://php.net/manual/en/pdo.lobs.php [03/21/2015 blaine1]
 
@@ -85,14 +85,14 @@ class PACSImage {
 		$full = fopen($this->image, 'rb');
 
 		$db = getPDOInstance();
-		$query = $db->prepare(PACSImage::INSERT);
+		$query = oci_parse($db, PACSImage::INSERT);
 
-		$query->bindValue("record_id", $this->record_id);
-		$query->bindValue("thumbnail", $thumb, PDO::PARAM_LOB);
-		$query->bindValue("regular_size", $regular, PDO::PARAM_LOB);
-		$query->bindValue("full_size", $full, PDO::PARAM_LOB);
+		oci_bind_by_name($query, ":record_id", $this->record_id);
+		oci_bind_by_name($query, ":thumbnail", $thumb, PDO::PARAM_LOB);
+		oci_bind_by_name($query, ":regular_size", $regular, PDO::PARAM_LOB);
+		oci_bind_by_name($query, ":full_size", $full, PDO::PARAM_LOB);
 		
-		$query->execute();
+		oci_execute($query);
 		print_r($db->errorInfo());
 		print_r($db->errorCode());
 

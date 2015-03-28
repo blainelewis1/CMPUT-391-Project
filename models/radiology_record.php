@@ -119,37 +119,39 @@ class RadiologyRecord {
 		}
 
 
-		$query = $db->prepare($query_string);
+		$query = oci_parse($db, $query_string);
 
 		if($diagnosis != ""){
-			$query->bindValue("diagnosis", $diagnosis);
+			oci_bind_by_name($query, ":diagnosis", $diagnosis);
 		}
 		
 		if($start_date != ""){
-			$query->bindValue("start_date", $start_date);
+			oci_bind_by_name($query, ":start_date", $start_date);
 		}
 		
 		if($end_date != ""){
-			$query->bindValue("end_date", $end_date);
+			oci_bind_by_name($query, ":end_date", $end_date);
 		}
 		
 		$query->execute();	
 
-		return $query->fetchAll();
+		$results;
+oci_fetch_all($query, $results);
+return (object) $results;
 	}
 
 	private function insert() {
 		$db = getPDOInstance();
-		$query = $db->prepare(RadiologyRecord::INSERT);
+		$query = oci_parse($db, RadiologyRecord::INSERT);
 
-		$query->bindValue("patient_id", $this->patient_id);
-		$query->bindValue("doctor_id", $this->doctor_id);
-		$query->bindValue("radiologist_id", $this->radiologist_id);
-		$query->bindValue("test_type", $this->test_type);
-		$query->bindValue("test_date", $this->test_date);
-		$query->bindValue("prescribing_date", $this->prescribing_date);
-		$query->bindValue("diagnosis", $this->diagnosis);
-		$query->bindValue("description", $this->description);
+		oci_bind_by_name($query, ":patient_id", $this->patient_id);
+		oci_bind_by_name($query, ":doctor_id", $this->doctor_id);
+		oci_bind_by_name($query, ":radiologist_id", $this->radiologist_id);
+		oci_bind_by_name($query, ":test_type", $this->test_type);
+		oci_bind_by_name($query, ":test_date", $this->test_date);
+		oci_bind_by_name($query, ":prescribing_date", $this->prescribing_date);
+		oci_bind_by_name($query, ":diagnosis", $this->diagnosis);
+		oci_bind_by_name($query, ":description", $this->description);
 
 		$query->execute();
 
@@ -158,12 +160,12 @@ class RadiologyRecord {
 
 	private function selectFromId() {
 		$db = getPDOInstance();
-		$query = $db->prepare(RadiologyRecord::SELECT_BY_ID);
+		$query = oci_parse($db, RadiologyRecord::SELECT_BY_ID);
 
-		$query->bindValue("record_id", $this->record_id);
+		oci_bind_by_name($query, ":record_id", $this->record_id);
 		$query->execute();
 
-		$row = $query->fetch();
+		oci_fetch_object($query);
 
 		populateFromRow($row);
 
