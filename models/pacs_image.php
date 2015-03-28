@@ -72,9 +72,7 @@ class PACSImage {
 
 		$row = oci_fetch_row($query);
 
-		print_r($row);
-
-		return $row[0];
+		return $row[0]->load();
 	}
 
 	public function insert() {
