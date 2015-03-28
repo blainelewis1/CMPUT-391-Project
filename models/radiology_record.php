@@ -36,8 +36,8 @@ class RadiologyRecord {
 						FROM radiology_record r, persons p
 						WHERE p.person_id = r.patient_id 
 						AND r.diagnosis = :diagnosis 
-						AND r.test_date >= :start_date 
-						AND r.test_date <= :end_date";
+						AND r.test_date >= TO_DATE(':start_date')
+						AND r.test_date <= TO_DATE(':end_date')";
 
 	const SELECT_ALL = "SELECT p.first_name,
 							 	p.address, p.phone, r.test_date
@@ -113,11 +113,11 @@ class RadiologyRecord {
 		} else if($start_date != "") {
 
 			$query_string .= $delimiter;
-			$query_string .= "r.test_date >= :start_date";
+			$query_string .= "r.test_date >= TO_DATE(':start_date')";
 
 		} else if($end_date != "") {
 			$query_string .= $delimiter;
-			$query_string .= "r.test_date <= :end_date";
+			$query_string .= "r.test_date <= TO_DATE(':end_date')";
 		}
 
 
