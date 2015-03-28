@@ -82,9 +82,9 @@ class PACSImage {
 	public function insert() {
 		//VALIDATE is a jpeg
 
-		$thumb = fopen($this->resize($this->image, PACSImage::THUMB_WIDTH, PACSImage::THUMB_HEIGHT),'rb');
-		$regular = fopen($this->resize($this->image, PACSImage::REGULAR_WIDTH, PACSImage::REGULAR_HEIGHT), 'rb');
-		$full = fopen($this->image, 'rb');
+		$thumb = $this->resize($this->image, PACSImage::THUMB_WIDTH, PACSImage::THUMB_HEIGHT);
+		$regular = $this->resize($this->image, PACSImage::REGULAR_WIDTH, PACSImage::REGULAR_HEIGHT);
+		$full = $this->image;
 
 		$db = getPDOInstance();
 		$query = oci_parse($db, PACSImage::INSERT);
