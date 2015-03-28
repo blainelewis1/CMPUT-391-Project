@@ -37,27 +37,27 @@
 		
 		<tr>
 			<td>
-				<?php echo  $user->person_id; ?>
+				<?php echo  $user->PERSON_ID; ?>
 			</td>
 
 			<td>
-				<?php echo  $user->user_name; ?>
+				<?php echo  $user->USER_NAME; ?>
 			</td>
 
 			<td>
-				<?php echo  $user->class_name; ?>
+				<?php echo  $user->CLASS_NAME; ?>
 			</td>
 			<td>
-				<?php echo  $user->date_registered; ?>
+				<?php echo  $user->DATE_REGISTERED; ?>
 			</td>
 
 			<td class="icon">
-				<a href="edit_user.php?<?php echo  User::USER_NAME.'='.$user->user_name; ?>">
+				<a href="edit_user.php?<?php echo  User::USER_NAME.'='.$user->USER_NAME; ?>">
 					<img src="/~blaine1/images/edit.png" />
 				</a>
 			</td>
 			<td class="icon">
-				<a href="manage_users.php?<?php echo  User::USER_NAME.'='.$user->user_name; ?>">
+				<a href="manage_users.php?<?php echo  User::USER_NAME.'='.$user->USER_NAME; ?>">
 					<img src="/~blaine1/images/delete.png" />
 				</a>
 			</td>
