@@ -110,12 +110,14 @@ class RadiologyRecord {
 			$query_string .= $delimiter;
 			$query_string .= "r.diagnosis = :diagnosis";
 
-		} else if($start_date != "") {
+		} 
+		if($start_date != "") {
 
 			$query_string .= $delimiter;
 			$query_string .= "r.test_date >= TO_DATE(:start_date, 'YYYY-MM-DD')";
 
-		} else if($end_date != "") {
+		} 
+		if($end_date != "") {
 			$query_string .= $delimiter;
 			$query_string .= "r.test_date <= TO_DATE(:end_date, 'YYYY-MM-DD')";
 		}
