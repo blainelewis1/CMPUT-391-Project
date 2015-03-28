@@ -8,7 +8,7 @@ $user = User::getLoggedInUser();
 
 $user->isAdmin();
 
-$records = [];
+$records = array();
 
 $diagnosis = isset($_GET[RadiologyRecord::DIAGNOSIS]) ? 
 	$_GET[RadiologyRecord::DIAGNOSIS] : "";
