@@ -140,9 +140,9 @@ class User {
 	}
 
 	private function populateFromRow($row) {
-		$this->class = $row->class;
-		$this->user_name = $row->user_name;
-		$this->person_id = $row->person_id;
+		$this->class = $row->CLASS;
+		$this->user_name = $row->USER_NAME;
+		$this->person_id = $row->PERSON_ID;
 	}
 	
 	private function update(){
