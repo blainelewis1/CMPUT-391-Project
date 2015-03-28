@@ -12,7 +12,7 @@
 		<?php if(isset($user)): ?>
 			<div class="username">
 				<a href="user_settings.php">
-					<?= $user->getUserName() ?>
+					<?php echo  $user->getUserName() ?>
 				</a>
 			</div>
 			<a href="logout.php">(logout)</a>

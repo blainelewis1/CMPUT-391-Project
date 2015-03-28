@@ -11,28 +11,28 @@ include('form_error.php');
 				$person->person_id); 
 		}
 	?>
-	<?= 
+	<?php echo  
 		textInput('First Name', 
 			Person::FIRST_NAME, 
 			$person->first_name,
 			24); 
 	?>
 	
-	<?= 
+	<?php echo  
 		textInput('Last Name', 
 			Person::LAST_NAME, 
 			$person->last_name,
 			24); 
 	?>
 	
-	<?= 
+	<?php echo  
 		textArea('Address', 
 			Person::ADDRESS, 
 			$person->address,
 			128); 
 	?>
 	
-	<?= 
+	<?php echo  
 		textInput('Phone', 
 			Person::PHONE, 
 			$person->phone,
@@ -40,12 +40,12 @@ include('form_error.php');
 	?>
 
 	
-	<?= 
+	<?php echo  
 		emailInput('Email', 
 			Person::EMAIL, 
 			$person->email); 
 	?>
 
 
-	<input type="submit" name="<?= Person::SUBMIT; ?>" value="Submit" />
+	<input type="submit" name="<?php echo  Person::SUBMIT; ?>" value="Submit" />
 </form>

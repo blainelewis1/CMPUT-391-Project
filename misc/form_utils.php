@@ -5,14 +5,14 @@
 function selectPerson($label, $name, $people, $default) { ?>
 <div class="row">
 	<div class="label">
-		<label><?= $label.':' ?></label>
+		<label><?php echo  $label.':' ?></label>
 	</div>
-<select name="<?= $name ?>">
+<select name="<?php echo  $name ?>">
 	<?php foreach($people  as $person): ?>
 		<option 
-		<?= $person->person_id == $default ? "selected" : "";?>
-		value="<?= $person->person_id; ?>">
-			<?= $person->person_id.' - '.$person->first_name.', '.$person->last_name; ?>
+		<?php echo  $person->person_id == $default ? "selected" : "";?>
+		value="<?php echo  $person->person_id; ?>">
+			<?php echo  $person->person_id.' - '.$person->first_name.', '.$person->last_name; ?>
 		</option>
 	<?php endforeach; ?>
 </select>
@@ -22,18 +22,18 @@ function selectPerson($label, $name, $people, $default) { ?>
 function textInput($label, $name, &$default, $maxlength=24){ ?>
 <div class="row">
 	<div class="label">
-		<label><?= $label.':' ?></label>
+		<label><?php echo  $label.':' ?></label>
 	</div>
-<input type="text" name="<?= $name; ?>" maxlength="<?= $maxlength ?>" value="<?= $default ?>" />
+<input type="text" name="<?php echo  $name; ?>" maxlength="<?php echo  $maxlength ?>" value="<?php echo  $default ?>" />
 </div>
 <?php } 
 
 function numberInput($label, $name, &$default){ ?>
 <div class="row">
 	<div class="label">
-		<label><?= $label.':' ?></label>
+		<label><?php echo  $label.':' ?></label>
 	</div>
-<input type="number" name="<?= $name; ?>" value="<?= $default ?>" />
+<input type="number" name="<?php echo  $name; ?>" value="<?php echo  $default ?>" />
 </div>
 <?php } 
 
@@ -42,9 +42,9 @@ function emailInput($label, $name, &$default){ ?>
 
 <div class="row">
 	<div class="label">
-		<label><?= $label.':' ?></label>
+		<label><?php echo  $label.':' ?></label>
 	</div>
-<input type="email" name="<?= $name; ?>" value="<?= $default ?>" />
+<input type="email" name="<?php echo  $name; ?>" value="<?php echo  $default ?>" />
 </div>
 <?php } 
 
@@ -53,9 +53,9 @@ function dateInput($label, $name, &$default){ ?>
 
 <div class="row">
 	<div class="label">
-		<label><?= $label.':' ?></label>
+		<label><?php echo  $label.':' ?></label>
 	</div>
-<input type="date" name="<?= $name; ?>" value="<?= $default ?>" />
+<input type="date" name="<?php echo  $name; ?>" value="<?php echo  $default ?>" />
 </div>
 <?php } 
 
@@ -63,9 +63,9 @@ function textArea($label, $name, &$default, $maxlength=1024){ ?>
 
 <div class="row">
 	<div class="label">
-		<label><?= $label.':' ?></label>
+		<label><?php echo  $label.':' ?></label>
 	</div>
-<textarea maxlength="<?= $maxlength ?>" name="<?= $name; ?>"><?= $default ?></textarea>
+<textarea maxlength="<?php echo  $maxlength ?>" name="<?php echo  $name; ?>"><?php echo  $default ?></textarea>
 </div>
 <?php } 
 
@@ -73,8 +73,8 @@ function passwordInput($label, $name, &$default, $maxlength=24){ ?>
 
 <div class="row">
 	<div class="label">
-		<label><?= $label.':' ?></label>
+		<label><?php echo  $label.':' ?></label>
 	</div>
-<input type="password" name="<?= $name; ?>" value="<?= $default ?>" />
+<input type="password" name="<?php echo  $name; ?>" value="<?php echo  $default ?>" />
 </div>
 <?php } ?>

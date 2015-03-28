@@ -16,7 +16,7 @@ include("misc/form_utils.php")
 
 <form action="" method="POST">
 	
-	<?= 
+	<?php echo  
 		textInput('Username', 
 			User::USER_NAME, 
 			$username); 
@@ -32,6 +32,6 @@ include("misc/form_utils.php")
 
 		</div>
 
-	<input type="submit" name="<?= User::LOGIN?>" value="Login!" />
+	<input type="submit" name="<?php echo  User::LOGIN?>" value="Login!" />
 
 </form>

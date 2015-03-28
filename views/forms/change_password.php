@@ -5,7 +5,7 @@
 			<label>Password: </label>
 		</div>
 
-		<input type="password" name="<?= User::PASSWORD; ?>" />	
+		<input type="password" name="<?php echo  User::PASSWORD; ?>" />	
 	</div>
-	<input type="submit" name="<?= User::CHANGE_PASSWORD; ?>" value="Change Password" />
+	<input type="submit" name="<?php echo  User::CHANGE_PASSWORD; ?>" value="Change Password" />
 </form>

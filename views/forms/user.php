@@ -20,23 +20,23 @@ include('form_error.php');
 			<label>Class: </label>
 		</div>
 
-		<select name="<?= User::CLASS_NAME; ?>">
+		<select name="<?php echo  User::CLASS_NAME; ?>">
 
-		  <option <?= $editting_user->class == "p" ? "selected" : "";?> value="p">
+		  <option <?php echo  $editting_user->class == "p" ? "selected" : "";?> value="p">
 		  	Patient
 		  </option>
-		  <option <?= $editting_user->class == "d" ? "selected" : "";?> value="d">
+		  <option <?php echo  $editting_user->class == "d" ? "selected" : "";?> value="d">
 		  	Doctor
 		  </option>
-		  <option <?= $editting_user->class == "r" ? "selected" : "";?> value="r">
+		  <option <?php echo  $editting_user->class == "r" ? "selected" : "";?> value="r">
 		  	Radiologist
 		  </option>
-		  <option <?= $editting_user->class == "a" ? "selected" : "";?> value="a">
+		  <option <?php echo  $editting_user->class == "a" ? "selected" : "";?> value="a">
 		  	Admin
 		  </option>
 		</select>
 	</div>
-	<?= 
+	<?php echo  
 		textInput('Username', 
 			User::USER_NAME, 
 			$editting_user->user_name,
@@ -52,7 +52,7 @@ include('form_error.php');
 			}
 		?>
 	
-	<input type="submit" name="<?= User::SUBMIT; ?>" value="Submit" />
+	<input type="submit" name="<?php echo  User::SUBMIT; ?>" value="Submit" />
 </form>
 
 <?php if(!$editting_user->isNew()) include('change_password.php') ?>

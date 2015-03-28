@@ -3,7 +3,7 @@
 ?>
 
 	<div class="failure">
-		<?= $message ?>
+		<?php echo  $message ?>
 	</div>
 
 <?php
@@ -12,8 +12,8 @@
 
 <form method="post" action="" enctype="multipart/form-data">
 
-	<input type="file" name="<?= PACSImage::IMAGE ?>" />
+	<input type="file" name="<?php echo  PACSImage::IMAGE ?>" />
 
-	<input type="submit" name="<?= PACSImage::SUBMIT_ANOTHER ?>" value="Submit Another">
-	<input type="submit" name="<?= PACSImage::SUBMIT ?>" value="Submit and Finish">
+	<input type="submit" name="<?php echo  PACSImage::SUBMIT_ANOTHER ?>" value="Submit Another">
+	<input type="submit" name="<?php echo  PACSImage::SUBMIT ?>" value="Submit and Finish">
 </form>
