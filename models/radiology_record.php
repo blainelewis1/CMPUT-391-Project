@@ -92,7 +92,9 @@ class RadiologyRecord {
 		} catch(PDOException $e) {
 			if($e->errorInfo[1] == -803 || $e->errorInfo[1] == 1062){
 				return false;
-			} 
+			} else {
+				throw $e;
+			}
 		}
 	}
 

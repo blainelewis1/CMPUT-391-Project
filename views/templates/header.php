@@ -10,11 +10,11 @@
 	<div id="login">
 
 		<?php if(isset($user)): ?>
-			<span class="username">
+			<div class="username">
 				<a href="user_settings.php">
 					<?= $user->getUserName() ?>
 				</a>
-			</span>
+			</div>
 			<a href="logout.php">(logout)</a>
 		<?php endif; ?>
 

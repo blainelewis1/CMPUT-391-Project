@@ -31,6 +31,7 @@ if(isset($_POST[RadiologyRecord::SUBMIT])) {
 			header('Location: upload.php?'.RadiologyRecord::RECORD_ID.'='.$record->record_id);
 			die();
 		}
+		print($message);
 		
 	}
 }

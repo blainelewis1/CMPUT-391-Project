@@ -31,6 +31,7 @@ function applyAndValidateRecordFields($record) {
 	$record->prescribing_date = $_POST[RadiologyRecord::PRESCRIBING_DATE];
 	$record->test_date = $_POST[RadiologyRecord::TEST_DATE];
 	$record->diagnosis = $_POST[RadiologyRecord::DIAGNOSIS];
+	$record->description = $_POST[RadiologyRecord::DESCRIPTION];
 
 	return $message;
 }

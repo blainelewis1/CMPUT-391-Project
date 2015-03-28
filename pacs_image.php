@@ -1,4 +1,12 @@
 <?php
+/*
+	This can be called with
+	
+	<img src="<?= PACSImage::SIZE.'='.PACSImage::FULL.'&'.PACSImage::IMAGE_ID.'='.$image->id?>" />
+
+*/
+
+
 include('models/pacs_image.php');
 
 //TODO: validation

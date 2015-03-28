@@ -228,6 +228,10 @@ textarea, select {
 	font-size: 15px;
 }
 
+select {
+	background-color: #FEFEFF;
+}
+
 form {
 	margin-bottom:20px;
 }

@@ -45,7 +45,7 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 	}
 }
 
-$content = "views/upload.php";
+$content = "views/forms/upload.php";
 
 include("views/templates/template.php");
 

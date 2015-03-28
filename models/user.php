@@ -28,9 +28,9 @@ class User {
 
 	const SELECT_ALL_USERS_QUERY = "SELECT users.user_name,
 										   users.person_id,
-										   users.class,
+										   classes.class_name,
 										   users.date_registered
-									FROM users";
+									FROM users JOIN classes ON classes.class_id = users.class";
 	
 	//TODO: CURDATE will probably cause problems when moving to oracle									
 	const INSERT = "INSERT INTO users 
@@ -226,7 +226,7 @@ class User {
 		} else if($redirect == false) {
 			return false;
 		} else {
-
+			$user = $this;
 			$content = "views/denied.php";
 			include("views/templates/template.php");
 			die();

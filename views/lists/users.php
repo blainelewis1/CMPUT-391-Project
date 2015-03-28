@@ -45,7 +45,7 @@
 			</td>
 
 			<td>
-				<?= $user->class; ?>
+				<?= $user->class_name; ?>
 			</td>
 			<td>
 				<?= $user->date_registered; ?>

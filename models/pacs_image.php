@@ -25,8 +25,13 @@ class PACSImage {
 	const SUBMIT = "submit";
 	const SUBMIT_ANOTHER = "submit";
 
-	const MAX_THUMB_WIDTH = 250;
-	const MAX_REGULAR_WIDTH = 400;
+	#const RATIO = 200/150;
+	const RATIO = 1.33333333333;
+	
+	const THUMB_WIDTH = 200;
+	const THUMB_HEIGHT = 150;
+	const REGULAR_WIDTH = 400;
+	const REGULAR_HEIGHT = 300;
 
 	public $record_id;
 	public $image_id;
@@ -75,8 +80,8 @@ class PACSImage {
 	public function insert() {
 		//VALIDATE is a jpeg
 
-		$thumb = fopen($this->resize($this->image, PACSImage::MAX_THUMB_WIDTH),'rb');
-		$regular = fopen($this->resize($this->image, PACSImage::MAX_REGULAR_WIDTH), 'rb');
+		$thumb = fopen($this->resize($this->image, PACSImage::THUMB_WIDTH, PACSImage::THUMB_HEIGHT),'rb');
+		$regular = fopen($this->resize($this->image, PACSImage::REGULAR_WIDTH, PACSImage::REGULAR_HEIGHT), 'rb');
 		$full = fopen($this->image, 'rb');
 
 		$db = getPDOInstance();
@@ -90,22 +95,43 @@ class PACSImage {
 		$query->execute();
 	}
 
-	private function resize($image, $newwidth) {
+	private function resize($image, $newwidth, $newheight) {
+		//TODO: does not work (will also stretch images)
+
+		//New approach. Make the thumb meet the aspect ratio via cropping, then resize
+		//Based on the least we'd need to crop
+
 		//http://php.net/manual/en/function.imagecopyresized.php [22/03/2015] blaine1
 
-		// Get new sizes
+		// Get sizes
 		list($width, $height) = getimagesize($image);
 
 		$ratio = $width/$height;
+		$newratio = $newwidth/$newheight;
 
-		$newheight = $width / $ratio;
 
-		// Load
 		$newimage = imagecreatetruecolor($newwidth, $newheight);
 		$source = imagecreatefromjpeg($image);
 
-		// Resize
-		imagecopyresized($newimage, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+		if($ratio > $newratio) {
+		
+			$cropwidth = $newratio * $height;
+			$xoffset = ($width - $cropwidth) / 2;
+
+			imagecopyresized($newimage, $source, 0, 0, $xoffset, 0, $newwidth, $newheight, $cropwidth, $height);
+			
+		} else {
+
+			$cropheight = $width / $newratio;
+			$yoffset = ($height - $cropheight) / 2;
+
+			print_r([$yoffset,$newwidth, $newheight,$width, $height]);
+
+			imagecopyresized($newimage, $source, 0, 0, 0, $yoffset, $newwidth, $newheight, $width, $cropheight);
+
+		}
+
 
 		imagejpeg($newimage, $image.$newwidth);
 
