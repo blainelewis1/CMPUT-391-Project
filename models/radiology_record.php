@@ -52,6 +52,8 @@ class RadiologyRecord {
 					:radiologist_id, :test_type, TO_DATE(:prescribing_date, 'YYYY-MM-DD'),
 					TO_DATE(:test_date, 'YYYY-MM-DD'), :diagnosis, :description)";
 
+	const LAST_INSERT_ID = "SELECT record_seq.curval FROM dual";
+
 
 	public $record_id;
 
@@ -155,7 +157,10 @@ class RadiologyRecord {
 
 		oci_execute($query);;
 
-		$this->record_id = $db->lastInsertId();
+		$query = oci_parse($db, RadiologyRecord::LAST_INSERT_ID);
+		oci_execute($query);
+
+		$this->record_id = oci_fetch_row($query)[0];
 	}
 
 	private function selectFromId() {
