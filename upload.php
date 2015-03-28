@@ -34,13 +34,13 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 		if(!empty($_POST[PACSImage::SUBMIT_ANOTHER])){
 
 			//TODO: redirect somewhere?
-			header('Location: upload.php?'.RadiologyRecord::RECORD_ID.'='.$pacs_image->record_id);
-			die();
+			#header('Location: upload.php?'.RadiologyRecord::RECORD_ID.'='.$pacs_image->record_id);
+			#die();
 		} else {
 
 			//TODO: this won't work in the future
-			header('Location: record.php');
-			die();
+			#header('Location: record.php');
+			#die();
 		}
 	}
 }
