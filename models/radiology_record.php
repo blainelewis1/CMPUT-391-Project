@@ -184,15 +184,15 @@ class RadiologyRecord {
 	}
 
 	private function populateFromRow($row) {
-		$this->record_id = $row->record_id;
-		$this->patient_id = $row->patient_id;
-		$this->doctor_id = $row->doctor_id;
-		$this->radiologist_id = $row->radiologist_id;
-		$this->test_type = $row->test_type;
-		$this->prescribing_date = $row->prescribing_date;
-		$this->test_date = $row->test_date;
-		$this->diagnosis = $row->diagnosis;
-		$this->description = $row->description;
+		$this->record_id = $row->RECORD_ID;
+		$this->patient_id = $row->PATIENT_ID;
+		$this->doctor_id = $row->DOCTOR_ID;
+		$this->radiologist_id = $row->RADIOLOGIST_ID;
+		$this->test_type = $row->TEST_TYPE;
+		$this->prescribing_date = $row->PRESCRIBING_DATE;
+		$this->test_date = $row->TEST_DATE;
+		$this->diagnosis = $row->DIAGNOSIS;
+		$this->description = $row->DESCRIPTION;
 	}
 }
 

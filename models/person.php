@@ -123,6 +123,8 @@ class Person {
 
 
 	private function selectFromUsername() {
+		//TODO: does this really belong here?
+
 		$db = getPDOInstance();
 		$query = oci_parse($db, Person::SELECT_USER_NAME);
 
@@ -130,6 +132,7 @@ class Person {
 		oci_execute($query);
 
 		$row = oci_fetch_object($query);
+		
 		$this->populateFromRow($row);
 
 	}
@@ -148,12 +151,12 @@ class Person {
 	}
 
 	private function populateFromRow($row) {
-		$this->first_name = $row->first_name;
-		$this->last_name = $row->last_name;
-		$this->address = $row->address;
-		$this->email = $row->email;
-		$this->phone = $row->phone;
-		$this->person_id = $row->person_id;
+		$this->first_name = $row->FIRST_NAME;
+		$this->last_name = $row->LAST_NAME;
+		$this->address = $row->ADDRESS;
+		$this->email = $row->EMAIL;
+		$this->phone = $row->PHONE;
+		$this->person_id = $row->PERSON_ID;
 	}
 
 	public function saveToDatabase() {
