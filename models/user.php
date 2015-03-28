@@ -60,7 +60,7 @@ class User {
 	public static function getAllUsers() {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(User::SELECT_ALL_USERS_QUERY);
+		$query = oci_parse($db, User::SELECT_ALL_USERS_QUERY);
 		$query->execute();	
 
 		return $query->fetchAll();
@@ -123,7 +123,7 @@ class User {
 	private function selectFromUsername() {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(User::SELECT_FROM_USER_NAME);
+		$query = oci_parse($db, User::SELECT_FROM_USER_NAME);
 
 		$query->bindValue("user_name", $this->user_name);
 		
@@ -142,7 +142,7 @@ class User {
 	private function update(){
 		$db = getPDOInstance();
 
-		$query = $db->prepare(User::UPDATE);
+		$query = oci_parse($db, User::UPDATE);
 
 		$query->bindValue("user_name", $this->user_name);
 		$query->bindValue("old_user_name", $this->old_user_name);
@@ -154,7 +154,7 @@ class User {
 	private function insert(){
 		$db = getPDOInstance();
 
-		$query = $db->prepare(User::INSERT);
+		$query = oci_parse($db, User::INSERT);
 
 		$query->bindValue("user_name", $this->user_name);
 		$query->bindValue("class", $this->class);
@@ -182,7 +182,7 @@ class User {
 	public function updatePassword($password){
 		$db = getPDOInstance();
 
-		$query = $db->prepare(User::CHANGE_PASSWORD_QUERY);
+		$query = oci_parse($db, User::CHANGE_PASSWORD_QUERY);
 		$query->bindValue("user_name", $this->user_name);
 		$query->bindValue("password", $password);
 		$query->execute();
@@ -191,7 +191,7 @@ class User {
 	public static function deleteRecord($user_name) {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(User::DELETE);
+		$query = oci_parse($db, User::DELETE);
 		$query->bindValue("user_name", $user_name);
 
 		$query->execute();
@@ -204,7 +204,7 @@ class User {
 	public static function login($user_name, $password) {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(User::LOGIN_QUERY);
+		$query = oci_parse($db, User::LOGIN_QUERY);
 		$query->bindValue("user_name", $user_name);
 		$query->bindValue("password", $password);
 		$query->execute();
