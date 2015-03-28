@@ -23,7 +23,7 @@ class PACSImage {
 	const SIZE = "size";
 
 	const SUBMIT = "submit";
-	const SUBMIT_ANOTHER = "submit";
+	const SUBMIT_ANOTHER = "submit_another";
 
 	#const RATIO = 200/150;
 	const RATIO = 1.33333333333;
@@ -93,6 +93,9 @@ class PACSImage {
 		$query->bindValue("full_size", $full, PDO::PARAM_LOB);
 		
 		$query->execute();
+		print_r($db->errorInfo());
+		print_r($db->errorCode());
+
 	}
 
 	private function resize($image, $newwidth, $newheight) {
@@ -125,8 +128,6 @@ class PACSImage {
 
 			$cropheight = $width / $newratio;
 			$yoffset = ($height - $cropheight) / 2;
-
-			print_r([$yoffset,$newwidth, $newheight,$width, $height]);
 
 			imagecopyresized($newimage, $source, 0, 0, 0, $yoffset, $newwidth, $newheight, $width, $cropheight);
 

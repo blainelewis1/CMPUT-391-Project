@@ -27,21 +27,21 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 	if($message == ""){
 		$pacs_image->image = $_FILES[PACSImage::IMAGE]["tmp_name"];
 
-		if($pacs_image->insert()) {
 
-			if(isset($_POST[PACSImage::SUBMIT_ANOTHER])){
-				//TODO: redirect somewhere?
-				header('Location: upload.php?'.RadiologyRecord::RECORD_ID.'='.$record->record_id);
-				die();
-			} else {
+		$pacs_image->insert();
+		//TODO: what if the insert fails
 
-				//TODO: this won't work in the future
-				header('Location: edit_record.php');
-				die();
-			}
+		if(!empty($_POST[PACSImage::SUBMIT_ANOTHER])){
 
+			//TODO: redirect somewhere?
+			header('Location: upload.php?'.RadiologyRecord::RECORD_ID.'='.$pacs_image->record_id);
+			die();
+		} else {
+
+			//TODO: this won't work in the future
+			header('Location: record.php');
+			die();
 		}
-		
 	}
 }
 
