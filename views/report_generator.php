@@ -48,22 +48,22 @@
 		Testing Date
 	</th>
 
-	<?php foreach($records as $record ): ?>
+	<?php foreach($records as $record ): $record = (object) $record?>
 		
 		<tr>
 			<td>
-				<?= $record->first_name; ?>
+				<?= $record->FIRST_NAME; ?>
 			</td>
 
 			<td>
-				<?= $record->address; ?>
+				<?= $record->ADDRESS; ?>
 			</td>
 
 			<td>
-				<?= $record->phone; ?>
+				<?= $record->PHONE; ?>
 			</td>
 			<td>
-				<?= $record->test_date; ?>
+				<?= $record->TEST_DATE; ?>
 			</td>
 		</tr>
 

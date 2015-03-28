@@ -133,7 +133,7 @@ class RadiologyRecord {
 			oci_bind_by_name($query, ":end_date", $end_date);
 		}
 		
-		oci_execute($query);;	
+		oci_execute($query);
 
 		$results;
 		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
