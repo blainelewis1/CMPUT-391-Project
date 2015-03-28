@@ -3,26 +3,26 @@
 <?php include('misc/form_utils.php'); ?>
 <form action="" method="GET">
 
-	<?= 
+	<?php echo  
 		textInput('Diagnosis', 
 			RadiologyRecord::DIAGNOSIS, 
 			$diagnosis); 
 	?>
 
-	<?=
+	<?php echo 
 		dateInput('Start Date',
 			RadiologyRecord::TEST_START_DATE,
 			$start_date);
 	?>
 
-	<?=
+	<?php echo 
 		dateInput('End Date',
 			RadiologyRecord::TEST_END_DATE,
 			$end_date);
 	?>
 	
 
-	<input type="submit" name="<?= RadiologyRecord::SEARCH; ?>" value="Search" />
+	<input type="submit" name="<?php echo  RadiologyRecord::SEARCH; ?>" value="Search" />
 </form>		
 </div>
 <div class="light-separator"></div>
@@ -52,18 +52,18 @@
 		
 		<tr>
 			<td>
-				<?= $record->FIRST_NAME; ?>
+				<?php echo  $record->FIRST_NAME; ?>
 			</td>
 
 			<td>
-				<?= $record->ADDRESS; ?>
+				<?php echo  $record->ADDRESS; ?>
 			</td>
 
 			<td>
-				<?= $record->PHONE; ?>
+				<?php echo  $record->PHONE; ?>
 			</td>
 			<td>
-				<?= $record->TEST_DATE; ?>
+				<?php echo  $record->TEST_DATE; ?>
 			</td>
 		</tr>
 
