@@ -15,7 +15,7 @@ function applyAndValidateUserFields($user) {
 
 	//TODO: validate class is valid as well
 	$message .= notEmpty($_POST, User::CLASS_NAME, 'Class');
-	$message .= oneOf($_POST[User::CLASS_NAME], ['d','a','r','p'], 'Class');
+	$message .= oneOf($_POST[User::CLASS_NAME], array('d','a','r','p'), 'Class');
 
 
 	//TODO: validate user is unique
