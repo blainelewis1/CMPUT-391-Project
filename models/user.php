@@ -63,7 +63,7 @@ class User {
 		oci_execute($query);	
 
 		$results;
-		oci_fetch_all($query, $results);
+		oci_fetch_all($query, $results, null, null, OCI_ASSOC);
 		return $results;
 	}
 
