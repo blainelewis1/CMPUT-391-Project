@@ -20,17 +20,17 @@ class User {
 				   		 FROM users
 						 WHERE users.user_name = :user_name AND 
 						       users.password = :password
-						 LIMIT 1";
+						 LIMIT 1;";
 
 	const CHANGE_PASSWORD_QUERY = "UPDATE users
 							 SET password = :password
-							 WHERE users.user_name = :user_name";
+							 WHERE users.user_name = :user_name;";
 
 	const SELECT_ALL_USERS_QUERY = "SELECT users.user_name,
 										   users.person_id,
 										   classes.class_name,
 										   users.date_registered
-									FROM users JOIN classes ON classes.class_id = users.class";
+									FROM users JOIN classes ON classes.class_id = users.class;";
 	
 	//TODO: CURDATE will probably cause problems when moving to oracle									
 	const INSERT = "INSERT INTO users 
