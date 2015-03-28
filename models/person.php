@@ -25,10 +25,7 @@ class Person {
 						   persons.phone
 					FROM persons JOIN users 
 					ON persons.person_id = users.person_id
-					WHERE users.user_name = :user_name
-					$results;
-oci_fetch_all($query, $results);
-";
+					WHERE users.user_name = :user_name";
 
 	const SELECT_ID = "SELECT persons.first_name, 
 						   persons.last_name, 
