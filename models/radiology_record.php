@@ -49,8 +49,8 @@ class RadiologyRecord {
 					prescribing_date, test_date, diagnosis,
 					description)
 					VALUES (:patient_id, :doctor_id,
-					:radiologist_id, :test_type, :prescribing_date,
-					:test_date, :diagnosis, :description)";
+					:radiologist_id, :test_type, TO_DATE(:prescribing_date),
+					TO_DATE(:test_date), :diagnosis, :description)";
 
 
 	public $record_id;
