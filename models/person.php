@@ -38,9 +38,7 @@ oci_fetch_all($query, $results);
 						   persons.phone
 					FROM persons
 					WHERE persons.person_id = :person_id
-					$results;
-oci_fetch_all($query, $results);
-";
+					";
 	
 	const UPDATE = "UPDATE persons
 					SET first_name = :first_name, 
