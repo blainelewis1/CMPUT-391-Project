@@ -102,9 +102,9 @@ class PACSImage {
 
 		oci_execute($query, OCI_DEFAULT);
 		
-		$thumb_clob->save($thumb);
-		$regular_clob->save($regular);
-		$full_clob->save($full);
+		$thumb_clob->import($thumb);
+		$regular_clob->import($regular);
+		$full_clob->import($full);
 
 		oci_commit($db);
 
