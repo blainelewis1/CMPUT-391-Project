@@ -70,13 +70,9 @@ class PACSImage {
 		oci_bind_by_name($query, ":image_id", $this->image_id);
 		oci_execute($query);
 
-		//http://php.net/manual/en/pdo.lobs.php [03/21/2015 blaine1]
+		$row = oci_fetch_row($query);
 
-		$query->bindColumn(1, $image, PDO::PARAM_LOB);
-
-		$query->fetch(PDO::FETCH_BOUND);
-
-		return $image;
+		return $row[0];
 	}
 
 	public function insert() {

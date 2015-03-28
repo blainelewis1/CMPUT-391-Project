@@ -162,7 +162,7 @@ class RadiologyRecord {
 		$query = oci_parse($db, RadiologyRecord::LAST_INSERT_ID);
 		oci_execute($query);
 
-		$row =  oci_fetch_row($query);
+		$row = oci_fetch_row($query);
 
 		print_r($row);
 
@@ -176,7 +176,8 @@ class RadiologyRecord {
 		oci_bind_by_name($query, ":record_id", $this->record_id);
 		oci_execute($query);
 
-		oci_fetch_object($query);
+
+		$row = oci_fetch_object($query);
 
 		populateFromRow($row);
 
