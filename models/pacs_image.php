@@ -89,9 +89,9 @@ class PACSImage {
 		$db = getPDOInstance();
 		$query = oci_parse($db, PACSImage::INSERT);
 
-		$thumb_clob = oci_new_descriptor($conn, OCI_D_LOB);
-		$regular_clob = oci_new_descriptor($conn, OCI_D_LOB);
-		$full_clob = oci_new_descriptor($conn, OCI_D_LOB);
+		$thumb_clob = oci_new_descriptor($db, OCI_D_LOB);
+		$regular_clob = oci_new_descriptor($db, OCI_D_LOB);
+		$full_clob = oci_new_descriptor($db, OCI_D_LOB);
 
 
 
