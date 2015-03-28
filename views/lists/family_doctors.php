@@ -36,7 +36,7 @@
 			</td>
 
 			<td class="icon">
-				<a href="edit_family_doctor.php?<?php echo  FamilyDoctor::PATIENT_ID.'='.$family_doctor->PATIENT_ID.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
+				<a href="family_doctor.php?<?php echo  FamilyDoctor::PATIENT_ID.'='.$family_doctor->PATIENT_ID.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
 					<img src="/~blaine1/images/edit.png" />
 				</a>
 			</td>

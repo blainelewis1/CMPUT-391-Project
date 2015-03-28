@@ -40,7 +40,7 @@
 			</td>
 
 			<td class="icon">
-				<a href="edit_person.php?<?php echo  Person::PERSON_ID.'='.$person->PERSON_ID; ?>">
+				<a href="person.php?<?php echo  Person::PERSON_ID.'='.$person->PERSON_ID; ?>">
 					<img src="/~blaine1/images/edit.png" />
 				</a>
 			</td>

@@ -52,7 +52,7 @@
 			</td>
 
 			<td class="icon">
-				<a href="edit_user.php?<?php echo  User::USER_NAME.'='.$user->USER_NAME; ?>">
+				<a href="user.php?<?php echo  User::USER_NAME.'='.$user->USER_NAME; ?>">
 					<img src="/~blaine1/images/edit.png" />
 				</a>
 			</td>
