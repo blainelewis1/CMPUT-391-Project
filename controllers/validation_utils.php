@@ -18,9 +18,13 @@ function maxLength($val, $length, $name) {
 }
 
 function validDate($val, $name) {
+
+	if(DateTime::createFromFormat('Y-m-d', $val) == false) {
+		return '<div class="error">'.$name.' must be a valid date.</div>';
+	}
 	return "";
 	//TODO: test dates
-	#'<div class="error">'.$name.' must be a valid date.</div>';
+	#
 }
 
 function isNumber($val, $name) {
