@@ -13,6 +13,8 @@ class RadiologyRecord {
 	const DESCRIPTION = "description";
 	const TEST_START_DATE = "test_start_date";
 	const TEST_END_DATE = "test_end_date";
+	const SEARCH_TERM = "search_term";
+	const THUMBNAIL_LIST = "thumbnail_list"
 
 	const SUBMIT = "submit";
 	const SEARCH = "search";
