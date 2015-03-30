@@ -3,7 +3,7 @@
 //If we pass by reference to not empty it might just make it empty.....
 
 function notEmpty($source, $index, $name) {
-	if(!isset($source[$index]) || $source[$index] == "") {
+	if(!isset($source[$index]) || trim($source[$index]) == "") {
 		$source[$index] = "";
 		return '<div class="error">'.$name.' cannot be empty.</div>';
 	}
