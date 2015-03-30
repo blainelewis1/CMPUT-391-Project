@@ -36,9 +36,8 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 	//TODO: validation
 	$message = "";
 
-	$pacs_image->image = $_FILES[PACSImage::IMAGE]["tmp_name"];
 
-	$message = validatePacsImage($pacs_image->image);
+	$message = validatePacsImage($pacs_image);
 
 	if($message == ""){
 
