@@ -1,6 +1,6 @@
 <?php
 
-include_once('misc/utils');
+include_once('misc/utils.php');
 include_once('models/user.php');
 include_once('models/person.php');
 

@@ -6,9 +6,9 @@ include("misc/form_utils.php")
 	if (isset($failed) && $failed):
 ?>
 
-	<div class="failure">
-		Incorrect username or password
-	</div>
+<div class="error">
+	Incorrect username or password
+</div>
 
 <?php
 	endif;
