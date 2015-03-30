@@ -25,7 +25,7 @@ if(isset($_POST[Person::SUBMIT])) {
 	$message = applyAndValidatePersonFields($person);
 
 	if($message == ""){
-		$person->update();
+		$person->saveToDatabase();
 		$message = '<div class="success">Details succesfully changed!</div>';
 	}
 
