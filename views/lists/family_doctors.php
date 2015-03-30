@@ -44,7 +44,7 @@
 				</a>
 			</td>
 			<td class="icon">
-				<a href="manage_family_doctors.php?<?php echo  '&'.FamilyDoctor::PATIENT_ID.'='.$family_doctor->PATIENT_ID.'&'.FamilyDoctor::DOCTOR_ID.'='.$FAMILY_DOCTOR->doctor_id; ?>">
+				<a href="manage_family_doctors.php?<?php echo  '&'.FamilyDoctor::PATIENT_ID.'='.$family_doctor->PATIENT_ID.'&'.FamilyDoctor::DOCTOR_ID.'='.$FAMILY_DOCTOR->DOCTOR_ID; ?>">
 					<img src="/~blaine1/images/delete.png" />
 				</a>
 			</td>
