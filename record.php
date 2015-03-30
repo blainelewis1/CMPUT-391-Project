@@ -13,6 +13,7 @@
 	
 */
 
+include_once('misc/utils.php');
 include_once('models/user.php');
 include_once('models/radiology_record.php');
 include_once('controllers/radiology_record.php');
@@ -24,7 +25,7 @@ $user = User::getLoggedInUser();
 $user->isRadiologist();
 
 $record;
-
+$message = "";
 
 if(isset($_GET[RadiologyRecord::RECORD_ID])){
 	
@@ -46,12 +47,16 @@ if(isset($_POST[RadiologyRecord::SUBMIT])) {
 
 		if($record->saveToDatabase()) {
 
+			addNotice("Record created successfully!");
+
 			header('Location: upload.php?'.RadiologyRecord::RECORD_ID.'='.$record->record_id);
 			die();
 		}
 
 	}
 }
+
+$message .= getNotices();
 
 $content = "views/forms/record.php";
 include("views/templates/template.php");
