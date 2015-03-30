@@ -1,7 +1,5 @@
 <?php
 
-phpinfo();
-
 include_once('models/user.php');
 
 $user = User::getLoggedInUser();

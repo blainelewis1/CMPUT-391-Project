@@ -29,6 +29,7 @@ $message = validateDiagnosisFormFields($records);
 
 $records = RadiologyRecord::selectByDiagnosisAndDate($diagnosis, $start_date, $end_date);
 
+$title = "Reports";
 $content = "views/report_generator.php";
 
 include("views/templates/template.php");

@@ -28,6 +28,7 @@ if(isset($_POST[User::LOGIN])){
 	}
 } 
 
+$title = "Login";
 $content = "views/forms/login.php";
 include("views/templates/template.php");
 

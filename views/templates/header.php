@@ -1,6 +1,6 @@
 <div id="header">
 	<!-- TODO: won't work with ~blaine1 prefix -->
-	<a href="/">
+	<a href="/~blaine1">
 		<h1>
 			 Radiology Information System
 		</h1>
