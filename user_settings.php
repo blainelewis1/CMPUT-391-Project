@@ -20,6 +20,7 @@ $user = User::getLoggedInUser();
 $person = Person::fromUsername($user->getUserName());
 
 //Test if the form(s) have been submitted.
+
 if(isset($_POST[Person::SUBMIT])) {
 	$message = applyAndValidatePersonFields($person);
 

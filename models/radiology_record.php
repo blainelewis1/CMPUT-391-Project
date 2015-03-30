@@ -56,17 +56,20 @@ class RadiologyRecord {
 
 	const LAST_INSERT_ID = "SELECT record_seq.currval FROM dual";
 
-	const SELECT_CUBE = "SELECT patient_id, test_type, COUNT(*)
-						 FROM radiology_record JOIN pacs_images ON radiology_record.record_id = pacs_images.record_id
-						 GROUP BY CUBE (patient_id, test_type)";
+	const SELECT_CUBE = "SELECT patient_id, test_type, COUNT(*) FROM radiology_record JOIN pacs_images ON radiology_record.record_id = pacs_images.record_id GROUP BY CUBE (patient_id, test_type)";
+
+	const SELECT_ROLLUP = "SELECT patient_id, test_type, extract(month from test_date) month, COUNT(*) FROM radiology_record JOIN pacs_images ON radiology_record.record_id = pacs_images.record_id GROUP BY ROLLUP (patient_id, test_type, test_date)";
 						 #WHERE test_date <= :end_date AND test_date >= start_date
 
-#SELECT patient_id, test_type, num_images FROM radiology_record JOIN (select count(*) num_images, record_id FROM pacs_images GROUP BY record_id) image_count ON  radiology_record.record_id = image_count.record_id
-#SELECT patient_id, test_type, COUNT(image_id) FROM radiology_record JOIN pacs_images ON radiology_record.record_id = pacs_images.record_id;
-
-//SELECT patient_id, test_type, COUNT(*) FROM radiology_record JOIN pacs_images ON radiology_record.record_id = pacs_images.record_id GROUP BY CUBE (patient_id, test_type);
+	/*const SELECT_CUBE = "SELECT patient_id, test_type, COUNT(*) 
+						 FROM radiology_record JOIN pacs_images ON radiology_record.record_id = pacs_images.record_id
+						 GROUP BY CUBE (patient_id, test_type)";*/
 
  //display the number of images for each patient ,  test type, and/or period of time
+
+// patient_id, test_type
+// patient_id, test_date
+// test_type, test_date
 
 	public $record_id;
 

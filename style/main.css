@@ -173,9 +173,17 @@ a, a:visited {
 }
 
 .failure {
+	background-color: #AAFFAA;
+	color: black;
+	border: 1px #AA3939 solid;
+	padding:5px;
+	margin-bottom:5px;
+}
+
+.success {
 	background-color: #FFAAAA;
 	color: black;
-	border: 1px AA3939 solid;
+	border: 1px #39AA39 solid;
 	padding:5px;
 	margin-bottom:5px;
 }
