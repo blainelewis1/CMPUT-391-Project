@@ -1,0 +1,10 @@
+<?php 
+
+$username = "root";
+$password = "";
+$dbname = "radiology";
+$host = "localhost";
+$dbtype = "oci";
+
+
+?>
