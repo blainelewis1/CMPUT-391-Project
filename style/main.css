@@ -172,8 +172,8 @@ a, a:visited {
 	margin-top: 20px;
 }
 
-.failure {
-	background-color: #AAFFAA;
+.error {
+	background-color: #FFAAAA;
 	color: black;
 	border: 1px #AA3939 solid;
 	padding:5px;
@@ -181,9 +181,9 @@ a, a:visited {
 }
 
 .success {
-	background-color: #FFAAAA;
+	background-color: #AAAAFF;
 	color: black;
-	border: 1px #39AA39 solid;
+	border: 1px #3939AA solid;
 	padding:5px;
 	margin-bottom:5px;
 }

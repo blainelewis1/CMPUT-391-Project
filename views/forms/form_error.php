@@ -2,7 +2,7 @@
 	if (!empty($message)):
 ?>
 	
-<div class="failure">
+<div class="message">
 	<?php echo  $message ?>
 </div>
 
