@@ -36,10 +36,12 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 	//TODO: validation
 	$message = "";
 
-	if($message == ""){
-		$pacs_image->image = $_FILES[PACSImage::IMAGE]["tmp_name"];
+	$pacs_image->image = $_FILES[PACSImage::IMAGE]["tmp_name"];
 
-		validatePacsImage($pacs_image->image);
+	$message = validatePacsImage($pacs_image->image);
+
+	if($message == ""){
+
 
 		$pacs_image->insert();
 		//TODO: what if the insert fails
@@ -62,6 +64,7 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 	}
 }
 
+$title = "Upload Image";
 $content = "views/forms/upload.php";
 
 include("views/templates/template.php");

@@ -26,6 +26,7 @@ $user->isRadiologist();
 
 $record;
 $message = "";
+$title;
 
 if(isset($_GET[RadiologyRecord::RECORD_ID])){
 	
