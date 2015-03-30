@@ -11,7 +11,7 @@
 </h3>
 
 <?php if(sizeof($users) == 0): ?>
-	<div class="failure">Sorry no users were found!</div>
+	<div class="error">Sorry no users were found!</div>
 <?php else: ?>
 
 <table>

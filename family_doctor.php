@@ -17,10 +17,13 @@ $family_doctor;
 $title;
 
 if(isset($_GET[FamilyDoctor::DOCTOR_ID]) && isset($_GET[FamilyDoctor::PATIENT_ID])){
+	
 	$title = "Edit Family Doctor";
 
 	$family_doctor = FamilyDoctor::fromIds($_GET[FamilyDoctor::PATIENT_ID], $_GET[FamilyDoctor::DOCTOR_ID]);
+
 } else {
+	
 	$title = "Create Family Doctor";
 
 	$family_doctor = new FamilyDoctor();
@@ -33,6 +36,16 @@ if(isset($_POST[FamilyDoctor::SUBMIT])) {
 
 	if($message == ""){
 		if($family_doctor->saveToDatabase()) {
+
+			if(isset($_GET[FamilyDoctor::DOCTOR_ID])){
+
+				addNotice("Family doctor successfully edited!");
+				
+			} else {
+				
+				addNotice("Family doctor successfully created!");
+			}
+
 			addNotice("Family doctor successfully created");
 
 			header('Location: manage_family_doctors.php');

@@ -12,7 +12,7 @@
 </h3>
 
 <?php if(sizeof($people) == 0): ?>
-	<div class="failure">Sorry no people were found!</div>
+	<div class="error">Sorry no people were found!</div>
 <?php else: ?>
 
 <table class="users">

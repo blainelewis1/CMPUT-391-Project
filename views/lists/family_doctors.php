@@ -11,7 +11,7 @@
 </h3>
 
 <?php if(sizeof($family_doctors) == 0): ?>
-	<div class="failure">Sorry no family doctors were found!</div>
+	<div class="error">Sorry no family doctors were found!</div>
 <?php else: ?>
 
 <table>

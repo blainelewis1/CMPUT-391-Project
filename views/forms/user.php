@@ -6,12 +6,12 @@ include('form_error.php');
 <form action="" method="POST">
 
 	<?php
-	 if($editting_user->isNew()) { 
+	 if($editing_user->isNew()) { 
 
 		selectPerson('Person',
 			Person::PERSON_ID, 
 			Person::getAllPeople(), 
-			$editting_user->person_id); 
+			$editing_user->person_id); 
 	}
 	?>
 
@@ -22,16 +22,16 @@ include('form_error.php');
 
 		<select name="<?php echo  User::CLASS_NAME; ?>">
 
-		  <option <?php echo  $editting_user->class == "p" ? "selected" : "";?> value="p">
+		  <option <?php echo  $editing_user->class == "p" ? "selected" : "";?> value="p">
 		  	Patient
 		  </option>
-		  <option <?php echo  $editting_user->class == "d" ? "selected" : "";?> value="d">
+		  <option <?php echo  $editing_user->class == "d" ? "selected" : "";?> value="d">
 		  	Doctor
 		  </option>
-		  <option <?php echo  $editting_user->class == "r" ? "selected" : "";?> value="r">
+		  <option <?php echo  $editing_user->class == "r" ? "selected" : "";?> value="r">
 		  	Radiologist
 		  </option>
-		  <option <?php echo  $editting_user->class == "a" ? "selected" : "";?> value="a">
+		  <option <?php echo  $editing_user->class == "a" ? "selected" : "";?> value="a">
 		  	Admin
 		  </option>
 		</select>
@@ -39,12 +39,12 @@ include('form_error.php');
 	<?php echo  
 		textInput('Username', 
 			User::USER_NAME, 
-			$editting_user->user_name,
+			$editing_user->user_name,
 			24); 
 	?>
 
 
-		<?php if($editting_user->isNew()){
+		<?php if($editing_user->isNew()){
 			passwordInput('Password', 
 					 User::PASSWORD, 
 					 $user->password, 
@@ -55,4 +55,4 @@ include('form_error.php');
 	<input type="submit" name="<?php echo  User::SUBMIT; ?>" value="Submit" />
 </form>
 
-<?php if(!$editting_user->isNew()) include('change_password.php') ?>
+<?php if(!$editing_user->isNew()) include('change_password.php') ?>

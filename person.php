@@ -15,10 +15,12 @@ $person;
 $title;
 
 if(isset($_GET[Person::PERSON_ID])){
+
 	$title = "Edit Person";
 
 	$person = Person::fromId($_GET[Person::PERSON_ID]);
 } else {
+
 	$title = "Create Person";
 	$person = new Person();
 }
@@ -29,7 +31,12 @@ if(isset($_POST[Person::SUBMIT])) {
 	if($message == ""){
 		if($person->saveToDatabase()) {
 
-			addNotice("Person successfully created!");
+			if(isset($_GET[Person::PERSON_ID])){
+				addNotice("Person successfully edited!");
+				
+			} else {
+				addNotice("Person successfully created!");
+			}
 
 			header('Location: manage_people.php');
 			die();
