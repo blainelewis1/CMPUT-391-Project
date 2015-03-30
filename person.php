@@ -41,7 +41,7 @@ if(isset($_POST[Person::SUBMIT])) {
 			header('Location: manage_people.php');
 			die();
 		} else {
-			$message .= "<div class="error">Person ID already exists!</div>";
+			$message .= '<div class="error">Person ID already exists!</div>';
 		}
 		
 	}
