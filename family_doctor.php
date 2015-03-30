@@ -50,7 +50,7 @@ if(isset($_POST[FamilyDoctor::SUBMIT])) {
 			die();
 			
 		} else {
-			$message = "This relationship already exists";
+			$message = "<div class="error">This relationship already exists</div>";
 		}
 		
 	}

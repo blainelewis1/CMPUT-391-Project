@@ -58,21 +58,15 @@ class FamilyDoctor {
 		$this->new = true;
 	}
 
+
 public function saveToDatabase() {
-		try {
-			if($this->new){
-				$this->insert();
-			} else {
-				$this->update();
-			}
-			return true;
-		} catch(PDOException $e) {
-			if($e->errorInfo[1] == -803 || $e->errorInfo[1] == 1062){
-				return false;
-			} else {
-				throw($e);
-			}
+
+		if($this->new){
+			return $this->insert();
+		} else {
+			return $this->update();
 		}
+		
 	}
 
 	private function insert() {
@@ -83,7 +77,7 @@ public function saveToDatabase() {
 		oci_bind_by_name($query, ":patient_id", $this->patient_id);
 		oci_bind_by_name($query, ":doctor_id", $this->doctor_id);
 		
-		oci_execute($query);
+		return @oci_execute($query);
 	}
 
 	private function update(){
@@ -96,7 +90,7 @@ public function saveToDatabase() {
 		oci_bind_by_name($query, ":patient_id", $this->patient_id);
 		oci_bind_by_name($query, ":doctor_id", $this->doctor_id);
 		
-		oci_execute($query);
+		return @oci_execute($query);
 	}
 
 	public function deleteRecord() {

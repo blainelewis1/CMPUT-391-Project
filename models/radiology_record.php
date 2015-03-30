@@ -180,8 +180,6 @@ class RadiologyRecord {
 
 		$row = oci_fetch_row($query);
 
-		print_r($row);
-
 		$this->record_id = $row[0];
 	}
 

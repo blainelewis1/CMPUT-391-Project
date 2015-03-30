@@ -60,7 +60,7 @@ if(isset($_POST[User::SUBMIT])) {
 			die();
 
 		} else {
-			$message .= "Username already exists!";
+			$message .= "<div class="error">Username already exists!</div>";
 		}
 	}
 } else if(isset($_POST[User::CHANGE_PASSWORD])) {

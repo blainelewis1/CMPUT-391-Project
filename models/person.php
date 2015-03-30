@@ -160,20 +160,12 @@ class Person {
 	}
 
 	public function saveToDatabase() {
-		try {
 			if($this->new){
-				$this->insert();
+				return $this->insert();
 			} else {
-				$this->update();
+				return $this->update();
 			}
-			return true;
-		} catch(PDOException $e) {
-			if($e->errorInfo[1] == -803 || $e->errorInfo[1] == 1062){
-				return false;
-			} 
-		}
 	}
-
 	private function update(){
 		$db = getPDOInstance();
 
@@ -186,7 +178,7 @@ class Person {
 		oci_bind_by_name($query, ":phone", $this->phone);
 		oci_bind_by_name($query, ":person_id", $this->person_id);
 		
-		oci_execute($query);
+		return @oci_execute($query);
 	}
 
 	private function insert(){
@@ -201,7 +193,7 @@ class Person {
 		oci_bind_by_name($query, ":email", $this->email);
 		oci_bind_by_name($query, ":phone", $this->phone);
 		
-		oci_execute($query);
+		return @oci_execute($query);
 	}
 
 	public function isNew() {
