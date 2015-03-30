@@ -5,7 +5,9 @@ function validatePacsImage($filename) {
 
 	print_r($tokens);
 
-	if(!($tokens[sizeof($tokens) - 1] == "jpg" || $tokens[sizeof($tokens) - ] == "jpeg")) {
+	$ext = $tokens[sizeof($tokens) - 1];
+
+	if(!($ext == "jpg" || $ext == "jpeg")) {
 		return '<div class="error">File extension not supported. Only jpg is supported.</div>';
 	}
 
