@@ -56,9 +56,9 @@ if(isset($_POST[User::SUBMIT])) {
 			}
 
 			//Redirect to manage users if the user was editted/created
-			#header('Location: manage_users.php');
-			#die();
-			
+			header('Location: manage_users.php');
+			die();
+
 		} else {
 			$message .= "Username already exists!";
 		}
@@ -70,7 +70,7 @@ if(isset($_POST[User::SUBMIT])) {
 
 	if($message == "") {
 		$user->updatePassword($_POST[User::PASSWORD]);
-		$message = '<div class="success">Password succesfully changed!</div>';
+		$message = '<div class="notice">Password succesfully changed!</div>';
 	}
 
 }

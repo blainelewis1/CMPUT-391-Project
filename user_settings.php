@@ -26,7 +26,7 @@ if(isset($_POST[Person::SUBMIT])) {
 
 	if($message == ""){
 		$person->saveToDatabase();
-		$message = '<div class="success">Details succesfully changed!</div>';
+		$message = '<div class="notice">Details succesfully changed!</div>';
 	}
 
 } else if(isset($_POST[User::CHANGE_PASSWORD])) {
@@ -34,7 +34,7 @@ if(isset($_POST[Person::SUBMIT])) {
 	$message = validatePassword();
 	if($message == "") {
 		$user->updatePassword($_POST[User::PASSWORD]);
-		$message = '<div class="success">Password succesfully changed!</div>';
+		$message = '<div class="notice">Password succesfully changed!</div>';
 	} 
 }
 
