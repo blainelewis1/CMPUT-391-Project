@@ -44,13 +44,13 @@ include('form_error.php');
 	?>
 
 
-		<?php if($editing_user->isNew()){
-			passwordInput('Password', 
-					 User::PASSWORD, 
-					 $user->password, 
-					 24);
-			}
-		?>
+	<?php if($editing_user->isNew()){
+		passwordInput('Password', 
+				 User::PASSWORD, 
+				 $empty, 
+				 24);
+		}
+	?>
 	
 	<input type="submit" name="<?php echo  User::SUBMIT; ?>" value="Submit" />
 </form>

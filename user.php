@@ -47,6 +47,7 @@ if(isset($_POST[User::SUBMIT])) {
 
 	if($message == ""){
 		if($editing_user->saveToDatabase()) {
+			
 			if(isset($_GET[User::USER_NAME])){
 				addNotice("User successfully edited!");
 
@@ -55,8 +56,9 @@ if(isset($_POST[User::SUBMIT])) {
 			}
 
 			//Redirect to manage users if the user was editted/created
-			header('Location: manage_users.php');
-			die();
+			#header('Location: manage_users.php');
+			#die();
+			
 		} else {
 			$message .= "Username already exists!";
 		}
@@ -70,7 +72,7 @@ if(isset($_POST[User::SUBMIT])) {
 		$user->updatePassword($_POST[User::PASSWORD]);
 		$message = '<div class="success">Password succesfully changed!</div>';
 	}
-	
+
 }
 
 $content = "views/forms/user.php";
