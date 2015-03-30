@@ -13,8 +13,8 @@
 			<div class="username">
 				<a href="user_settings.php">
 					<?php echo  $user->getUserName() ?>
+					<image width="15" src="/~blaine1/images/gear.png" />
 				</a>
-				<image width="22" src="/~blaine1/images/gear.png" />
 			</div>
 			<a href="logout.php">(logout)</a>
 		<?php endif; ?>
