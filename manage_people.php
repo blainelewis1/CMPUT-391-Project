@@ -9,6 +9,9 @@ $user->isAdmin();
 
 $people = Person::getAllPeople();
 
+$message = getNotices();
+$title = "Manage People";
+
 $content = "views/lists/people.php";
 include("views/templates/template.php");
 

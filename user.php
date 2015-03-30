@@ -8,6 +8,7 @@
 	If no GET is passed then it is assumed it is a new user
 */
 
+include_once('misc/utils.php');
 include_once('models/user.php');
 include_once('models/person.php');
 include_once('controllers/user.php');
@@ -23,13 +24,19 @@ $user = User::getLoggedInUser();
 $user->isAdmin();
 
 $editting_user;
-
+$title;
 //Attempt to prefill the field if we are editting a user
 
 if(isset($_GET[User::USER_NAME])){
+
+	$title = "Edit User";
 	$editting_user = User::fromUserName($_GET[User::USER_NAME]);
 	$editting_user->old_user_name = $_GET[User::USER_NAME];
+
 } else {
+
+	$title = "Create User";
+
 	$editting_user = new User();
 }
 
@@ -40,6 +47,8 @@ if(isset($_POST[User::SUBMIT])) {
 
 	if($message == ""){
 		if($editting_user->saveToDatabase()) {
+			addNotice("User successfully created!");
+
 			//Redirect to manage users if the user was editted/created
 			header('Location: manage_users.php');
 			die();
@@ -56,7 +65,6 @@ if(isset($_POST[User::SUBMIT])) {
 		$message = '<div class="success">Password succesfully changed!</div>';
 	}
 }
-
 
 $content = "views/forms/user.php";
 include("views/templates/template.php");

@@ -1,12 +1,13 @@
 <?php include("views/templates/user_management_sub_nav.php"); ?>
 
+<?php include("views/forms/form_error.php"); ?>
+
 <h3>
 	<a href="user.php">
 		<span class="button">
 			Create User
 		</span>
 	</a>
-
 </h3>
 
 <?php if(sizeof($users) == 0): ?>
