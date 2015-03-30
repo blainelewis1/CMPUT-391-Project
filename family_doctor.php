@@ -42,11 +42,9 @@ if(isset($_POST[FamilyDoctor::SUBMIT])) {
 				addNotice("Family doctor successfully edited!");
 				
 			} else {
-				
+
 				addNotice("Family doctor successfully created!");
 			}
-
-			addNotice("Family doctor successfully created");
 
 			header('Location: manage_family_doctors.php');
 			die();
