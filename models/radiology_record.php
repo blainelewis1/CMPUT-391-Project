@@ -211,6 +211,7 @@ class RadiologyRecord {
 
 		$results;
 		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
+		print_r($results);
 		return $results;
 	}
 

@@ -15,6 +15,7 @@ $end_date = "";
 $columnNames = array();
 $rows = array();
 
+$title = "Data Analysis";
 $content = 'views/data_analysis.php';
 
 include("views/templates/template.php");

@@ -58,7 +58,6 @@ if($search_term != ""){
 	//loop through viewable, and add up frequency of search term using:
 	//Rank(record_id) = 6*frequency(patient_name) + 3*frequency(diagnosis) + frequency(description)
 }
-
 $records = $viewable;
 
 $title = "Search";
