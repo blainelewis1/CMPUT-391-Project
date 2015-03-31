@@ -15,7 +15,7 @@
 	<input type="submit" name="<?php echo RadiologyRecord::SEARCH;?>" value="Search" />
 </form>
 
-<?php if(sizeof($records) == 0): ?>
+<?php if(sizeof($rows) == 0): ?>
 	<div class="error">Sorry no totals were found!</div>
 <?php else: ?>
 
