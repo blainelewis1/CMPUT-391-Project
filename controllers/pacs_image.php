@@ -2,7 +2,7 @@
 
 function applyAndValidatePacsImage($image) {
 
-	$tokens = split(".", $_FILES[PACSImage::IMAGE]["name"]);
+	$tokens = explode(".", $_FILES[PACSImage::IMAGE]["name"]);
 
 	$ext = $tokens[sizeof($tokens) - 1];
 
