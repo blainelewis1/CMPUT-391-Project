@@ -19,8 +19,6 @@ $end_date = isset($_GET[RadiologyRecord::TEST_END_DATE]) ?
 $columnNames = isset($_GET[RadiologyRecord::ANALYZE_LEVEL]) ? 
 				   $_GET[RadiologyRecord::ANALYZE_LEVEL] : array();
 
-print_r($columnNames);
-
 $columns = array();
 
 foreach ($columnNames as $columnName) {

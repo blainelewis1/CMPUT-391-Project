@@ -2,13 +2,13 @@
 
 <form action="" method="GET">
 
-	<?php echo 
+	<?php //echo 
 		dateInput('Start Date',
 			RadiologyRecord::TEST_START_DATE,
 			$start_date);
 	?>
 
-	<?php echo 
+	<?php //echo 
 		dateInput('End Date',
 			RadiologyRecord::TEST_END_DATE,
 			$end_date);
