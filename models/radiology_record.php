@@ -148,7 +148,7 @@ class RadiologyRecord {
 		
 		$db = getPDOInstance();
 		
-		$query_string = str_replace('columns', implode(",", $columns), RadiologyRecord::SELECT_CUBE);
+		$query_string = str_replace('columns', implode(",", $columns), RadiologyRecord::SELECT_ROLLUP);
 
 		$query = oci_parse($db, $query_string);
 
