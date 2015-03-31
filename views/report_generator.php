@@ -28,7 +28,7 @@
 <div class="light-separator"></div>
 
 <?php if(sizeof($records) == 0): ?>
-	<div class="failure">Sorry no records were found!</div>
+	<div class="error">Sorry no records were found!</div>
 <?php else: ?>
 
 <table class="records">

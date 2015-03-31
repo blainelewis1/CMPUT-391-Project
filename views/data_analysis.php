@@ -16,7 +16,7 @@
 </form>
 
 <?php if(sizeof($records) == 0): ?>
-	<div class="failure">Sorry no totals were found!</div>
+	<div class="error">Sorry no totals were found!</div>
 <?php else: ?>
 
 <table>
