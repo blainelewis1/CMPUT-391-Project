@@ -13,8 +13,6 @@ include_once('models/radiology_record.php');
 include_once('models/pacs_image.php');
 include_once('controllers/pacs_image.php');
 
-//TODO: check error conditions, eg. invalid id
-
 $user = User::getLoggedInUser();
 
 //Ensure the user is a radiologist
@@ -36,8 +34,6 @@ if(!isset($_GET[RadiologyRecord::RECORD_ID])){
 }
 
 if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER])) {
-	//TODO: validation
-
 
 	$message = applyAndValidatePacsImage($pacs_image);
 
@@ -45,20 +41,17 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 
 
 		$pacs_image->insert();
-		//TODO: what if the insert fails
 
 		if(!empty($_POST[PACSImage::SUBMIT_ANOTHER])){
 
 			addNotice("Image uploaded!");
 
-			//TODO: redirect somewhere?
 			header('Location: upload.php?'.RadiologyRecord::RECORD_ID.'='.$pacs_image->record_id);
 			die();
 		} else {
 
 			addNotice("Record completed!");
 
-			//TODO: this won't work in the future
 			header('Location: record.php');
 			die();
 		}

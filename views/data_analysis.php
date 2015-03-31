@@ -17,13 +17,13 @@
 	<?php echo checkboxes('Analyze', 
 			RadiologyRecord::ANALYZE_LEVEL,
 			RadiologyRecord::$ANALYZE_OPTIONS,
-			$analyze);
+			$columnNames);
 	?>
 
 	<?php echo selectItems('Drill To',
 				RadiologyRecord::DRILL_LEVEL,
 				RadiologyRecord::$DRILL_LEVELS,
-				$drill);
+				$drill_level);
 	?>
 	<input type="submit" name="<?php echo RadiologyRecord::SEARCH;?>" value="Search" />
 </form>

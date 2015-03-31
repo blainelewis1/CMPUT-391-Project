@@ -23,6 +23,14 @@ class RadiologyRecord {
 	public static $ANALYZE_OPTIONS = array("Test Type", "Patient", "Test Date");
 	public static $DRILL_LEVELS = array("Week", "Month", "Year");
 
+	public static $DRILL_VALUES = array("Week", "Month", "Year");
+
+
+	public static $ANALYZE_COLUMNS = array("Test Type" => "test_type", 
+		"Patient" => "patient_id", 
+		"Test Date" => "EXTRACT (drill_level FROM test_date)");
+
+
 	const ANALYZE_LEVEL = "analyze_level";
 	const DRILL_LEVEL = "drill_level";
 
@@ -72,7 +80,10 @@ class RadiologyRecord {
 
 	const SELECT_CUBE = "SELECT patient_id, test_type, COUNT(*) FROM radiology_record JOIN pacs_images ON radiology_record.record_id = pacs_images.record_id GROUP BY CUBE (patient_id, test_type)";
 
-	const SELECT_ROLLUP = "SELECT patient_id, test_type, extract(month from test_date) month, COUNT(*) FROM radiology_record JOIN pacs_images ON radiology_record.record_id = pacs_images.record_id GROUP BY ROLLUP (patient_id, test_type, test_date)";
+	const SELECT_ROLLUP = "SELECT columns, COUNT(*) 
+							FROM radiology_record JOIN 
+							pacs_images ON radiology_record.record_id = pacs_images.record_id 
+							GROUP BY ROLLUP (columns)";
 						 #WHERE test_date <= :end_date AND test_date >= start_date
 
 	/*const SELECT_CUBE = "SELECT patient_id, test_type, COUNT(*) 
@@ -131,6 +142,25 @@ class RadiologyRecord {
 				throw $e;
 			}
 		}
+	}
+
+	public static function analyze($columns, $start_date, $end_date, $drill_level = "") {
+		
+		$db = getPDOInstance();
+		
+		$query_string = str_replace('columns', implode(",", $columns), RadiologyRecord::SELECT_CUBE);
+
+		$query = oci_parse($db, $query_string);
+
+		if(in_array("test_date", $columns)){
+			$query_string = str_replace('drill_level', $drill_level, $query_string);
+		}
+
+		oci_execute($query);
+
+		$results;
+		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
+		return $results;
 	}
 
 	public static function selectByDiagnosisAndDate($diagnosis, $start_date, $end_date) {
