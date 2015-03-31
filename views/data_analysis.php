@@ -16,14 +16,14 @@
 
 	<?php//TODO: make checkboxes echo 
 		checkboxes('Analyze', 
-			RadiologyRecord::ANALYZE_COLUMN,
-			RadiologyRecord::ANALYZE_COLUMNS,
+			RadiologyRecord::ANALYZE_LEVEL,
+			RadiologyRecord::$ANALYZE_OPTIONS,
 			$analyze);
 	?>
 
 	<?php echo selectItems('Drill To',
 				RadiologyRecord::DRILL_LEVEL,
-				RadiologyRecord::DRILL_LEVELS,
+				RadiologyRecord::$DRILL_LEVELS,
 				$drill);
 	?>
 	<input type="submit" name="<?php echo RadiologyRecord::SEARCH;?>" value="Search" />
