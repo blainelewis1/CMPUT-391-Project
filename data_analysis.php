@@ -7,7 +7,7 @@ $user = User::getLoggedInUser();
 
 $user->isAdmin();
 
-$columnNames = isset($_GET[RadiologyRecord::DRILL_LEVEL]) ? 
+$drill_level = isset($_GET[RadiologyRecord::DRILL_LEVEL]) ? 
 				   $_GET[RadiologyRecord::DRILL_LEVEL] : "";
 
 $start_date = isset($_GET[RadiologyRecord::TEST_START_DATE]) ? 
