@@ -20,11 +20,11 @@ class RadiologyRecord {
 	const SUBMIT = "submit";
 	const SEARCH = "search";
 
-	const ANALYZE_OPTIONS = array("Test Type", "Patient", "Test Date");
-	const DRILL_LEVELS = array("Week", "Month", "Year");
+	public static ANALYZE_OPTIONS = array("Test Type", "Patient", "Test Date");
+	public static  DRILL_LEVELS = array("Week", "Month", "Year");
 
 	const ANALYZE_LEVEL = "analyze_level";
-	const DRILL_LEVEL = "analyze_level";
+	const DRILL_LEVEL = "drill_level";
 
 
 	const SELECT_BY_ID = "SELECT DISTINCT radiology_record.record_id,
