@@ -46,6 +46,10 @@ class RadiologyRecord {
 						FROM radiology_record r, persons p
 						WHERE p.person_id = r.patient_id ";
 
+	const SELECT_SEARCH = "SELECT *
+						FROM radiology_record r, pacs_images p
+						WHERE p.record_id = r.record_id ";
+						
 	const INSERT = "INSERT INTO radiology_record (patient_id,
 					doctor_id, radiologist_id, test_type, 
 					prescribing_date, test_date, diagnosis,
@@ -143,6 +147,51 @@ class RadiologyRecord {
 
 		if($diagnosis != ""){
 			oci_bind_by_name($query, ":diagnosis", $diagnosis);
+		}
+		
+		if($start_date != ""){
+			oci_bind_by_name($query, ":start_date", $start_date);
+		}
+		
+		if($end_date != ""){
+			oci_bind_by_name($query, ":end_date", $end_date);
+		}
+		
+		oci_execute($query);
+
+		$results;
+		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
+		return $results;
+	}
+	
+	
+	public static function selectBySearch($search_term, $start_date, $end_date){
+		$db = getPDOInstance();
+
+		$query_string = RadiologyRecord::SELECT_ALL;
+		$delimiter = " AND ";
+
+		if($search_term != "") {
+			$query_string .= $delimiter;
+			//TODO: SEARCH STUFF
+
+		} 
+		if($start_date != "") {
+
+			$query_string .= $delimiter;
+			$query_string .= "r.test_date >= TO_DATE(:start_date, 'YYYY-MM-DD')";
+
+		} 
+		if($end_date != "") {
+			$query_string .= $delimiter;
+			$query_string .= "r.test_date <= TO_DATE(:end_date, 'YYYY-MM-DD')";
+		}
+
+
+		$query = oci_parse($db, $query_string);
+
+		if($search_term != ""){
+			oci_bind_by_name($query, ":search_term", $search_term);
 		}
 		
 		if($start_date != ""){

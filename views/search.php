@@ -1,4 +1,4 @@
-<div id="personal_information">
+
 
 <?php include('misc/form_utils.php'); ?>
 <form action="" method="GET">
@@ -22,6 +22,7 @@
 
 	<input type="submit" name="<?php echo  RadiologyRecord::SEARCH; ?>" value="Search" />
 </form>		
+
 </div>
 <div class="light-separator"></div>
 

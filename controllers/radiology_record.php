@@ -53,4 +53,17 @@ function validateDiagnosisFormFields(){
 	return $message;
 }
 
+function validateSearchFormFields(){
+
+	/*if dates are empty, should still show search results. Therefore
+	only check search term*/
+
+
+	$message = "";
+
+	$message .= notEmpty($_POST, RadiologyRecord::SEARCH_TERM, 'search term');
+	
+	return $message;
+}
+
 ?>
