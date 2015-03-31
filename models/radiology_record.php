@@ -21,7 +21,7 @@ class RadiologyRecord {
 	const SEARCH = "search";
 
 	public static $ANALYZE_OPTIONS = array("Test Type", "Patient", "Test Date");
-	public static  $DRILL_LEVELS = array("Week", "Month", "Year");
+	public static $DRILL_LEVELS = array("Week", "Month", "Year");
 
 	const ANALYZE_LEVEL = "analyze_level";
 	const DRILL_LEVEL = "drill_level";

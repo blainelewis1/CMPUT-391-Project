@@ -14,8 +14,7 @@
 			$end_date);
 	?>
 
-	<?php//TODO: make checkboxes echo 
-		checkboxes('Analyze', 
+	<?php echo checkboxes('Analyze', 
 			RadiologyRecord::ANALYZE_LEVEL,
 			RadiologyRecord::$ANALYZE_OPTIONS,
 			$analyze);

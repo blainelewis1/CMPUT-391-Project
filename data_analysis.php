@@ -12,6 +12,9 @@ $drill = "";
 $start_date = "";
 $end_date = "";
 
+$columnNames = array();
+$rows = array();
+
 $content = 'views/data_analysis.php';
 
 include("views/templates/template.php");
