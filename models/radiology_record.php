@@ -21,14 +21,16 @@ class RadiologyRecord {
 	const SEARCH = "search";
 
 	public static $ANALYZE_OPTIONS = array("Test Type", "Patient", "Test Date");
+
+
 	public static $DRILL_LEVELS = array("Week", "Month", "Year");
 
-	public static $DRILL_VALUES = array("Week", "Month", "Year");
+	public static $DRILL_VALUES = array("Week" => "IW", "Month" => "MON", "Year" => "YEAR");
 
 
 	public static $ANALYZE_COLUMNS = array("Test Type" => "test_type", 
 		"Patient" => "patient_id", 
-		"Test Date" => "EXTRACT (drill_level FROM test_date)");
+		"Test Date" => "to_char(to_date(test_date), 'drill_level')");
 
 
 	const ANALYZE_LEVEL = "analyze_level";
