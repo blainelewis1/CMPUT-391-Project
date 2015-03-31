@@ -7,7 +7,7 @@
 	Upon success the action depends on which button was clicked, either the user is
 	redirected to create another record, or they can upload another image
 */
-
+include_once('misc/utils.php');
 include_once('models/user.php');
 include_once('models/radiology_record.php');
 include_once('models/pacs_image.php');
@@ -22,6 +22,9 @@ $user->isRadiologist();
 
 $record;
 
+$message = "";
+
+
 if(!isset($_GET[RadiologyRecord::RECORD_ID])){
 	//TODO: 404?
 	print('Not editting a record');
@@ -34,7 +37,6 @@ if(!isset($_GET[RadiologyRecord::RECORD_ID])){
 
 if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER])) {
 	//TODO: validation
-	$message = "";
 
 
 	$message = applyAndValidatePacsImage($pacs_image);
@@ -62,6 +64,8 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 		}
 	}
 }
+
+$message .= getNotices();
 
 $title = "Upload Image";
 $content = "views/forms/upload.php";
