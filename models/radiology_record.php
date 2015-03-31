@@ -25,7 +25,7 @@ class RadiologyRecord {
 
 	public static $DRILL_LEVELS = array("Week", "Month", "Year");
 
-	public static $DRILL_VALUES = array("Week" => "IW", "Month" => "MON", "Year" => "YEAR");
+	public static $DRILL_VALUES = array("Week" => "IW", "Month" => "MM", "Year" => "YYYY");
 
 
 	public static $ANALYZE_COLUMNS = array("Test Type" => "test_type", 
