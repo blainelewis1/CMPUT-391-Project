@@ -25,7 +25,7 @@ class RadiologyRecord {
 
 	public static $DRILL_LEVELS = array("Week", "Month", "Year");
 
-	public static $DRILL_VALUES = array("Week" => "IW", "Month" => "MONTH", "Year" => "YYYY");
+	public static $DRILL_VALUES = array("Week" => "IW", "Month" => "Month", "Year" => "YYYY");
 
 
 	public static $ANALYZE_COLUMNS = array("Test Type" => "test_type", 
@@ -84,7 +84,7 @@ class RadiologyRecord {
 							FROM radiology_record JOIN 
 							pacs_images ON radiology_record.record_id = pacs_images.record_id 
 							GROUP BY ROLLUP (columns)
-							ORDER BY COUNT(*)";
+							ORDER BY COUNT(*) DESC";
 						 #WHERE test_date <= :end_date AND test_date >= start_date
 
 	/*const SELECT_CUBE = "SELECT patient_id, test_type, COUNT(*) 
@@ -154,8 +154,6 @@ class RadiologyRecord {
 
 
 		$query = oci_parse($db, $query_string);
-
-		print_r($query_string);
 
 		oci_execute($query);
 
