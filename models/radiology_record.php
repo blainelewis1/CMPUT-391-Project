@@ -148,12 +148,9 @@ class RadiologyRecord {
 		
 		$db = getPDOInstance();
 		
-		$query_string = str_replace('columns', implode(",", $columns), RadiologyRecord::SELECT_ROLLUP);
+		$query_string = str_replace('columns', implode(", ", $columns), RadiologyRecord::SELECT_ROLLUP);
+		$query_string = str_replace('drill_level', $drill_level, $query_string);
 
-
-		if(in_array("test_date", $columns)){
-			$query_string = str_replace('drill_level', $drill_level, $query_string);
-		}
 
 		$query = oci_parse($db, $query_string);
 
