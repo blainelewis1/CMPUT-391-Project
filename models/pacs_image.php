@@ -104,6 +104,10 @@ class PACSImage {
 
 		oci_commit($db);
 
+		@unlink($thumb);
+		@unlink($regular);
+		@unlink($full);
+
 	}
 
 	private function resize($image, $newwidth, $newheight) {
