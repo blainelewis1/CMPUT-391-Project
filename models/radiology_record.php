@@ -54,8 +54,8 @@ class RadiologyRecord {
 						WHERE p.person_id = r.patient_id ";
 
 	const SELECT_SEARCH = "SELECT *
-						FROM radiology_record r, pacs_images p
-						WHERE p.record_id = r.record_id ";
+							FROM radiology_record r JOIN 
+							 pacs_images p ON r.record_id = p.record_id";
 						
 	const INSERT = "INSERT INTO radiology_record (patient_id,
 					doctor_id, radiologist_id, test_type, 
@@ -175,7 +175,7 @@ class RadiologyRecord {
 	public static function selectBySearch($search_term, $start_date, $end_date){
 		$db = getPDOInstance();
 		
-		$query_string = RadiologyRecord::SELECT_ALL;
+		$query_string = RadiologyRecord::SELECT_SEARCH;
 		$delimiter = " AND ";
 
 		//if($search_term != "") {
