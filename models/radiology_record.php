@@ -25,7 +25,7 @@ class RadiologyRecord {
 
 	public static $DRILL_LEVELS = array("Week", "Month", "Year");
 
-	public static $DRILL_VALUES = array("Week" => "IW", "Month" => "MM", "Year" => "YYYY");
+	public static $DRILL_VALUES = array("Week" => "IW", "Month" => "MONTH", "Year" => "YYYY");
 
 
 	public static $ANALYZE_COLUMNS = array("Test Type" => "test_type", 
@@ -80,12 +80,11 @@ class RadiologyRecord {
 
 	const LAST_INSERT_ID = "SELECT record_seq.currval FROM dual";
 
-	const SELECT_CUBE = "SELECT patient_id, test_type, COUNT(*) FROM radiology_record JOIN pacs_images ON radiology_record.record_id = pacs_images.record_id GROUP BY CUBE (patient_id, test_type)";
-
 	const SELECT_ROLLUP = "SELECT columns, COUNT(*) 
 							FROM radiology_record JOIN 
 							pacs_images ON radiology_record.record_id = pacs_images.record_id 
-							GROUP BY ROLLUP (columns)";
+							GROUP BY ROLLUP (columns)
+							ORDER BY COUNT(*)";
 						 #WHERE test_date <= :end_date AND test_date >= start_date
 
 	/*const SELECT_CUBE = "SELECT patient_id, test_type, COUNT(*) 

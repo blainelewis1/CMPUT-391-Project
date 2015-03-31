@@ -29,9 +29,9 @@ foreach ($columnNames as $columnName) {
 
 $columnNames[] = "Image Count";
 
-$drill_level = RadiologyRecord::$DRILL_VALUES[$drill_level];
+$real_drill_level = RadiologyRecord::$DRILL_VALUES[$drill_level];
 
-$rows = RadiologyRecord::analyze($columns, $start_date, $end_date, $drill_level);
+$rows = RadiologyRecord::analyze($columns, $start_date, $end_date, $real_drill_level);
 
 $title = "Data Analysis";
 $content = 'views/data_analysis.php';
