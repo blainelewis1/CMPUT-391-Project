@@ -37,7 +37,7 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 	$message = "";
 
 
-	$message = validatePacsImage($pacs_image);
+	$message = applyAndValidatePacsImage($pacs_image);
 
 	if($message == ""){
 
