@@ -56,6 +56,9 @@ class RadiologyRecord {
 	const SELECT_SEARCH = "SELECT *
 							FROM radiology_record r JOIN 
 							 pacs_images p ON r.record_id = p.record_id";
+
+#select record_id, LISTAGG(image_id, ',') WITHIN GROUP (ORDER BY image_id) "images"  FROM pacs_images GROUP BY record_id
+
 						
 	const INSERT = "INSERT INTO radiology_record (patient_id,
 					doctor_id, radiologist_id, test_type, 
@@ -77,6 +80,9 @@ class RadiologyRecord {
 						 GROUP BY CUBE (patient_id, test_type)";*/
 
  //display the number of images for each patient ,  test type, and/or period of time
+
+
+
 
 // patient_id, test_type
 // patient_id, test_date
@@ -211,7 +217,6 @@ class RadiologyRecord {
 
 		$results;
 		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
-		print_r($results);
 		return $results;
 	}
 

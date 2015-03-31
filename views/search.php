@@ -71,7 +71,7 @@
 		Thumbnail List
 	</th>
 
-	<?php print_r($records); foreach($records as $record ): $record = (object) $record?>
+	<?php foreach($records as $record ): $record = (object) $record?>
 		
 		<tr>
 			<td>
