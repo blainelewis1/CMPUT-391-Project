@@ -47,7 +47,7 @@ class PACSImage {
 	public $image;
 
 	public static function getURL($image_id, $image_size) {
-		return 'pacs_image.php?image_id='.$image_id'&image_size='.$image_size;
+		return 'pacs_image.php?image_id='.$image_id.'&image_size='.$image_size;
 	}
 
 	public static function getImage($image_id, $image_size){
