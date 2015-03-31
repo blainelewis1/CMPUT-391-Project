@@ -103,6 +103,7 @@ function checkboxes($label, $name, $items, $default) { ?>
 		<label><?php echo  $label.':' ?></label>
 	</div>
 	<?php foreach($items  as $item): ?>
+		<label><?php echo $item; ?></label>
 		<input type="checkbox" name="<?php echo $name; ?>" value="<?php echo $item; ?>" <?php echo in_array($item, $default) ? "checked" : "";?> />
 	<?php endforeach; ?>
 </div>
