@@ -95,5 +95,16 @@ function selectItems($label, $name, $items, $default) { ?>
 	<?php endforeach; ?>
 </select>
 </div>
+<?php }
+
+function checkboxes($label, $name, $items, $default) { ?>
+<div class="row">
+	<div class="label">
+		<label><?php echo  $label.':' ?></label>
+	</div>
+	<?php foreach($items  as $item): ?>
+		<input type="checkbox" name="<?php echo $name; ?>" value="<?php echo $item; ?>" <?php echo in_array($item, $default) ? "checked" : "";?> />
+	<?php endforeach; ?>
+</div>
 <?php } ?>
 

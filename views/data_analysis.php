@@ -21,7 +21,7 @@
 			$analyze);
 	?>
 
-	<?php echo selectItem('Aggregate By',
+	<?php echo selectItem('Drill To',
 				RadiologyRecord::DRILL_LEVEL,
 				RadiologyRecord::DRILL_LEVELS,
 				$drill);
