@@ -1,5 +1,6 @@
 <?php 
 
+
 class RadiologyRecord {
 	
 	const RECORD_ID = "record_id";
@@ -74,7 +75,7 @@ class RadiologyRecord {
 // patient_id, test_type
 // patient_id, test_date
 // test_type, test_date
-
+	
 	public $record_id;
 
 	public $patient_id;
@@ -167,15 +168,13 @@ class RadiologyRecord {
 	
 	public static function selectBySearch($search_term, $start_date, $end_date){
 		$db = getPDOInstance();
-
+		
 		$query_string = RadiologyRecord::SELECT_ALL;
 		$delimiter = " AND ";
 
-		if($search_term != "") {
-			$query_string .= $delimiter;
-			//TODO: SEARCH STUFF
-
-		} 
+		//if($search_term != "") {
+			//$query_string .= $delimiter;
+		//} 
 		if($start_date != "") {
 
 			$query_string .= $delimiter;

@@ -8,9 +8,8 @@ include_once('controllers/radiology_record.php');
 
 $user = User::getLoggedInUser();
 
-//$user->isAdmin();
-
 $records = array();
+$viewable = array();
 
 $search_term = isset($_GET[RadiologyRecord::SEARCH_TERM]) ? 
 				   $_GET[RadiologyRecord::SEARCH_TERM] : "";
@@ -24,16 +23,44 @@ $end_date = isset($_GET[RadiologyRecord::TEST_END_DATE]) ?
 $message = validateSearchFormFields($records);
 
 $records = RadiologyRecord::selectBySearch($search_term, $start_date, $end_date);
+			
+//get an array of records the user is authorized to view
+if ($user->isAdmin(false)){
+	$viewable = $records;
+} else if ($user->isRadiologist(false)){
+	foreach($records as $record ){
+		if ($record->RADIOLOGIST_ID == $user->person_id){
+			$viewable .= $record;
+		}
+	}
+} else if ($user->isPatient(false)){
+	foreach($records as $record ){
+		if ($record->PATIENT_ID == $user->person_id){
+			$viewable .= $record;
+		}
+	}
+} else if ($user->isDoctor(false)) {
+	foreach($records as $record ){
+		if ($record->DOCTOR_ID == $user->person_id){
+			$viewable .= $record;
+		}
+	}
+} else {
+	//ERROR
+}
 
-//$user->isAdmin() and $user->isRadiologist 
-/*
-display certain records depending on user type
 
-a patient can only view his/her own records; 
-a doctor can only view records of their patients; 
-a radiologist can only review records conducted by oneself;
-an administrator can view any records;
-*/
+if($search_term != ""){
+	$search_array = explode(' ', $search_term);
+	$result_array = array();
+			
+	//TODO: SEARCH STUFF
+	//loop through viewable, and add up frequency of search term using:
+	//Rank(record_id) = 6*frequency(patient_name) + 3*frequency(diagnosis) + frequency(description)
+}
+
+$records = $viewable;
+
 $title = "Search";
 $content = "views/search.php";
 

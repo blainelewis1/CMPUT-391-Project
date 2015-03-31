@@ -239,6 +239,14 @@ class User {
 		return $this->isClass("r", $redirect);
 	}
 
+	public function isDoctor($redirect=true) {
+		return $this->isClass("d", $redirect);
+	}
+	
+	public function isPatient($redirect=true) {
+		return $this->isClass("p", $redirect);
+	}
+
 	public function getUserName() {
 		return $this->user_name;
 	}
