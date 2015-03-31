@@ -27,6 +27,8 @@ foreach ($columnNames as $columnName) {
 	$columns[] = RadiologyRecord::$ANALYZE_COLUMNS[$columnName];
 }
 
+$columnNames[] = "Image Count";
+
 $rows = RadiologyRecord::analyze($columns, $start_date, $end_date, strtolower($drill_level));
 
 $title = "Data Analysis";
