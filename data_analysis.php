@@ -10,12 +10,6 @@ $user->isAdmin();
 $drill_level = isset($_GET[RadiologyRecord::DRILL_LEVEL]) ? 
 				   $_GET[RadiologyRecord::DRILL_LEVEL] : "";
 
-$start_date = isset($_GET[RadiologyRecord::TEST_START_DATE]) ? 
-				   $_GET[RadiologyRecord::TEST_START_DATE] : "";
-
-$end_date = isset($_GET[RadiologyRecord::TEST_END_DATE]) ? 
-				   $_GET[RadiologyRecord::TEST_END_DATE] : "";
-
 $columnNames = isset($_GET[RadiologyRecord::ANALYZE_LEVEL]) ? 
 				   $_GET[RadiologyRecord::ANALYZE_LEVEL] : array();
 

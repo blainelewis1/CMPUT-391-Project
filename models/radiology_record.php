@@ -145,7 +145,7 @@ class RadiologyRecord {
 		}
 	}
 
-	public static function analyze($columns, $start_date, $end_date, $drill_level) {
+	public static function analyze($columns, $drill_level) {
 		
 		$db = getPDOInstance();
 		
