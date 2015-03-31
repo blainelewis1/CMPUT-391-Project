@@ -50,7 +50,7 @@ class PACSImage {
 		return 'pacs_image.php?image_id='.$image_id.'&image_size='.$image_size;
 	}
 
-	public static function getImage($image_id, $image_size){
+	public static function getImageTag($image_id, $image_size){
 		return '<img src="'.PACSImage::getURL($image_id, $image_size).'" />';
 	}
 
