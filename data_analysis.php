@@ -21,7 +21,7 @@ $columnNames = isset($_GET[RadiologyRecord::ANALYZE_LEVEL]) ?
 
 print_r($columnNames);
 
-$columns = [];
+$columns = array();
 
 foreach ($columnNames as $columnName) {
 	$columns[] = RadiologyRecord::$ANALYZE_COLUMNS[$columnName];
