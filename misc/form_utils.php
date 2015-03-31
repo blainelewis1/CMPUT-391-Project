@@ -53,7 +53,7 @@ function dateInput($label, $name, &$default){ ?>
 
 <div class="row">
 	<div class="label">
-		<label><?php echo  $label.':' ?></label>
+		<label><?php echo  $label.' (YYYY-MM-DD):' ?></label>
 	</div>
 <input type="date" name="<?php echo  $name; ?>" value="<?php echo  $default ?>" />
 </div>
@@ -77,4 +77,23 @@ function passwordInput($label, $name, &$default, $maxlength=24){ ?>
 	</div>
 <input type="password" name="<?php echo  $name; ?>" value="<?php echo  $default ?>" />
 </div>
+<?php } 
+
+
+function selectItems($label, $name, $items, $default) { ?>
+<div class="row">
+	<div class="label">
+		<label><?php echo  $label.':' ?></label>
+	</div>
+<select name="<?php echo  $name ?>">
+	<?php foreach($items  as $item): ?>
+		<option 
+		<?php echo  $item == $default ? "selected" : "";?>
+		value="<?php echo  $item; ?>">
+			<?php echo  $item; ?>
+		</option>
+	<?php endforeach; ?>
+</select>
+</div>
 <?php } ?>
+

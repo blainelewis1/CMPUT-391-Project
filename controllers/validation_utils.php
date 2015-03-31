@@ -23,8 +23,7 @@ function validDate($val, $name) {
 		return '<div class="error">'.$name.' must be a valid date.</div>';
 	}
 	return "";
-	//TODO: test dates
-	#
+	
 }
 
 function isNumber($val, $name) {

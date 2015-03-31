@@ -13,16 +13,34 @@
 			RadiologyRecord::TEST_END_DATE,
 			$end_date);
 	?>
-	
 
-	<input type="submit" name="<?php echo  RadiologyRecord::SEARCH; ?>" value="Search" />
+	<?php//TODO: make checkboxes echo 
+		checkboxes('Analyze', 
+			RadiologyRecord::ANALYZE_COLUMN,
+			RadiologyRecord::ANALYZE_COLUMNS,
+			$analyze);
+	?>
+
+	<?php echo selectItem('Aggregate By',
+				RadiologyRecord::DRILL_LEVEL,
+				RadiologyRecord::DRILL_LEVELS,
+				$drill);
+	?>
+	<input type="submit" name="<?php echo RadiologyRecord::SEARCH;?>" value="Search" />
 </form>
 
-<div class="button">Drill down</div>
-<div class="button">Drill Up</div>
-
-<div class="button">Rotate</div>
-
 <table>
-	
+
+	<?php foreach($columnNames as $columnName): ?>
+		<th><?php echo $columnName;?></th>
+	<?php endforeach; ?>
+
+	<?php foreach($rows as $row): ?>
+		<tr>
+			<?php foreach($row as $column): ?>
+				<td><?php echo $column; ?></td>
+			<?php endforeach; ?>
+		</tr>
+	<?php endforeach; ?>
+
 </table>
