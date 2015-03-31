@@ -23,7 +23,12 @@ $columnNames[] = "Image Count";
 
 $real_drill_level = RadiologyRecord::$DRILL_VALUES[$drill_level];
 
-$rows = RadiologyRecord::analyze($columns, $start_date, $end_date, $real_drill_level);
+$rows = array();
+
+if(sizeOf($columnNames) != 0) {
+	$rows = RadiologyRecord::analyze($columns, $start_date, $end_date, $real_drill_level);
+} 
+
 
 $title = "Data Analysis";
 $content = 'views/data_analysis.php';

@@ -15,6 +15,10 @@
 	<input type="submit" name="<?php echo RadiologyRecord::SEARCH;?>" value="Search" />
 </form>
 
+<?php if(sizeof($records) == 0): ?>
+	<div class="failure">Sorry no totals were found!</div>
+<?php else: ?>
+
 <table>
 
 	<?php foreach($columnNames as $columnName): ?>
@@ -30,3 +34,5 @@
 	<?php endforeach; ?>
 
 </table>
+
+<?php endif; ?>
