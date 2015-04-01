@@ -304,6 +304,10 @@ class User {
 		return $this->isClass("p", $redirect);
 	}
 
+	public function getClass() {
+		return $this->class;
+	}
+
 }
 
 

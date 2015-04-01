@@ -77,9 +77,45 @@ class RadiologyRecord {
 
 
 	//Searches for records
-	const SELECT_SEARCH = "SELECT *
+/*	const SELECT_SEARCH = "SELECT *
 							FROM radiology_record r JOIN 
 							 pacs_images p ON r.record_id = p.record_id";
+*/
+
+const SELECT_SEARCH =
+"SELECT radiology_record.record_id, 
+	6*(SCORE(3) + SCORE(4)) + 3*SCORE(1) + SCORE(2) myrank, 
+	image_agg.images,
+	radiologist.first_name, radiologist.last_name, radiologist.person_id,
+	doctor.first_name, doctor.last_name, doctor.person_id,
+	patient.first_name, patient.last_name, patient.person_id
+	radiology_record.test_type,
+	radiology_record.test_date,
+	radiology_record.prescribing_date,
+	radiology_record.diagnosis,
+	radiology_record.description
+FROM radiology_record JOIN 
+persons doctor ON radiology_record.doctor_id = doctor.person_id JOIN
+persons radiologist ON radiology_record.doctor_id = radiologist.person_id JOIN
+persons patient ON radiology_record.patient_id = patient.person_id JOIN 
+	(SELECT LISTAGG(pacs_images.image_id, ',') WITHIN GROUP (ORDER BY pacs_images.image_id) images, 
+			pacs_images.record_id  
+		FROM pacs_images 
+		GROUP BY pacs_images.record_id
+	) image_agg ON image_agg.record_id = radiology_record.record_id 
+WHERE CONTAINS(radiology_record.diagnosis, ':diagnosis', 1) > 0 OR 
+	CONTAINS(radiology_record.description, ':description', 2) > 0 OR 
+	CONTAINS(patient.first_name, ':first_name', 3) > 0 OR 
+	CONTAINS(patient.last_name, ':last_name', 4) > 0 
+	SECURITY
+ORDER BY myrank";
+
+	public static $SEARCH_SECURITY = 
+	array("a" => "", 
+		"d" => " :doctor_id IN (SELECT doctor_id FROM family_doctor WHERE family_doctor.patient_id = radiology_record.patient_id) ", 
+		"p" => " radiology_record.patient_id = :patient_id ", 
+		"r" => " radiology_record.radiologist_id = :radiologist_id ");
+
 
 #select record_id, LISTAGG(image_id, ',') WITHIN GROUP (ORDER BY image_id) "images"  FROM pacs_images GROUP BY record_id
 
@@ -224,12 +260,35 @@ class RadiologyRecord {
 	
 	//Please fill me in
 	
-	public static function selectBySearch($search_term, $start_date, $end_date){
+	public static function selectBySearch($user, $search_term, $start_date, $end_date){
 		$db = getPDOInstance();
 		
 		$query_string = RadiologyRecord::SELECT_SEARCH;
-		$delimiter = " AND ";
 
+		$query_string = str_replace("SECURITY", " AND ".RadiologyRecord::$SEARCH_SECURITY[$user->getClass()], $query_string);
+
+		$query = oci_parse($db, $query_string);
+
+		if($user->getClass() == "d"){
+			oci_bind_by_name($query, ":doctor_id", $user->person_id);
+		}
+		if($user->getClass() == "p"){
+			oci_bind_by_name($query, ":patient_id", $user->person_id);
+		}
+		if($user->getClass() == "r"){
+			oci_bind_by_name($query, ":radiologist_id", $user->person_id);
+		}
+
+		oci_bind_by_name($query, ":diagnosis", $search_term);
+		oci_bind_by_name($query, ":description", $search_term);
+
+		oci_execute($query);
+
+		$results;
+		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
+		return $results;
+
+/*
 		//if($search_term != "") {
 			//$query_string .= $delimiter;
 		//} 
@@ -258,7 +317,7 @@ class RadiologyRecord {
 		if($end_date != ""){
 			oci_bind_by_name($query, ":end_date", $end_date);
 		}
-		
+*/		
 		oci_execute($query);
 
 		$results;

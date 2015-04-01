@@ -22,8 +22,9 @@ $end_date = isset($_GET[RadiologyRecord::TEST_END_DATE]) ?
 
 $message = validateSearchFormFields($records);
 
-$records = RadiologyRecord::selectBySearch($search_term, $start_date, $end_date);
-			
+$records = RadiologyRecord::selectBySearch($user, $search_term, $start_date, $end_date);
+
+/*			
 //get an array of records the user is authorized to view
 if ($user->isAdmin(false)){
 	$viewable = $records;
@@ -59,7 +60,7 @@ if($search_term != ""){
 	//Rank(record_id) = 6*frequency(patient_name) + 3*frequency(diagnosis) + frequency(description)
 }
 $records = $viewable;
-
+*/
 $title = "Search";
 $content = "views/search.php";
 
