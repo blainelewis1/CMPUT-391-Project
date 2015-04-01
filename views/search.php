@@ -70,7 +70,7 @@
 	<th>
 		Thumbnail List
 	</th>
-
+	<?php print_r($records); ?>
 	<?php foreach($records as $record ): $record = (object) $record?>
 		
 		<tr>
@@ -79,7 +79,7 @@
 			</td>
 
 			<td>
-				<?php echo  $record->PATIENT_ID; ?>
+				<?php echo  $record->PATIENT_FIRST_NAME . ' ' . $record->PATIENT_LAST_NAME; ?>
 			</td>
 
 			<td>
