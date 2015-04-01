@@ -112,9 +112,9 @@ ORDER BY myrank";
 
 	public static $SEARCH_SECURITY = 
 	array("a" => "", 
-		"d" => " :doctor_id IN (SELECT doctor_id FROM family_doctor WHERE family_doctor.patient_id = radiology_record.patient_id) ", 
-		"p" => " radiology_record.patient_id = :patient_id ", 
-		"r" => " radiology_record.radiologist_id = :radiologist_id ");
+		"d" => " AND :doctor_id IN (SELECT doctor_id FROM family_doctor WHERE family_doctor.patient_id = radiology_record.patient_id) ", 
+		"p" => " AND radiology_record.patient_id = :patient_id ", 
+		"r" => " AND radiology_record.radiologist_id = :radiologist_id ");
 
 
 #select record_id, LISTAGG(image_id, ',') WITHIN GROUP (ORDER BY image_id) "images"  FROM pacs_images GROUP BY record_id
@@ -265,7 +265,7 @@ ORDER BY myrank";
 		
 		$query_string = RadiologyRecord::SELECT_SEARCH;
 
-		$query_string = str_replace("SECURITY", " AND ".RadiologyRecord::$SEARCH_SECURITY[$user->getClass()], $query_string);
+		$query_string = str_replace("SECURITY", RadiologyRecord::$SEARCH_SECURITY[$user->getClass()], $query_string);
 
 		$query = oci_parse($db, $query_string);
 
