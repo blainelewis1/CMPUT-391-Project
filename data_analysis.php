@@ -26,7 +26,7 @@ $real_drill_level = RadiologyRecord::$DRILL_VALUES[$drill_level];
 $rows = array();
 
 if(sizeOf($columnNames) != 1) {
-	$rows = RadiologyRecord::analyze($columns, $start_date, $end_date, $real_drill_level);
+	$rows = RadiologyRecord::analyze($columns, $real_drill_level);
 } 
 
 
