@@ -25,8 +25,6 @@ $start_date = isset($_GET[RadiologyRecord::TEST_START_DATE]) ?
 $end_date = isset($_GET[RadiologyRecord::TEST_END_DATE]) ? 
 			      $_GET[RadiologyRecord::TEST_END_DATE] : "";
 
-$message = validateDiagnosisFormFields($records);
-
 $records = RadiologyRecord::selectByDiagnosisAndDate($diagnosis, $start_date, $end_date);
 
 $title = "Reports";

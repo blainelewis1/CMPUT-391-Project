@@ -2,6 +2,12 @@
 
 include_once("misc/validation_utils.php");
 
+/*
+	Takes an instance of PACSImage and validates all incoming fields for it.
+	Then applies the fields to it
+
+	If fields are invalid it returns a styled message explaining the error
+*/
 
 function applyAndValidatePacsImage($image) {
 

@@ -3,7 +3,17 @@
 include_once("misc/validation_utils.php");
 include('models/family_doctor.php');
 
+
+
 //TODO: validate that the doctor patient are actually in the given list
+
+/*
+	Takes an instance of family doctor, validates the fields for a
+	family doctor and applies them to the given doctor
+
+	If fields are invalid it returns a styled message explaining the error
+*/
+
 function applyAndValidateFamilyDoctorFields($family_doctor) {
 	$message = "";
 

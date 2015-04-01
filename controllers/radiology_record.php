@@ -2,6 +2,13 @@
 
 include_once("misc/validation_utils.php");
 
+/*
+	Takes a radiology record and validates all incoming fields to it and 
+	applies them	
+
+	If fields are invalid it returns a styled message explaining the error
+*/
+
 function applyAndValidateRecordFields($record) {
 	
 	$message = '';
@@ -36,22 +43,9 @@ function applyAndValidateRecordFields($record) {
 	return $message;
 }
 
-function validateDiagnosisFormFields(){
-
-	/*TODO: 
-		Empty diagnosis should display all records between the two dates.
-		Empty start date should display all records up until end_date
-		Empty end date should display all records after start date*/
-
-
-	$message = "";
-
-	$message .= notEmpty($_POST, RadiologyRecord::DIAGNOSIS, 'diagnosis');
-	$message .= notEmpty($_POST, RadiologyRecord::TEST_START_DATE, 'start date');
-	$message .= notEmpty($_POST, RadiologyRecord::TEST_END_DATE, 'end date');
-
-	return $message;
-}
+/*
+	WRITE ME
+*/
 
 function validateSearchFormFields(){
 
