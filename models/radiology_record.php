@@ -280,7 +280,7 @@ ORDER BY myrank";
 		if(trim($user->getClass()) == "r"){
 			print("not triggered....");
 			print($user->person_id);
-			oci_bind_by_name($query, ":radiologist_id", $user->person_id);
+			oci_bind_by_name($query, ":radiologist_id", $user->person_id, -1, OCI_B_INT);
 		}
 
 		oci_bind_by_name($query, ":diagnosis", $search_term);
