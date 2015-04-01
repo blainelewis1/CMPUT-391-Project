@@ -147,3 +147,18 @@ VALUES (1, 'admin', 'admin', '', '', '');
 
 INSERT INTO users (user_name, password, class, person_id, date_registered)
 VALUES ('admin', 'admin', 'a', 1, SYSDATE);
+
+/*
+   added indices for text searching
+*/
+
+DROP INDEX diagnosis_index;
+DROP INDEX description_index;
+DROP INDEX first_index;
+DROP INDEX last_index;
+
+CREATE INDEX diagnosis_index ON radiology_record (diagnosis) indextype is ctxsys.context;
+CREATE INDEX description_index ON radiology_record (description) indextype is ctxsys.context;
+CREATE INDEX first_index ON persons (first_name) indextype is ctxsys.context;
+CREATE INDEX last_index ON persons (last_name) indextype is ctxsys.context;
+

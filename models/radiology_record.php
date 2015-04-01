@@ -286,6 +286,8 @@ ORDER BY myrank";
 
 		oci_execute($query);
 
+		print($query_string);
+
 		$results;
 		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
 		return $results;
