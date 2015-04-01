@@ -1,6 +1,13 @@
-<?php include("views/templates/user_management_sub_nav.php"); ?>
+<?php 
 
-<?php include("views/forms/form_error.php"); ?>
+/*
+	Lists all family doctors given by $family_doctors
+*/
+
+include("views/templates/user_management_sub_nav.php"); 
+include("views/forms/form_error.php");
+
+?>
 
 <h3>
 	<a href="family_doctor.php">

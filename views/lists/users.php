@@ -1,6 +1,13 @@
-<?php include("views/templates/user_management_sub_nav.php"); ?>
+<?php 
 
-<?php include("views/forms/form_error.php"); ?>
+/*
+	Lists users given by $users
+*/
+
+include("views/templates/user_management_sub_nav.php");
+include("views/forms/form_error.php");
+
+?>
 
 <h3>
 	<a href="user.php">
