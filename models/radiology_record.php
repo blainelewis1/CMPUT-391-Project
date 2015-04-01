@@ -167,7 +167,7 @@ ORDER BY myrank";
 
 	//Automatically labels as a new record for insertion
 	public function __construct() {
-		$this->new  = false;	
+		$this->new  = true;	
 	}
 
 	//Saves the record as it is to the database either updating or
