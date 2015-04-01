@@ -22,9 +22,7 @@ $end_date = isset($_GET[RadiologyRecord::TEST_END_DATE]) ?
 
 $message = validateSearchFormFields($records);
 
-if($search_term != "") {
-	$records = RadiologyRecord::selectBySearch($user, $search_term, $start_date, $end_date);
-}
+$records = RadiologyRecord::selectBySearch($user, $search_term, $start_date, $end_date);
 
 
 /*			
