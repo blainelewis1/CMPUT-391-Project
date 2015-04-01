@@ -103,10 +103,10 @@ persons patient ON radiology_record.patient_id = patient.person_id JOIN
 		FROM pacs_images 
 		GROUP BY pacs_images.record_id
 	) image_agg ON image_agg.record_id = radiology_record.record_id 
-WHERE CONTAINS(radiology_record.diagnosis, ':diagnosis', 1) > 0 OR 
-	CONTAINS(radiology_record.description, ':description', 2) > 0 OR 
-	CONTAINS(patient.first_name, ':first_name', 3) > 0 OR 
-	CONTAINS(patient.last_name, ':last_name', 4) > 0 
+WHERE CONTAINS(radiology_record.diagnosis, :diagnosis, 1) > 0 OR 
+	CONTAINS(radiology_record.description, :description, 2) > 0 OR 
+	CONTAINS(patient.first_name, :first_name, 3) > 0 OR 
+	CONTAINS(patient.last_name, :last_name, 4) > 0 
 	SECURITY
 ORDER BY myrank";
 
@@ -280,6 +280,8 @@ ORDER BY myrank";
 
 		oci_bind_by_name($query, ":diagnosis", $search_term);
 		oci_bind_by_name($query, ":description", $search_term);
+		oci_bind_by_name($query, ":first_name", $search_term);
+		oci_bind_by_name($query, ":last_name", $search_term);
 
 		oci_execute($query);
 
