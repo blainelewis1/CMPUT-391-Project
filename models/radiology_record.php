@@ -268,6 +268,8 @@ ORDER BY myrank";
 
 		$query = oci_parse($db, $query_string);
 
+		print($user->getClass());
+
 		if($user->getClass() == "d"){
 			oci_bind_by_name($query, ":doctor_id", $user->person_id);
 		}

@@ -22,7 +22,10 @@ $end_date = isset($_GET[RadiologyRecord::TEST_END_DATE]) ?
 
 $message = validateSearchFormFields($records);
 
-$records = RadiologyRecord::selectBySearch($user, $search_term, $start_date, $end_date);
+if($search_term != "") {
+	$records = RadiologyRecord::selectBySearch($user, $search_term, $start_date, $end_date);
+}
+
 
 /*			
 //get an array of records the user is authorized to view
