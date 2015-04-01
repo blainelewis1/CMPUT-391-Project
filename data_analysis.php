@@ -30,6 +30,9 @@ if(sizeOf($columnNames) != 1) {
 } 
 
 
+//TODO: make those checkboxes look nice
+//TODO: remove drill level if date isn't selected...
+
 $title = "Data Analysis";
 $content = 'views/data_analysis.php';
 

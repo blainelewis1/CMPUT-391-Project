@@ -152,9 +152,6 @@ class RadiologyRecord {
 		$query_string = str_replace('columns', implode(", ", $columns), RadiologyRecord::SELECT_ROLLUP);
 		$query_string = str_replace('drill_level', $drill_level, $query_string);
 
-
-		print($query_string);
-
 		$query = oci_parse($db, $query_string);
 
 		oci_execute($query);
