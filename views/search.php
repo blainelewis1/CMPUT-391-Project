@@ -1,5 +1,3 @@
-
-
 <?php include_once('misc/form_utils.php'); ?>
 <?php include_once('models/pacs_image.php'); ?>
 <form action="" method="GET">
@@ -28,7 +26,7 @@
 <div class="light-separator"></div>
 
 <?php if(sizeof($records) == 0): ?>
-	<div class="failure">Sorry no records were found!</div>
+	<div class="error">Sorry no records were found!</div>
 <?php else: ?>
 
 <table class="records">

@@ -22,6 +22,11 @@ include_once("misc/database.php");
 
 class Person {
 
+	const ADMIN = "a";
+	const PATIENT = "p";
+	const DOCTOR = "d";
+	const RADIOLOGIST = "r";
+
 	//Constants for using with GET and POST names
 
 	const FIRST_NAME = "first_name";
