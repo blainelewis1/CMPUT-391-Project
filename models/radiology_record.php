@@ -287,12 +287,12 @@ ORDER BY myrank";
 
 		oci_execute($query);
 
-		print($query_string);
+		// print($query_string);
 
-		print_r($query);
-		print(oci_error());
-		print(oci_error($db));
-		print(oci_error($query));
+		// print_r($query);
+		// print(oci_error());
+		// print(oci_error($db));
+		// print(oci_error($query));
 
 		$results;
 		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
