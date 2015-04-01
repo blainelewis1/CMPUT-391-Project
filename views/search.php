@@ -71,7 +71,6 @@
 	<th>
 		Thumbnail List
 	</th>
-	<?php print_r($records); ?>
 	<?php foreach($records as $record ): $record = (object) $record?>
 		
 		<tr>
@@ -108,7 +107,7 @@
 			<td>
 				<?php 
 					foreach(explode(',', $record->IMAGES) as $image_id) {
-						echo PACSImage::getImage($image_id, PACSImage::THUMBNAIL); 
+						echo PACSImage::getImageTag($image_id, PACSImage::THUMBNAIL); 
 					} 
 				?>
 			</td>

@@ -88,7 +88,7 @@ const SELECT_SEARCH =
 	image_agg.images,
 	radiologist.first_name radiologist_first_name, radiologist.last_name radiologist_last_name, radiologist.person_id radiologist_id,
 	doctor.first_name doctor_first_name, doctor.last_name doctor_last_name, doctor.person_id doctor_id,
-	patient.first_name patient_first_name, patient.last_name patient_first_name, patient.person_id patient_id,
+	patient.first_name patient_first_name, patient.last_name patient_last_name, patient.person_id patient_id,
 	radiology_record.test_type,
 	radiology_record.test_date,
 	radiology_record.prescribing_date,
