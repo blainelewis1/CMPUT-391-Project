@@ -283,7 +283,14 @@ ORDER BY myrank";
 		oci_bind_by_name($query, ":first_name", $search_term);
 		oci_bind_by_name($query, ":last_name", $search_term);
 
+
 		oci_execute($query);
+
+		print($query_string);
+
+		print_r(oci_error($db)); 
+		print_r(oci_error($query)); 
+		print_r(oci_error()); 
 
 		$results;
 		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
