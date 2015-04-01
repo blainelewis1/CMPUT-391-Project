@@ -1,11 +1,18 @@
+<?php
+/*
+	Takes $user as a parameter to link to the user_setting page
+
+	Shows the nav etc.
+*/
+?>
+
 <div id="header">
-	<!-- TODO: won't work with ~blaine1 prefix -->
+
 	<a href="/~blaine1">
 		<h1>
 			 Radiology Information System
 		</h1>
 	</a>
-	<!-- TODO: This will not work from subfolders.. Oh well? -->
 	
 	<div id="login">
 

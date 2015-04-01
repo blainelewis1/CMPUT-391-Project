@@ -1,15 +1,16 @@
-<?php if(isset($user)): ?>
-<div id="nav">
-<ul>
- 	<!-- TODO: bold or identify the page you are on now -->
+<?php 
+/*
+	Shows navigation links
 
- 	<!--
- 	<li>
- 		<h2>
-			<a href="user_settings.php">User</a>
-		</h2>
-	</li>
-	-->
+	Takes $user as a parameter to determine visiblities of each page
+*/
+if(isset($user)): 
+?>
+
+
+<div id="nav">
+
+<ul>
 
 	<?php if($user->isAdmin(false)): ?>
 

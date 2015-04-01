@@ -6,6 +6,7 @@
 
 	Upon success the action depends on which button was clicked, either the user is
 	redirected to create another record, or they can upload another image
+
 */
 include_once('misc/utils.php');
 include_once('models/user.php');

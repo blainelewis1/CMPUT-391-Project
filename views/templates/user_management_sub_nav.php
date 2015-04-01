@@ -1,3 +1,11 @@
+<?php
+	/*
+		Takes no parameters, shows links to the managing pages
+	*/
+
+?>
+
+
 <div id="sub-nav">
 	<ul>
 		<li>
