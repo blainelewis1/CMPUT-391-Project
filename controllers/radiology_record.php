@@ -1,6 +1,6 @@
 <?php
 
-include('validation_utils.php');
+include_once("misc/validation_utils.php");
 
 function applyAndValidateRecordFields($record) {
 	

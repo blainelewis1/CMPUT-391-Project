@@ -1,8 +1,18 @@
 <?php 
 
+/*
+	This class represents a row in radiology_record and gives
+	access to selecting, searching, inserting, updating and
+	analyzing
+
+
+	Can be instantiated either normally or using RadiologyRecord::fromId($id)
+*/
+
 
 class RadiologyRecord {
 	
+	// Constants to be used as GET and POST names
 	const RECORD_ID = "record_id";
 	const PATIENT_ID = "patient_id";
 	const DOCTOR_ID = "doctor_id";
@@ -20,14 +30,14 @@ class RadiologyRecord {
 	const SUBMIT = "submit";
 	const SEARCH = "search";
 
+	//Data analysis options
 	public static $ANALYZE_OPTIONS = array("Test Type", "Patient", "Test Date");
-
 
 	public static $DRILL_LEVELS = array("Week", "Month", "Year");
 
 	public static $DRILL_VALUES = array("Week" => "IW", "Month" => "Month", "Year" => "YYYY");
 
-
+	//If test_date is used, drill level MUST be filled in
 	public static $ANALYZE_COLUMNS = array("Test Type" => "test_type", 
 		"Patient" => "patient_id", 
 		"Test Date" => "to_char(to_date(test_date), 'drill_level')");
@@ -36,6 +46,8 @@ class RadiologyRecord {
 	const ANALYZE_LEVEL = "analyze_level";
 	const DRILL_LEVEL = "drill_level";
 
+
+	//Various queries
 
 	const SELECT_BY_ID = "SELECT DISTINCT radiology_record.record_id,
 								 radiology_record.patient_id,
@@ -63,6 +75,8 @@ class RadiologyRecord {
 						FROM radiology_record r, persons p
 						WHERE p.person_id = r.patient_id ";
 
+
+	//Searches for records
 	const SELECT_SEARCH = "SELECT *
 							FROM radiology_record r JOIN 
 							 pacs_images p ON r.record_id = p.record_id";
@@ -78,30 +92,20 @@ class RadiologyRecord {
 					:radiologist_id, :test_type, TO_DATE(:prescribing_date, 'YYYY-MM-DD'),
 					TO_DATE(:test_date, 'YYYY-MM-DD'), :diagnosis, :description)";
 
+	//Gets the last insert id
 	const LAST_INSERT_ID = "SELECT record_seq.currval FROM dual";
 
+
+	//For data analysis, columns must be filled in with the columns needed, can't
+	//Be passed as params because they are columns
 	const SELECT_ROLLUP = "SELECT columns, COUNT(*) 
 							FROM radiology_record JOIN 
 							pacs_images ON radiology_record.record_id = pacs_images.record_id 
 							GROUP BY ROLLUP (columns)
 							ORDER BY COUNT(*) DESC";
-						 #WHERE test_date <= :end_date AND test_date >= start_date
-
-	/*const SELECT_CUBE = "SELECT patient_id, test_type, COUNT(*) 
-						 FROM radiology_record JOIN pacs_images ON radiology_record.record_id = pacs_images.record_id
-						 GROUP BY CUBE (patient_id, test_type)";*/
-
- //display the number of images for each patient ,  test type, and/or period of time
-
-
-
-
-// patient_id, test_type
-// patient_id, test_date
-// test_type, test_date
 	
+	//These correspond directly to the columns in the table
 	public $record_id;
-
 	public $patient_id;
 	public $doctor_id;
 	public $radiologist_id;
@@ -111,12 +115,13 @@ class RadiologyRecord {
 	public $diagnosis;
 	public $description;
 
-	public $start_date;
-	public $end_date;
-
+	//Determines whether we insert or update the record
 	private $new;
 
+
+	//Get a filled in record based on the id
 	public static function fromId($record_id) {
+
 		$record = new RadiologyRecord();
 		$record->new = false;
 		$record->record_id = $record_id;
@@ -124,27 +129,30 @@ class RadiologyRecord {
 
 	}
 
+	//Automatically labels as a new record for insertion
 	public function __construct() {
-		$this->new = true;
+		
+		new = true;
 	}
 
+	//Saves the record as it is to the database either updating or
+	//Inserting as needed
 	public function savetoDatabase() {
-		try {
-			if($this->new){
-				$this->insert();
-			} else {
-				$this->update();
-			}
-			return true;
-		} catch(PDOException $e) {
-			if($e->errorInfo[1] == -803 || $e->errorInfo[1] == 1062){
-				return false;
-			} else {
-				throw $e;
-			}
+
+		if($this->new){
+			$this->insert();
+		} else {
+			//Throws exception, currently unsupported
+			$this->update();
 		}
+		return true;
 	}
 
+
+	/*
+	 * Given a list of columns to group by and a level to drill down to as shown in the constants
+	 * above this returns the number of images for each combination of columns
+	 */
 	public static function analyze($columns, $drill_level) {
 		
 		$db = getPDOInstance();
@@ -161,11 +169,18 @@ class RadiologyRecord {
 		return $results;
 	}
 
+	/*
+	 * Selects all records with a test date before start_date, after end_date and with the given diagnosis
+	 * Any of these can be empty and it will be ignored 
+	*/
+
 	public static function selectByDiagnosisAndDate($diagnosis, $start_date, $end_date) {
 		$db = getPDOInstance();
 
 		$query_string = RadiologyRecord::SELECT_ALL;
 		$delimiter = " AND ";
+
+		//Because there are optional parameters we need to add them manually
 
 		if($diagnosis != "") {
 			$query_string .= $delimiter;
@@ -186,6 +201,8 @@ class RadiologyRecord {
 
 		$query = oci_parse($db, $query_string);
 
+		//Only apply parameters if they are set
+
 		if($diagnosis != ""){
 			oci_bind_by_name($query, ":diagnosis", $diagnosis);
 		}
@@ -205,6 +222,7 @@ class RadiologyRecord {
 		return $results;
 	}
 	
+	//Please fill me in
 	
 	public static function selectBySearch($search_term, $start_date, $end_date){
 		$db = getPDOInstance();
@@ -248,6 +266,11 @@ class RadiologyRecord {
 		return $results;
 	}
 
+	/*
+	 * Inserts the current record into the database, and sets record_id to
+	 * the assigned id
+	*/
+
 	private function insert() {
 		$db = getPDOInstance();
 		$query = oci_parse($db, RadiologyRecord::INSERT);
@@ -271,6 +294,10 @@ class RadiologyRecord {
 		$this->record_id = $row[0];
 	}
 
+	/*
+	 *	Selects a record into the object based on the record_id that is set
+	 */
+
 	private function selectFromId() {
 		$db = getPDOInstance();
 		$query = oci_parse($db, RadiologyRecord::SELECT_BY_ID);
@@ -284,6 +311,10 @@ class RadiologyRecord {
 		populateFromRow($row);
 
 	}
+
+	/*
+	 * Given a row from a query it applies all the fields to it
+	 */
 
 	private function populateFromRow($row) {
 		$this->record_id = $row->RECORD_ID;

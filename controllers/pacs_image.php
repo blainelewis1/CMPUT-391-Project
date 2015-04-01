@@ -1,5 +1,8 @@
 <?php
 
+include_once("misc/validation_utils.php");
+
+
 function applyAndValidatePacsImage($image) {
 
 	$tokens = explode(".", $_FILES[PACSImage::IMAGE]["name"]);

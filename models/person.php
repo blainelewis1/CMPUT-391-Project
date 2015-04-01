@@ -1,8 +1,29 @@
 <?php
 
+/*
+	This class represents a row in persons and supports operations on people
+
+	These operations are:
+		selecting by username,
+		selecting by id
+		insert
+		update
+		select by clas
+
+	It can be instantiated normally resulting in it being inserted upon finishing
+
+	Or it can be instantiated using Person::fromId or Person::fromUserName which both result 
+	in the row being updated
+
+*/
+
+
 include_once("misc/database.php");
 
 class Person {
+
+	//Constants for using with GET and POST names
+
 	const FIRST_NAME = "first_name";
 	const LAST_NAME = "last_name";
 	const ADDRESS = "address";
@@ -12,11 +33,7 @@ class Person {
 	const DELETE = "delete";
 	const PERSON_ID = "person_id";
 
-	const DOCTOR = "d";
-	const ADMIN = "a";
-	const PATIENT = "p";
-	const RADIOLOGIST = "r";
-
+	//Select a single person based on their username
 	const SELECT_USER_NAME = "SELECT persons.first_name, 
 						   persons.last_name, 
 						   persons.address,
@@ -27,6 +44,7 @@ class Person {
 					ON persons.person_id = users.person_id
 					WHERE users.user_name = :user_name";
 
+	//Select a person based on their username
 	const SELECT_ID = "SELECT persons.first_name, 
 						   persons.last_name, 
 						   persons.address,
@@ -34,9 +52,7 @@ class Person {
 						   persons.email, 
 						   persons.phone
 					FROM persons
-					WHERE persons.person_id = :person_id
-					";
-	
+					WHERE persons.person_id = :person_id";
 	const UPDATE = "UPDATE persons
 					SET first_name = :first_name, 
 					    last_name = :last_name, 
@@ -44,23 +60,24 @@ class Person {
 					    email = :email, 
 					    phone = :phone
 					WHERE persons.person_id = :person_id";
-
 	const INSERT = "INSERT INTO persons
 					(person_id, first_name, last_name, address, email, phone)
 					VALUES (:person_id, :first_name, :last_name, :address, :email, :phone)";
 
-	const DELETE_QUERY = "DELETE FROM persons WHERE persons.person_id = :person_id";
-
+	//Select all peopl
 	const SELECT_ALL_QUERY = "SELECT persons.first_name, 
 										persons.last_name, 
 										persons.person_id
-								  FROM persons";
+							  FROM persons";
+	//Select all people with a given class
 	const SELECT_ALL_BY_CLASS = "SELECT DISTINCT persons.first_name, 
 										persons.last_name, 
 										persons.person_id
 								  FROM persons JOIN users ON persons.person_id = users.person_id
 								  WHERE class = :class";
 
+
+	//Fields corresponding to database columns
 	public $first_name;
 	public $last_name;
 	public $address; 
@@ -68,7 +85,7 @@ class Person {
 	public $phone; 
 	public $person_id;
 
-	private $user_name;
+	//Used to determine if the person is to be updated or inserted
 	private $new;
 
 
@@ -96,16 +113,16 @@ class Person {
 		return $results;
 	}
 
+	//Selects a person from username and populates all fields
 	public static function fromUserName($user_name) {
 		$person = new Person();
-		$person->user_name = $user_name;
-		$person->selectFromUsername();
+		$person->selectFromUsername($user_name);
 		$person->new = false;
 	
 		return $person;
 	}
 
-
+	//Selects a person from id and populates all fields
 	public static function fromId($person_id) {
 		$person = new Person();
 		
@@ -122,13 +139,14 @@ class Person {
 	}
 
 
-	private function selectFromUsername() {
-		//TODO: does this really belong here?
+	//Selects a row from a given username into this instances fields
+	private function selectFromUsername($user_name) {
+
 
 		$db = getPDOInstance();
 		$query = oci_parse($db, Person::SELECT_USER_NAME);
 
-		oci_bind_by_name($query, ":user_name", $this->user_name);
+		oci_bind_by_name($query, ":user_name", $user_name);
 		oci_execute($query);
 
 		$row = oci_fetch_object($query);
@@ -136,7 +154,8 @@ class Person {
 		$this->populateFromRow($row);
 
 	}
-
+	
+	//Selects a row from a given id into this instances fields
 	private function selectFromId() {
 		$db = getPDOInstance();
 		$query = oci_parse($db, Person::SELECT_ID);
@@ -150,6 +169,7 @@ class Person {
 
 	}
 
+	//Given a row from the database it populates i
 	private function populateFromRow($row) {
 		$this->first_name = $row->FIRST_NAME;
 		$this->last_name = $row->LAST_NAME;
@@ -159,6 +179,8 @@ class Person {
 		$this->person_id = $row->PERSON_ID;
 	}
 
+	//Decides whether to update or insert this row and then returns
+	//Where or not there is a duplicate (or if it failed)
 	public function saveToDatabase() {
 			if($this->new){
 				return $this->insert();
@@ -166,6 +188,9 @@ class Person {
 				return $this->update();
 			}
 	}
+
+	//Updates a row with the same id and returns whether or not it
+	//Was a duplicate
 	private function update(){
 		$db = getPDOInstance();
 
@@ -180,7 +205,9 @@ class Person {
 		
 		return @oci_execute($query);
 	}
-
+	
+	//Inserts a row with the same id and returns whether or not it
+	//Was a duplicate
 	private function insert(){
 		$db = getPDOInstance();
 

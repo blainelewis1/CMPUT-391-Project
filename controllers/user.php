@@ -1,6 +1,6 @@
 <?php
 
-include_once("validation_utils.php");
+include_once("misc/validation_utils.php");
 
 function applyAndValidateUserFields($user) {
 

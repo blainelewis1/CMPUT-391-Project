@@ -1,6 +1,6 @@
 <?php
 
-include('validation_utils.php');
+include_once("misc/validation_utils.php");
 include('models/family_doctor.php');
 
 //TODO: validate that the doctor patient are actually in the given list

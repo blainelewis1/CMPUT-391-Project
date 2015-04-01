@@ -1,8 +1,3 @@
-
-CREATE DATABASE IF NOT EXISTS radiology;
-USE radiology;
-
-
 /*
  *  File name:  setup.sql
  *  Function:   to create the initial database schema for the CMPUT 391 project,
@@ -92,7 +87,6 @@ CREATE TABLE pacs_images (
 
 /*
  * Maps classes to readable strings
- * TODO: remove if not needed
  */
 
 CREATE TABLE classes (
@@ -145,3 +139,11 @@ BEGIN
 
 END;
 /
+
+/* Admin account */
+
+INSERT INTO persons (person_id, first_name, last_name, address, email, phone)
+VALUES (1, 'admin', 'admin', '', '', '');
+
+INSERT INTO users (user_name, password, class, person_id, date_registered)
+VALUES ('admin', 'admin', 'a', 1, SYSDATE);
