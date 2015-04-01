@@ -36,15 +36,15 @@
 	</th>
 	
 	<th>
-		Patient ID
+		Patient
 	</th>
 	
 	<th>
-		Doctor ID
+		Doctor
 	</th>
 	
 	<th>
-		Radiologist ID
+		Radiologist
 	</th>
 
 	<th>
@@ -79,11 +79,13 @@
 			</td>
 
 			<td>
-				<?php echo  $record->PATIENT_FIRST_NAME . ' ' . $record->PATIENT_LAST_NAME; ?>
+				<?php echo  $record->PATIENT_FIRST_NAME . ' ' . $record->PATIENT_LAST_NAME.'-'.$record->PATIENT_ID; ?>
 			</td>
-
 			<td>
-				<?php echo  $record->RADIOLOGIST_ID; ?>
+				<?php echo  $record->DOCTOR_FIRST_NAME . ' ' . $record->DOCTOR_LAST_NAME.'-'.$record->DOCTOR_ID; ?>
+			</td>
+			<td>
+				<?php echo  $record->RADIOLOGIST_FIRST_NAME . ' ' . $record->RADIOLOGIST_LAST_NAME.'-'.$record->RADIOLOGIST_ID; ?>
 			</td>
 			<td>
 				<?php echo  $record->TEST_TYPE; ?>
@@ -103,7 +105,11 @@
 				<?php echo  $record->DESCRIPTION; ?>
 			</td>
 			<td>
-				<?php echo  $record->THUMBNAIL_LIST; ?>
+				<?php 
+					foreach(explode(',', $record->IMAGES) as $image_id) {
+						echo PACSImage::getImage($image_id, PACSImage::THUMBNAIL); 
+					} 
+				?>
 			</td>
 		</tr>
 
