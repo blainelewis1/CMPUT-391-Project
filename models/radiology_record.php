@@ -276,7 +276,9 @@ ORDER BY myrank";
 		if($user->getClass() == "p"){
 			oci_bind_by_name($query, ":patient_id", $user->person_id);
 		}
-		if($user->getClass() == "r"){
+
+		if(trim($user->getClass()) == "r"){
+			print("not triggered....");
 			oci_bind_by_name($query, ":radiologist_id", $user->person_id);
 		}
 
