@@ -1,6 +1,7 @@
 
 
-<?php include('misc/form_utils.php'); ?>
+<?php include_once('misc/form_utils.php'); ?>
+<?php include_once('models/pacs_image.php'); ?>
 <form action="" method="GET">
 
 	<?php echo  
@@ -79,13 +80,13 @@
 			</td>
 
 			<td>
-				<?php echo  $record->PATIENT_FIRST_NAME . ' ' . $record->PATIENT_LAST_NAME.'-'.$record->PATIENT_ID; ?>
+				<?php echo  $record->PATIENT_FIRST_NAME . ' ' . $record->PATIENT_LAST_NAME.' - '.$record->PATIENT_ID; ?>
 			</td>
 			<td>
-				<?php echo  $record->DOCTOR_FIRST_NAME . ' ' . $record->DOCTOR_LAST_NAME.'-'.$record->DOCTOR_ID; ?>
+				<?php echo  $record->DOCTOR_FIRST_NAME . ' ' . $record->DOCTOR_LAST_NAME.' - '.$record->DOCTOR_ID; ?>
 			</td>
 			<td>
-				<?php echo  $record->RADIOLOGIST_FIRST_NAME . ' ' . $record->RADIOLOGIST_LAST_NAME.'-'.$record->RADIOLOGIST_ID; ?>
+				<?php echo  $record->RADIOLOGIST_FIRST_NAME . ' ' . $record->RADIOLOGIST_LAST_NAME.' - '.$record->RADIOLOGIST_ID; ?>
 			</td>
 			<td>
 				<?php echo  $record->TEST_TYPE; ?>
