@@ -276,7 +276,6 @@ ORDER BY myrank";
 		}
 
 		if(trim($user->getClass()) == "r"){
-			print($user->person_id);
 			oci_bind_by_name($query, ":radiologist_id", $user->person_id, -1, OCI_B_INT);
 		}
  

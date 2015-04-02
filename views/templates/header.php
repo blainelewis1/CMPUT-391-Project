@@ -27,6 +27,11 @@
 		<?php endif; ?>
 
 	</div>
+	<div id="help">
+	<a href="help.php?page=<?php echo strtolower(str_replace(" ", "", $title));?>">
+	help
+	</a>
+	</div>
 
 	<?php include("navigation.php") ?>
 
