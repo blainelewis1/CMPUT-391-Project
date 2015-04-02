@@ -3,6 +3,8 @@
 include_once("models/user.php");
 include_once("misc/utils.php");
 
+$user = User::getLoggedInUser();
+
 $title = "Help";
 
 $user_management = array("createuser", "edituser", "manageusers", "managepeople", "managefamilydoctors", "createfamilydoctor","editfamilydoctor","edituser", "editperson");
@@ -10,7 +12,7 @@ $user_management = array("createuser", "edituser", "manageusers", "managepeople"
 $content = "views/help/";
 
 if (empty($_GET['page']) || $_GET['page'] == "radiologyinformationsystem") {
-	$content .= "index.php";
+	$content .= "help.php";
 } else if(in_array($_GET['page'], $user_management)) {
 	$content .= 'manageusers.php';
 }  else {
