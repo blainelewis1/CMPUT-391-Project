@@ -9,9 +9,11 @@ $user_management = array("createuser", "edituser", "manageusers", "managepeople"
 
 $content = "views/help/";
 
-if(in_array($_GET['page'], $user_management)){
+if (empty($_GET['page']) || $_GET['page'] == "radiologyinformationsystem") {
+	content .= "index.php";
+} else if(in_array($_GET['page'], $user_management)) {
 	$content .= 'manageusers.php';
-} else {
+}  else {
 	$content .= $_GET['page'].'.php';
 }
 
