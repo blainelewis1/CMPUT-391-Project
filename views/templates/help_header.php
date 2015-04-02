@@ -2,7 +2,6 @@
 
 <ul>
 
-	<?php if($user->isAdmin(false)): ?>
 
 	<li>
  		<h2>
