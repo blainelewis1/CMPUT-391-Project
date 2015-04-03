@@ -20,4 +20,25 @@ function setRedirect($location){
 	$_SESSION['REDIRECT_TO'] = $location;
 }
 
+
+
+function addNotice($notice){
+	if(!isset($_SESSION['NOTICES'])){
+		$_SESSION['NOTICES'] = "";
+	}
+
+	$_SESSION['NOTICES'] .= '<div class="notice">'.$notice.'</div>';
+}
+
+function getNotices() {
+	if(!isset($_SESSION['NOTICES'])) {
+		return '';
+	}
+
+	$notices = 	$_SESSION['NOTICES'];
+	unset($_SESSION['NOTICES']);
+
+	return $notices;
+}
+
 ?>

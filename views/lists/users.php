@@ -1,4 +1,13 @@
-<?php include("views/templates/user_management_sub_nav.php"); ?>
+<?php 
+
+/*
+	Lists users given by $users
+*/
+
+include("views/templates/user_management_sub_nav.php");
+include("views/forms/form_error.php");
+
+?>
 
 <h3>
 	<a href="user.php">
@@ -6,11 +15,10 @@
 			Create User
 		</span>
 	</a>
-
 </h3>
 
 <?php if(sizeof($users) == 0): ?>
-	<div class="failure">Sorry no users were found!</div>
+	<div class="error">Sorry no users were found!</div>
 <?php else: ?>
 
 <table>
@@ -33,32 +41,32 @@
 	<th></th>
 	<th></th>
 
-	<?php foreach($users as $user ): ?>
+	<?php foreach($users as $user ): $user = (object) $user; ?>
 		
 		<tr>
 			<td>
-				<?= $user->person_id; ?>
+				<?php echo  $user->PERSON_ID; ?>
 			</td>
 
 			<td>
-				<?= $user->user_name; ?>
+				<?php echo  $user->USER_NAME; ?>
 			</td>
 
 			<td>
-				<?= $user->class_name; ?>
+				<?php echo  $user->CLASS_NAME; ?>
 			</td>
 			<td>
-				<?= $user->date_registered; ?>
+				<?php echo  $user->DATE_REGISTERED; ?>
 			</td>
 
 			<td class="icon">
-				<a href="edit_user.php?<?= User::USER_NAME.'='.$user->user_name; ?>">
-					<img src="/images/edit.png" />
+				<a href="user.php?<?php echo  User::USER_NAME.'='.$user->USER_NAME; ?>">
+					<img src="/~blaine1/images/edit.png" />
 				</a>
 			</td>
 			<td class="icon">
-				<a href="manage_users.php?<?= User::USER_NAME.'='.$user->user_name; ?>">
-					<img src="/images/delete.png" />
+				<a href="manage_users.php?<?php echo  User::USER_NAME.'='.$user->USER_NAME; ?>">
+					<img src="/~blaine1/images/delete.png" />
 				</a>
 			</td>
 		</tr>

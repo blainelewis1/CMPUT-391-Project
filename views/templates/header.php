@@ -1,11 +1,18 @@
+<?php
+/*
+	Takes $user as a parameter to link to the user_setting page
+
+	Shows the nav etc.
+*/
+?>
+
 <div id="header">
-	<!-- TODO: won't work with ~blaine1 prefix -->
-	<a href="/">
+
+	<a href="/~blaine1">
 		<h1>
 			 Radiology Information System
 		</h1>
 	</a>
-	<!-- TODO: This will not work from subfolders.. Oh well? -->
 	
 	<div id="login">
 
@@ -13,11 +20,17 @@
 			<div class="username">
 				<a href="user_settings.php">
 					<?php echo  $user->getUserName() ?>
+					<image width="15" src="/~blaine1/images/gear.png" />
 				</a>
 			</div>
 			<a href="logout.php">(logout)</a>
 		<?php endif; ?>
 
+	</div>
+	<div id="help">
+	<a href="help.php?page=<?php echo strtolower(str_replace(" ", "", $title));?>">
+		<image width="15" src="/~blaine1/images/help.png" />
+	</a>
 	</div>
 
 	<?php include("navigation.php") ?>

@@ -3,32 +3,32 @@
 <?php include('misc/form_utils.php'); ?>
 <form action="" method="GET">
 
-	<?= 
+	<?php echo  
 		textInput('Diagnosis', 
 			RadiologyRecord::DIAGNOSIS, 
 			$diagnosis); 
 	?>
 
-	<?=
+	<?php echo 
 		dateInput('Start Date',
 			RadiologyRecord::TEST_START_DATE,
 			$start_date);
 	?>
 
-	<?=
+	<?php echo 
 		dateInput('End Date',
 			RadiologyRecord::TEST_END_DATE,
 			$end_date);
 	?>
 	
 
-	<input type="submit" name="<?= RadiologyRecord::SEARCH; ?>" value="Search" />
+	<input type="submit" name="<?php echo  RadiologyRecord::SEARCH; ?>" value="Search" />
 </form>		
 </div>
 <div class="light-separator"></div>
 
 <?php if(sizeof($records) == 0): ?>
-	<div class="failure">Sorry no records were found!</div>
+	<div class="error">Sorry no records were found!</div>
 <?php else: ?>
 
 <table class="records">
@@ -48,22 +48,22 @@
 		Testing Date
 	</th>
 
-	<?php foreach($records as $record ): ?>
+	<?php foreach($records as $record ): $record = (object) $record?>
 		
 		<tr>
 			<td>
-				<?= $record->first_name; ?>
+				<?php echo  $record->FIRST_NAME; ?>
 			</td>
 
 			<td>
-				<?= $record->address; ?>
+				<?php echo  $record->ADDRESS; ?>
 			</td>
 
 			<td>
-				<?= $record->phone; ?>
+				<?php echo  $record->PHONE; ?>
 			</td>
 			<td>
-				<?= $record->test_date; ?>
+				<?php echo  $record->TEST_DATE; ?>
 			</td>
 		</tr>
 

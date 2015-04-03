@@ -172,10 +172,18 @@ a, a:visited {
 	margin-top: 20px;
 }
 
-.failure {
+.error {
 	background-color: #FFAAAA;
 	color: black;
-	border: 1px AA3939 solid;
+	border: 1px #AA3939 solid;
+	padding:5px;
+	margin-bottom:5px;
+}
+
+.notice {
+	background-color: #AAAAFF;
+	color: black;
+	border: 1px #3939AA solid;
 	padding:5px;
 	margin-bottom:5px;
 }
@@ -217,12 +225,19 @@ td.icon {
 	width:20px;
 	max-width: 20px;
 }
+
 input[type="text"], input[type="number"], 
 input[type="password"], input[type="email"], 
 input[type="date"] {
 	padding:5px;
 	font-size: 17px;
 }
+
+input[type="checkbox"] {
+	padding:5px;
+	background-color: #FEFEFF;
+}
+
 textarea, select {
 	padding:5px;
 	font-size: 15px;

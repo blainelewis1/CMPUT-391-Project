@@ -1,4 +1,14 @@
-<?php include("views/templates/user_management_sub_nav.php"); ?>
+<?php 
+
+/*
+	Lists all family doctors given by $family_doctors
+*/
+
+include("views/templates/user_management_sub_nav.php"); 
+include("views/forms/form_error.php");
+
+?>
+
 <h3>
 	<a href="family_doctor.php">
 		<span class="button">
@@ -8,7 +18,7 @@
 </h3>
 
 <?php if(sizeof($family_doctors) == 0): ?>
-	<div class="failure">Sorry no family doctors were found!</div>
+	<div class="error">Sorry no family doctors were found!</div>
 <?php else: ?>
 
 <table>
@@ -24,25 +34,25 @@
 	
 	<th></th>
 
-	<?php foreach($family_doctors as $family_doctor): ?>
+	<?php foreach($family_doctors as $family_doctor): $family_doctor = (object) $family_doctor; ?>
 		
 		<tr>
 			<td>
-				<?= $family_doctor->doctor_name; ?>
+				<?php echo  $family_doctor->DOCTOR_NAME; ?>
 			</td>
 
 			<td>
-				<?= $family_doctor->patient_name; ?>
+				<?php echo  $family_doctor->PATIENT_NAME; ?>
 			</td>
 
 			<td class="icon">
-				<a href="edit_family_doctor.php?<?= FamilyDoctor::PATIENT_ID.'='.$family_doctor->patient_id.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
-					<img src="/images/edit.png" />
+				<a href="family_doctor.php?<?php echo  FamilyDoctor::PATIENT_ID.'='.$family_doctor->PATIENT_ID.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->DOCTOR_ID; ?>">
+					<img src="/~blaine1/images/edit.png" />
 				</a>
 			</td>
 			<td class="icon">
-				<a href="manage_family_doctors.php?<?= '&'.FamilyDoctor::PATIENT_ID.'='.$family_doctor->patient_id.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->doctor_id; ?>">
-					<img src="/images/delete.png" />
+				<a href="manage_family_doctors.php?<?php echo  '&'.FamilyDoctor::PATIENT_ID.'='.$family_doctor->PATIENT_ID.'&'.FamilyDoctor::DOCTOR_ID.'='.$family_doctor->DOCTOR_ID; ?>">
+					<img src="/~blaine1/images/delete.png" />
 				</a>
 			</td>
 		</tr>

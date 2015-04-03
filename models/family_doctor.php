@@ -1,9 +1,33 @@
 <?php
 
-class FamilyDoctor {
+include_once('misc/database.php');
+
+/*
+	This class represents a row in family_doctor
+
+	It allows for editting, insertion, deletion and selecting all such records
+
+	It can be instantiated as a new record normally, meaning upon
+	saving it will be inserted
+
+	Or you can use FamilyDoctors::fromIds($patient, $doctor) which means the record will be
+	updated upon saving
+
+*/
+
 //TODO: add order by clauses everywhere
 
+class FamilyDoctor {
+
+	// Constants to be used by POST or GET
+
 	const SUBMIT = "submit";
+	const PATIENT_ID = "patient_id";
+	const DOCTOR_ID = "doctor_id";
+	
+
+
+	//Various self explanatory queries
 	const INSERT = "INSERT INTO family_doctor
 						   (patient_id, doctor_id) 
 					VALUES (:patient_id, :doctor_id)";
@@ -17,27 +41,35 @@ class FamilyDoctor {
 					WHERE patient_id = :patient_id AND doctor_id=:doctor_id";
 
 	const SELECT_ALL = "SELECT doctor_id, patient_id, 
-						CONCAT(patient.first_name, ' ', patient.last_name) as patient_name,
-						CONCAT(doctor.first_name, ' ', doctor.last_name)  as doctor_name 
+						patient.first_name || ' ' || patient.last_name patient_name,
+						doctor.first_name || ' ' || doctor.last_name  doctor_name 
 						FROM family_doctor
-						JOIN persons as doctor ON doctor_id=doctor.person_id 
-						JOIN persons as patient ON patient_id=patient.person_id";
+						JOIN persons doctor ON doctor_id=doctor.person_id 
+						JOIN persons patient ON patient_id=patient.person_id";
 
-	const PATIENT_ID = "patient_id";
-	const DOCTOR_ID = "doctor_id";
 
+    //Used to determine whether we need to insert or update						
 	private $new;
+	
+	// "old" values are given in case we need to update
 	private $old_patient_id;
 	private $old_doctor_id;
+
+
+	//Returns all fo the family doctors
 
 	public static function getAllFamilyDoctors() {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(FamilyDoctor::SELECT_ALL);
-		$query->execute();	
+		$query = oci_parse($db, FamilyDoctor::SELECT_ALL);
+		oci_execute($query);	
 
-		return $query->fetchAll();
+		$results;
+		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
+		return $results;
 	}
+
+	//Returns a new instance from an old pair of ids
 
 	public static function fromIds($patient, $doctor) {
 		$family_doctor = new FamilyDoctor();
@@ -52,60 +84,65 @@ class FamilyDoctor {
 		return $family_doctor;
 	}
 
+	//Default to being a new record
+
 	public function __construct() {
 		$this->new = true;
 	}
 
-public function saveToDatabase() {
-		try {
-			if($this->new){
-				$this->insert();
-			} else {
-				$this->update();
-			}
-			return true;
-		} catch(PDOException $e) {
-			if($e->errorInfo[1] == -803 || $e->errorInfo[1] == 1062){
-				return false;
-			} else {
-				throw($e);
-			}
+	// Either updates or inserts depending on how the record was created
+	// If the function returns false, there is a duplicate entry
+
+	public function saveToDatabase() {
+
+		if($this->new){
+			return $this->insert();
+		} else {
+			return $this->update();
 		}
+		
 	}
+
+
+	//Insert the relationship, return false if it is a duplicate entry
 
 	private function insert() {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(FamilyDoctor::INSERT);
+		$query = oci_parse($db, FamilyDoctor::INSERT);
 
-		$query->bindValue("patient_id", $this->patient_id);
-		$query->bindValue("doctor_id", $this->doctor_id);
+		oci_bind_by_name($query, ":patient_id", $this->patient_id);
+		oci_bind_by_name($query, ":doctor_id", $this->doctor_id);
 		
-		$query->execute();
+		return @oci_execute($query);
 	}
+
+	//Update the relationship based on old_XXX and old_XXX, return false if it is a duplicate entry
 
 	private function update(){
 		$db = getPDOInstance();
 
-		$query = $db->prepare(FamilyDoctor::UPDATE);
+		$query = oci_parse($db, FamilyDoctor::UPDATE);
 
-		$query->bindValue("old_patient_id", $this->old_patient_id);
-		$query->bindValue("old_doctor_id", $this->old_doctor_id);
-		$query->bindValue("patient_id", $this->patient_id);
-		$query->bindValue("doctor_id", $this->doctor_id);
+		oci_bind_by_name($query, ":old_patient_id", $this->old_patient_id);
+		oci_bind_by_name($query, ":old_doctor_id", $this->old_doctor_id);
+		oci_bind_by_name($query, ":patient_id", $this->patient_id);
+		oci_bind_by_name($query, ":doctor_id", $this->doctor_id);
 		
-		$query->execute();
+		return @oci_execute($query);
 	}
+
+	//Delete this record from the database
 
 	public function deleteRecord() {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(FamilyDoctor::DELETE);
+		$query = oci_parse($db, FamilyDoctor::DELETE);
 
-		$query->bindValue("patient_id", $this->patient_id);
-		$query->bindValue("doctor_id", $this->doctor_id);
+		oci_bind_by_name($query, ":patient_id", $this->patient_id);
+		oci_bind_by_name($query, ":doctor_id", $this->doctor_id);
 		
-		$query->execute();
+		oci_execute($query);
 	}
 
 }

@@ -8,11 +8,11 @@ function selectPerson($label, $name, $people, $default) { ?>
 		<label><?php echo  $label.':' ?></label>
 	</div>
 <select name="<?php echo  $name ?>">
-	<?php foreach($people  as $person): ?>
+	<?php foreach($people  as $person): $person = (object) $person; ?>
 		<option 
-		<?php echo  $person->person_id == $default ? "selected" : "";?>
-		value="<?php echo  $person->person_id; ?>">
-			<?php echo  $person->person_id.' - '.$person->first_name.', '.$person->last_name; ?>
+		<?php echo  $person->PERSON_ID == $default ? "selected" : "";?>
+		value="<?php echo  $person->PERSON_ID; ?>">
+			<?php echo  $person->PERSON_ID.' - '.$person->FIRST_NAME.', '.$person->LAST_NAME; ?>
 		</option>
 	<?php endforeach; ?>
 </select>
@@ -53,7 +53,7 @@ function dateInput($label, $name, &$default){ ?>
 
 <div class="row">
 	<div class="label">
-		<label><?php echo  $label.':' ?></label>
+		<label><?php echo  $label.' (YYYY-MM-DD):' ?></label>
 	</div>
 <input type="date" name="<?php echo  $name; ?>" value="<?php echo  $default ?>" />
 </div>
@@ -77,4 +77,36 @@ function passwordInput($label, $name, &$default, $maxlength=24){ ?>
 	</div>
 <input type="password" name="<?php echo  $name; ?>" value="<?php echo  $default ?>" />
 </div>
+<?php } 
+
+
+function selectItems($label, $name, $items, $default) { ?>
+<div class="row">
+	<div class="label">
+		<label><?php echo  $label.':' ?></label>
+	</div>
+<select name="<?php echo  $name ?>">
+	<?php foreach($items  as $item): ?>
+		<option 
+		<?php echo  $item == $default ? "selected" : "";?>
+		value="<?php echo  $item; ?>">
+			<?php echo  $item; ?>
+		</option>
+	<?php endforeach; ?>
+</select>
+</div>
+<?php }
+
+function checkboxes($label, $name, $items, $default) { ?>
+<div class="row">
+	<div class="label">
+		<label><?php echo  $label.':' ?></label>
+	</div>
+	<?php foreach($items  as $item): ?>
+		<label><?php echo $item; ?></label>
+		<input type="checkbox" name="<?php echo $name; ?>[]" value="<?php echo $item; ?>" <?php echo in_array($item, $default) ? "checked" : "";?> />
+		<br />
+	<?php endforeach; ?>
+</div>
 <?php } ?>
+

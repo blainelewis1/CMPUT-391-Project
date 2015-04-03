@@ -1,8 +1,34 @@
 <?php
 
+/*
+	This class represents a row in persons and supports operations on people
+
+	These operations are:
+		selecting by username,
+		selecting by id
+		insert
+		update
+		select by clas
+
+	It can be instantiated normally resulting in it being inserted upon finishing
+
+	Or it can be instantiated using Person::fromId or Person::fromUserName which both result 
+	in the row being updated
+
+*/
+
+
 include_once("misc/database.php");
 
 class Person {
+
+	const ADMIN = "a";
+	const PATIENT = "p";
+	const DOCTOR = "d";
+	const RADIOLOGIST = "r";
+
+	//Constants for using with GET and POST names
+
 	const FIRST_NAME = "first_name";
 	const LAST_NAME = "last_name";
 	const ADDRESS = "address";
@@ -12,11 +38,7 @@ class Person {
 	const DELETE = "delete";
 	const PERSON_ID = "person_id";
 
-	const DOCTOR = "d";
-	const ADMIN = "a";
-	const PATIENT = "p";
-	const RADIOLOGIST = "r";
-
+	//Select a single person based on their username
 	const SELECT_USER_NAME = "SELECT persons.first_name, 
 						   persons.last_name, 
 						   persons.address,
@@ -25,9 +47,9 @@ class Person {
 						   persons.phone
 					FROM persons JOIN users 
 					ON persons.person_id = users.person_id
-					WHERE users.user_name = :user_name
-					LIMIT 1";
+					WHERE users.user_name = :user_name";
 
+	//Select a person based on their username
 	const SELECT_ID = "SELECT persons.first_name, 
 						   persons.last_name, 
 						   persons.address,
@@ -35,9 +57,7 @@ class Person {
 						   persons.email, 
 						   persons.phone
 					FROM persons
-					WHERE persons.person_id = :person_id
-					LIMIT 1";
-	
+					WHERE persons.person_id = :person_id";
 	const UPDATE = "UPDATE persons
 					SET first_name = :first_name, 
 					    last_name = :last_name, 
@@ -45,23 +65,24 @@ class Person {
 					    email = :email, 
 					    phone = :phone
 					WHERE persons.person_id = :person_id";
-
 	const INSERT = "INSERT INTO persons
 					(person_id, first_name, last_name, address, email, phone)
 					VALUES (:person_id, :first_name, :last_name, :address, :email, :phone)";
 
-	const DELETE_QUERY = "DELETE FROM persons WHERE persons.person_id = :person_id";
-
+	//Select all peopl
 	const SELECT_ALL_QUERY = "SELECT persons.first_name, 
 										persons.last_name, 
 										persons.person_id
-								  FROM persons";
+							  FROM persons";
+	//Select all people with a given class
 	const SELECT_ALL_BY_CLASS = "SELECT DISTINCT persons.first_name, 
 										persons.last_name, 
 										persons.person_id
 								  FROM persons JOIN users ON persons.person_id = users.person_id
 								  WHERE class = :class";
 
+
+	//Fields corresponding to database columns
 	public $first_name;
 	public $last_name;
 	public $address; 
@@ -69,40 +90,44 @@ class Person {
 	public $phone; 
 	public $person_id;
 
-	private $user_name;
+	//Used to determine if the person is to be updated or inserted
 	private $new;
 
 
 	public static function getAllPeople() {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(Person::SELECT_ALL_QUERY);
-		$query->execute();	
+		$query = oci_parse($db, Person::SELECT_ALL_QUERY);
+		oci_execute($query);	
 
-		return $query->fetchAll();
+		$results;
+		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
+		return $results;
 	}
 
 	public static function getAllByClass($class) {
 		$db = getPDOInstance();
 
-		$query = $db->prepare(Person::SELECT_ALL_BY_CLASS);
-		$query->bindValue("class", $class);
+		$query = oci_parse($db, Person::SELECT_ALL_BY_CLASS);
+		oci_bind_by_name($query, ":class", $class);
 
-		$query->execute();	
+		oci_execute($query);	
 
-		return $query->fetchAll();
+		$results;
+		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
+		return $results;
 	}
 
+	//Selects a person from username and populates all fields
 	public static function fromUserName($user_name) {
 		$person = new Person();
-		$person->user_name = $user_name;
-		$person->selectFromUsername();
+		$person->selectFromUsername($user_name);
 		$person->new = false;
 	
 		return $person;
 	}
 
-
+	//Selects a person from id and populates all fields
 	public static function fromId($person_id) {
 		$person = new Person();
 		
@@ -119,83 +144,88 @@ class Person {
 	}
 
 
-	private function selectFromUsername() {
+	//Selects a row from a given username into this instances fields
+	private function selectFromUsername($user_name) {
+
+
 		$db = getPDOInstance();
-		$query = $db->prepare(Person::SELECT_USER_NAME);
+		$query = oci_parse($db, Person::SELECT_USER_NAME);
 
-		$query->bindValue("user_name", $this->user_name);
-		$query->execute();
+		oci_bind_by_name($query, ":user_name", $user_name);
+		oci_execute($query);
 
-		$row = $query->fetch();
+		$row = oci_fetch_object($query);
+		
 		$this->populateFromRow($row);
 
 	}
-
+	
+	//Selects a row from a given id into this instances fields
 	private function selectFromId() {
 		$db = getPDOInstance();
-		$query = $db->prepare(Person::SELECT_ID);
+		$query = oci_parse($db, Person::SELECT_ID);
 
-		$query->bindValue("person_id", $this->person_id);
-		$query->execute();
+		oci_bind_by_name($query, ":person_id", $this->person_id);
+		oci_execute($query);
 
-		$row = $query->fetch();
+		$row = oci_fetch_object($query);
 
 		$this->populateFromRow($row);
 
 	}
 
+	//Given a row from the database it populates i
 	private function populateFromRow($row) {
-		$this->first_name = $row->first_name;
-		$this->last_name = $row->last_name;
-		$this->address = $row->address;
-		$this->email = $row->email;
-		$this->phone = $row->phone;
-		$this->person_id = $row->person_id;
+		$this->first_name = $row->FIRST_NAME;
+		$this->last_name = $row->LAST_NAME;
+		$this->address = $row->ADDRESS;
+		$this->email = $row->EMAIL;
+		$this->phone = $row->PHONE;
+		$this->person_id = $row->PERSON_ID;
 	}
 
+	//Decides whether to update or insert this row and then returns
+	//Where or not there is a duplicate (or if it failed)
 	public function saveToDatabase() {
-		try {
 			if($this->new){
-				$this->insert();
+				return $this->insert();
 			} else {
-				$this->update();
+				return $this->update();
 			}
-			return true;
-		} catch(PDOException $e) {
-			if($e->errorInfo[1] == -803 || $e->errorInfo[1] == 1062){
-				return false;
-			} 
-		}
 	}
 
+	//Updates a row with the same id and returns whether or not it
+	//Was a duplicate
 	private function update(){
 		$db = getPDOInstance();
 
-		$query = $db->prepare(Person::UPDATE);
+		$query = oci_parse($db, Person::UPDATE);
 
-		$query->bindValue("first_name", $this->first_name);
-		$query->bindValue("last_name", $this->last_name);
-		$query->bindValue("address", $this->address);
-		$query->bindValue("email", $this->email);
-		$query->bindValue("phone", $this->phone);
-		$query->bindValue("person_id", $this->person_id);
+		oci_bind_by_name($query, ":first_name", $this->first_name);
+		oci_bind_by_name($query, ":last_name", $this->last_name);
+		oci_bind_by_name($query, ":address", $this->address);
+		oci_bind_by_name($query, ":email", $this->email);
+		oci_bind_by_name($query, ":phone", $this->phone);
+		oci_bind_by_name($query, ":person_id", $this->person_id);
 		
-		$query->execute();
+		return @oci_execute($query);
 	}
-
+	
+	//Inserts a row with the same id and returns whether or not it
+	//Was a duplicate
 	private function insert(){
 		$db = getPDOInstance();
 
-		$query = $db->prepare(Person::INSERT);
+		$query = oci_parse($db, Person::INSERT);
 
-		$query->bindValue("person_id", $this->person_id);
-		$query->bindValue("first_name", $this->first_name);
-		$query->bindValue("last_name", $this->last_name);
-		$query->bindValue("address", $this->address);
-		$query->bindValue("email", $this->email);
-		$query->bindValue("phone", $this->phone);
+		oci_bind_by_name($query, ":person_id", $this->person_id);
+		oci_bind_by_name($query, ":first_name", $this->first_name);
+		oci_bind_by_name($query, ":last_name", $this->last_name);
+		oci_bind_by_name($query, ":address", $this->address);
+		oci_bind_by_name($query, ":email", $this->email);
+		oci_bind_by_name($query, ":phone", $this->phone);
 		
-		$query->execute();
+		return @oci_execute($query);
 	}
 
 	public function isNew() {

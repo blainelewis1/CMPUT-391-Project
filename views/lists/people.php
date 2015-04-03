@@ -1,4 +1,14 @@
-<?php include("views/templates/user_management_sub_nav.php"); ?>
+<?php 
+
+/*
+	Lists all peoplr given by $peopls
+*/
+
+include("views/templates/user_management_sub_nav.php"); 
+include("views/forms/form_error.php");
+
+?>
+
 <h3>
 
 	<a href="person.php">
@@ -9,7 +19,7 @@
 </h3>
 
 <?php if(sizeof($people) == 0): ?>
-	<div class="failure">Sorry no peoples were found!</div>
+	<div class="error">Sorry no people were found!</div>
 <?php else: ?>
 
 <table class="users">
@@ -24,24 +34,24 @@
 	</th>
 	<th></th>
 
-	<?php foreach($people as $person ): ?>
+	<?php foreach($people as $person): $person = (object) $person;?>
 		
 		<tr>
 			<td>
-				<?= $person->person_id; ?>
+				<?php echo  $person->PERSON_ID; ?>
 			</td>
 
 			<td>
-				<?= $person->first_name; ?>
+				<?php echo  $person->FIRST_NAME; ?>
 			</td>
 
 			<td>
-				<?= $person->last_name; ?>
+				<?php echo  $person->LAST_NAME; ?>
 			</td>
 
 			<td class="icon">
-				<a href="edit_person.php?<?= Person::PERSON_ID.'='.$person->person_id; ?>">
-					<img src="/images/edit.png" />
+				<a href="person.php?<?php echo  Person::PERSON_ID.'='.$person->PERSON_ID; ?>">
+					<img src="/~blaine1/images/edit.png" />
 				</a>
 			</td>
 		</tr>

@@ -1,6 +1,13 @@
 <?php
 
-include_once("validation_utils.php");
+include_once("misc/validation_utils.php");
+
+/*
+	Takes a user and validates all incoming fields to it and 
+	applies them	
+
+	If fields are invalid it returns a styled message explaining the error
+*/
 
 function applyAndValidateUserFields($user) {
 
@@ -13,12 +20,9 @@ function applyAndValidateUserFields($user) {
 		$message .= maxLength($_POST[User::PASSWORD], 24, 'Password');
 	}
 
-	//TODO: validate class is valid as well
 	$message .= notEmpty($_POST, User::CLASS_NAME, 'Class');
-	$message .= oneOf($_POST[User::CLASS_NAME], ['d','a','r','p'], 'Class');
+	$message .= oneOf($_POST[User::CLASS_NAME], array('d','a','r','p'), 'Class');
 
-
-	//TODO: validate user is unique
 	$message .= notEmpty($_POST, User::USER_NAME, 'User name');
 
 	$user->class = $_POST[User::CLASS_NAME];
@@ -32,10 +36,14 @@ function applyAndValidateUserFields($user) {
 	return $message;
 }
 
+/*
+	Used when changing password to validate that the password is valid
+*/
+
 function validatePassword() {
 
 	if(empty($_POST[User::PASSWORD])) {
-		return "Password cannot be empty <br />";
+		return '<div class="error">Password cannot be empty</div>';
 	}
 
 	return "";

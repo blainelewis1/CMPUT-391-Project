@@ -17,7 +17,10 @@ include("head.php");
 ?>
 
 <body>
+	
 	<?php include("header.php"); ?>
+
+	<?php include("help_header.php"); ?>
 
 	<div id="content">
 		<?php include($content); ?>
