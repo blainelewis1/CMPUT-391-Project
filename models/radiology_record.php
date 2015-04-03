@@ -56,7 +56,7 @@ class RadiologyRecord {
 	const SELECT_ALL = "SELECT persons.first_name,
 							 	persons.address, persons.phone, radiology_record.test_date
 						FROM radiology_record, persons
-						WHERE p.person_id = r.patient_id ";
+						WHERE persons.person_id = radiology_record.patient_id ";
 
 const SEARCH_QUERY =
 "SELECT radiology_record.record_id, 
