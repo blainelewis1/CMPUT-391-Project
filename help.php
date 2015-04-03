@@ -5,12 +5,12 @@ include_once("misc/utils.php");
 
 $title = "Help";
 
-$user_management = array("createuser", "edituser", "usermanagement");
+$user_management = array("createuser", "edituser", "manageusers", "managepeople", "managefamilydoctors", "createfamilydoctor","editfamilydoctor","edituser", "editperson");
 
 $content = "views/help/";
 
 if(in_array($_GET['page'], $user_management)){
-	$content .= 'user_management.php';
+	$content .= 'manageusers.php';
 } else {
 	$content .= $_GET['page'].'.php';
 }

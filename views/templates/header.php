@@ -29,7 +29,7 @@
 	</div>
 	<div id="help">
 	<a href="help.php?page=<?php echo strtolower(str_replace(" ", "", $title));?>">
-	help
+		<image width="15" src="/~blaine1/images/help.png" />
 	</a>
 	</div>
 
