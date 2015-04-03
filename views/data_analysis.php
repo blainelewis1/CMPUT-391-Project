@@ -9,7 +9,7 @@
 
 	<?php echo selectItems('Drill To',
 				RadiologyRecord::DRILL_LEVEL,
-				RadiologyRecord::$DRILL_VALUES,
+				array_keys(RadiologyRecord::$DRILL_VALUES),
 				$drill_level);
 	?>
 	<input type="submit" name="<?php echo RadiologyRecord::SEARCH;?>" value="Search" />

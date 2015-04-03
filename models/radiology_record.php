@@ -31,7 +31,7 @@ class RadiologyRecord {
 	const SUBMIT = "submit";
 	const SEARCH = "search";
 
-	public static $SEARCH_ORDERS = array("relevance" => "myrank", "Test Date Descending" => "radiology_record.test_date DESC", "Test Date Ascending" => "radiology_record.test_date ASC");
+	public static $SEARCH_ORDERS = array("Relevance" => "myrank", "Test Date Descending" => "radiology_record.test_date DESC", "Test Date Ascending" => "radiology_record.test_date ASC");
 
 
 	const ANALYZE_LEVEL = "analyze_level";
