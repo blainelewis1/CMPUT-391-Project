@@ -25,7 +25,7 @@
 	}
 	
 	var select = document.getElementsByName("<?php echo RadiologyRecord::DRILL_LEVEL; ?>")[0];
-	select.disabled = <?php echo in_array("Test Date", $columnNames) ? '"false"' : '"false"';?>;
+	select.disabled = <?php echo in_array("Test Date", $columnNames) ? '"false"' : '"true"';?>;
 
 </script>
 
