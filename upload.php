@@ -40,7 +40,7 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 
 	if($message == ""){
 
-
+		print($pacs_image->image);
 		$pacs_image->insert();
 
 		if(!empty($_POST[PACSImage::SUBMIT_ANOTHER])){
