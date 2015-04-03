@@ -46,7 +46,7 @@
 	selectRelevance.style.display = <?php echo $search_term == "" ? '"none"' : '"block"'; ?>;
 	
 	var select = document.querySelectorAll("select")[0];
-	<?php echo $search_term == "" ? select.selectedIndex = 1 : ""; ?>
+	<?php echo $search_term == "" ? "select.selectedIndex = 1;" : ""; ?>
 
 </script>
 
