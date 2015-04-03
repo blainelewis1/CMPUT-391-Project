@@ -13,9 +13,6 @@ include_once('models/user.php');
 include_once('models/person.php');
 include_once('controllers/user.php');
 
-//TODO: check error conditions, eg. invalid id
-//TODO: change user name reject if not unique
-//TODO: we need to give success messages everywhere.....
 
 $user = User::getLoggedInUser();
 

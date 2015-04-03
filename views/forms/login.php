@@ -2,7 +2,6 @@
 include("misc/form_utils.php")
 ?>
 <?php
-	//TODO: adopt message style
 	if (isset($failed) && $failed):
 ?>
 

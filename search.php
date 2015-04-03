@@ -1,7 +1,9 @@
 <?php
+
 /*
 	From here a user can search for any record
 */
+
 include_once('models/user.php');
 include_once('models/radiology_record.php');
 include_once('controllers/radiology_record.php');
@@ -28,7 +30,7 @@ if(!($search_term == "" && $start_date == "" && $$end_date == "")){
 }
 
 $title = "Search";
-$content = "views/search.php";
+$content = "views/lists/search.php";
 
 include("views/templates/template.php");
 

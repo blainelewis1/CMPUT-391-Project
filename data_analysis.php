@@ -34,7 +34,7 @@ if(sizeOf($columnNames) != 1) {
 //TODO: remove drill level if date isn't selected...
 
 $title = "Data Analysis";
-$content = 'views/data_analysis.php';
+$content = 'views/lists/data_analysis.php';
 
 include("views/templates/template.php");
 

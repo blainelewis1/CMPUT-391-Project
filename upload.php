@@ -25,8 +25,8 @@ $message = "";
 
 
 if(!isset($_GET[RadiologyRecord::RECORD_ID])){
-	//TODO: 404?
-	print('Not editting a record');
+	pageNotFound();
+
 	die();
 } else {
 	//TODO: what if the record does not exist

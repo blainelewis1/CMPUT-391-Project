@@ -20,8 +20,6 @@ function setRedirect($location){
 	$_SESSION['REDIRECT_TO'] = $location;
 }
 
-
-
 function addNotice($notice){
 	if(!isset($_SESSION['NOTICES'])){
 		$_SESSION['NOTICES'] = "";
@@ -39,6 +37,14 @@ function getNotices() {
 	unset($_SESSION['NOTICES']);
 
 	return $notices;
+}
+
+function pageNotFound() {
+	$title = "Page Not Found";
+	$content = "views/404.php";
+
+	include('views/templates/template.php');
+	die();
 }
 
 ?>

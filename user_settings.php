@@ -41,7 +41,7 @@ if(isset($_POST[Person::SUBMIT])) {
 //Display the results
 
 $title = "User Settings";
-$content = "views/user_settings.php";
+$content = "views/forms/user_settings.php";
 include("views/templates/template.php");
 
 
