@@ -32,14 +32,22 @@
 
 <script type="text/javascript">
 	function ifSearchTerm(search_term) {
-			var selectRelevance = document.querySelectorAll("option[value=Relevance]")[0];
-			//selectRelevance.style.visibility = search_term.value == "" ? 'hidden' : 'visible';
-			selectRelevance.diabled = search_term.value == "";
+		var selectRelevance = document.querySelectorAll("option[value=Relevance]")[0];
+		selectRelevance.style.display = search_term.value == "" ? 'none' : 'block';
+		if(search_term.value == ""){
+			var select = document.querySelectorAll("select")[0];
+			if(select.options[select.selectedIndex] == 0) {
+				select.options[select.selectedIndex]++;
+			}
+		}
 	}
 	
 	var selectRelevance = document.querySelectorAll("option[value=Relevance]")[0];
-	//selectRelevance.style.visibility = <?php echo $search_term == "" ? '"hidden"' : '"visible"'; ?>;
-	selectRelevance.disabled = <?php echo $search_term == "" ? 'true' : 'false'; ?>;
+	selectRelevance.style.display = <?php echo $search_term == "" ? '"none"' : '"block"'; ?>;
+	var select = document.querySelectorAll("select")[0];
+	if(select.options[select.selectedIndex] == 0) {
+		select.options[select.selectedIndex]++;
+	}
 
 </script>
 
