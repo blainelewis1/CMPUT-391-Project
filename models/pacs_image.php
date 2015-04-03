@@ -135,6 +135,8 @@ class PACSImage {
 
 		oci_commit($db);
 
+		print($full);
+
 		//Cleanup the images
 		//@unlink($thumb);
 		//@unlink($regular);
