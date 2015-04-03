@@ -53,7 +53,7 @@ class RadiologyRecord {
 						  WHERE radiology_record.record_id = :record_id
 						  GROUP BY persons.person_id";
 
-	const SELECT_ALL = "SELECT persons.first_name,
+	const SELECT_ALL = "SELECT persons.first_name || ' ' || persons.last_name full_name,
 							 	persons.address, persons.phone, radiology_record.test_date
 						FROM radiology_record, persons
 						WHERE persons.person_id = radiology_record.patient_id ";

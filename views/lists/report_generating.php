@@ -52,7 +52,7 @@
 		
 		<tr>
 			<td>
-				<?php echo  $record->FIRST_NAME; ?>
+				<?php echo  $record->FULL_NAME; ?>
 			</td>
 
 			<td>
