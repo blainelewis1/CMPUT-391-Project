@@ -21,7 +21,7 @@ function applyAndValidatePacsImage($image) {
 
 	print_r($_FILES[PACSImage::IMAGE]);
 
-	$pacs_image->image = $_FILES[PACSImage::IMAGE]["tmp_name"];
+	$image->image = $_FILES[PACSImage::IMAGE]["tmp_name"];
 
 	return "";	
 }
