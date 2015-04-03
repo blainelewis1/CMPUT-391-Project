@@ -5,7 +5,8 @@
 	<?php echo  
 		textInput('Search', 
 			RadiologyRecord::SEARCH_TERM, 
-			$search_term); 
+			$search_term,
+			"ifSearchTerm(this)"); 
 	?>
 	<?php echo 
 		dateInput('Start Date',
@@ -27,6 +28,17 @@
 	?>
 	<input type="submit" name="<?php echo  RadiologyRecord::SEARCH; ?>" value="Search" />
 </form>		
+
+<script type="text/javascript">
+	function ifSearchTerm(input) {
+			var selectRelevance = document.querySelectorAll("input[value=Relevance]")[0];
+			selectRelavance.disabled = input.value == "";
+	}
+	
+	var selectRelevance = document.querySelectorAll("input[value=Relevance]")[0];
+	selectRelavance.disabled = <?php echo  $search_term == "" ? 'true' : 'false';
+
+</script>
 
 </div>
 <div class="light-separator"></div>
