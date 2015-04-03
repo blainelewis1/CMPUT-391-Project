@@ -170,6 +170,11 @@ class User {
 		oci_bind_by_name($query, ":user_name", $user_name);
 
 		oci_execute($query);
+
+		if($user_name == User::getLoggedInUser()->user_name) {
+			header('Location: logout.php');
+		}
+
 	}
 
 
@@ -231,6 +236,10 @@ class User {
 		oci_bind_by_name($query, ":old_user_name", $this->old_user_name);
 		oci_bind_by_name($query, ":class", $this->class);
 		
+		if($old_user_name == User::getLoggedInUser()->user_name){
+			$_SESSION[User::USER_NAME] = $this->user_name;
+		}
+
 		return @oci_execute($query);
 	}
 

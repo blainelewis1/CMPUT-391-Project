@@ -19,7 +19,6 @@ if(isset($_POST[User::LOGIN])){
 		redirect("index.php");
 
 	} else {
-		//TODO: this should be out of scope... why isn't it
 
 		//Auto fill the username
 		$username = $_POST[User::USER_NAME];

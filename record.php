@@ -18,8 +18,6 @@ include_once('models/user.php');
 include_once('models/radiology_record.php');
 include_once('controllers/radiology_record.php');
 
-//TODO: check error conditions, eg. invalid id
-
 $user = User::getLoggedInUser();
 
 $user->isRadiologist();

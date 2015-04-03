@@ -97,14 +97,14 @@ function selectItems($label, $name, $items, $default) { ?>
 </div>
 <?php }
 
-function checkboxes($label, $name, $items, $default) { ?>
+function checkboxes($label, $name, $items, $default, $onclick="") { ?>
 <div class="row">
 	<div class="label">
 		<label><?php echo  $label.':' ?></label>
 	</div>
 	<?php foreach($items  as $item): ?>
 		<label><?php echo $item; ?></label>
-		<input type="checkbox" name="<?php echo $name; ?>[]" value="<?php echo $item; ?>" <?php echo in_array($item, $default) ? "checked" : "";?> />
+		<input type="checkbox" name="<?php echo $name; ?>[]" value="<?php echo $item; ?>" <?php echo in_array($item, $default) ? "checked" : "";?> onclick="<?php echo $onclick;?>"/>
 		<br />
 	<?php endforeach; ?>
 </div>

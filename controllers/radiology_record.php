@@ -13,8 +13,6 @@ function applyAndValidateRecordFields($record) {
 	
 	$message = '';
 
-	//TODO: test that patient, doctor etc. are valid
-
 	$message .= notEmpty($_POST, RadiologyRecord::PATIENT_ID, 'Patient');
 	$message .= notEmpty($_POST, RadiologyRecord::DOCTOR_ID, 'Doctor');
 	$message .= notEmpty($_POST, RadiologyRecord::RADIOLOGIST_ID, 'Radiologist');
