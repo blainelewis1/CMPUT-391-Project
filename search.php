@@ -19,6 +19,9 @@ $start_date = isset($_GET[RadiologyRecord::TEST_START_DATE]) ?
 
 $end_date = isset($_GET[RadiologyRecord::TEST_END_DATE]) ? 
 			      $_GET[RadiologyRecord::TEST_END_DATE] : "";
+			      
+$search_order = isset($_GET[RadiologyRecord::ORDER]) ? 
+			      $_GET[RadiologyRecord::ORDER] : "";
 
 $message = validateSearchFormFields($records);
 if(!($search_term == "" && $start_date == "" && $$end_date == "")){

@@ -18,7 +18,13 @@
 			RadiologyRecord::TEST_END_DATE,
 			$end_date);
 	?>
+	<?php echo 
+		selectItems('Sorted By',
+			RadiologyRecord::ORDER,
+			array_keys(RadiologyRecord::$SEARCH_ORDERS),
+			$search_order); 
 
+	?>
 	<input type="submit" name="<?php echo  RadiologyRecord::SEARCH; ?>" value="Search" />
 </form>		
 

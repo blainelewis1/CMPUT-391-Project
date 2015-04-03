@@ -26,14 +26,12 @@ class RadiologyRecord {
 	const TEST_END_DATE = "test_end_date";
 	const SEARCH_TERM = "search_term";
 	const THUMBNAIL_LIST = "thumbnail_list";
+	const ORDER = "order";
 
 	const SUBMIT = "submit";
 	const SEARCH = "search";
 
-	//Data analysis options
-	public static $ANALYZE_OPTIONS = array("Test Type", "Patient", "Test Date");
-
-	public static $DRILL_LEVELS = array("Week", "Month", "Year");
+	public static $SEARCH_ORDERS = array("relevance" => "myrank", "Test Date Descending" => "radiology_record.test_date DESC", "Test Date Ascending" => "radiology_record.test_date ASC");
 
 
 	const ANALYZE_LEVEL = "analyze_level";
@@ -249,15 +247,14 @@ WHERE ";
 	
 	//Please fill me in
 	
-	public static function search($user, $search_term, $start_date, $end_date){
+	public static function search($user, $search_term, $start_date, $end_date, $order){
 		$db = getPDOInstance();
 		
 		$query_string = RadiologyRecord::SEARCH_QUERY;
 
-		$query_string .= RadiologyRecord::$SEARCH_SECURITY[$user->getClass()];
-
 
 		$delimiter = " ";
+
 		if($start_date != "") {
 
 			$query_string .= $delimiter;
@@ -288,6 +285,10 @@ WHERE ";
 			$query_string = str_replace("SCORE", "", $query_string);
 		}
 
+		$query_string .= RadiologyRecord::$SEARCH_SECURITY[$user->getClass()];
+
+		$query_string .= "ORDER BY ".RadiologyRecord::$SEARCH_ORDERS[$order];
+
 
 		$query = oci_parse($db, $query_string);
 
@@ -316,6 +317,8 @@ WHERE ";
 			oci_bind_by_name($query, ":first_name", $search_term);
 			oci_bind_by_name($query, ":last_name", $search_term);
 		}
+
+
 
 		print($query_string);
 

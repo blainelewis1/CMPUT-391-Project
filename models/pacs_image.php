@@ -66,8 +66,10 @@ class PACSImage {
 		return 'pacs_image.php?image_id='.$image_id.'&image_size='.$image_size;
 	}
 	//Utility function to get an actual image tag filled in
-	public static function getImageTag($image_id, $image_size){
-		return '<img src="'.PACSImage::getURL($image_id, $image_size).'" />';
+	public static function getThumbnail($image_id){
+		return '<a href="'.PACSImage::getURL($image_id, PACSImage::FULL).'">
+					<img src="'.PACSImage::getURL($image_id, PACSImage::THUMBNAIL).'" />
+				<a>';
 	}
 
 	public function __construct($image_id = null) {
