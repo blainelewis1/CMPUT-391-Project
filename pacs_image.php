@@ -12,7 +12,7 @@ include('models/pacs_image.php');
 header("Content-Type: image/jpeg");
 
 
-if(!User::isUserLoggedIn){
+if(!User::isUserLoggedIn()){
 	//TODO: permissions could be tightened
 
 	$file = fopen('images/denied.png', 'rb');
@@ -26,6 +26,7 @@ $size = isset($_GET[PACSImage::SIZE]) ? $_GET[PACSImage::SIZE] : PACSImage::FULL
 $image = $image->getImage($size);
 
 if(!$image) {
+
 	$file = fopen('images/notfound.png', 'rb');
 	fpassthru($file);
 
