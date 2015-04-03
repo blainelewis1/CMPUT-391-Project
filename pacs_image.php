@@ -17,6 +17,8 @@ if(!User::isUserLoggedIn()){
 
 	$file = fopen('images/denied.png', 'rb');
 	fpassthru($file);
+
+	die();
 }
 
 $image = new PACSImage($_GET[PACSImage::IMAGE_ID]);
@@ -30,6 +32,7 @@ if(!$image) {
 	$file = fopen('images/notfound.png', 'rb');
 	fpassthru($file);
 
+	die();
 }
 
 
