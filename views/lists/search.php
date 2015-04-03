@@ -33,11 +33,11 @@
 <script type="text/javascript">
 	function ifSearchTerm(search_term) {
 			var selectRelevance = document.querySelectorAll("option[value=Relevance]")[0];
-			selectRelavance.style.visibility = search_term.value == "" ? 'hidden' : 'visible';
+			selectRelevance.style.visibility = search_term.value == "" ? 'hidden' : 'visible';
 	}
 	
 	var selectRelevance = document.querySelectorAll("option[value=Relevance]")[0];
-	selectRelavance.style.visibility = <?php echo  $search_term == "" ? 'hidden' : 'visible'; ?> ;
+	selectRelevance.style.visibility = <?php echo $search_term == "" ? '"hidden"' : '"visible"'; ?>;
 
 </script>
 
