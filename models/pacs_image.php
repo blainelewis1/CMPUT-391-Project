@@ -63,7 +63,7 @@ class PACSImage {
 
 	//Utility function to get an image URL 
 	public static function getURL($image_id, $image_size) {
-		return 'pacs_image.php?image_id='.$image_id.'&image_size='.$image_size;
+		return 'pacs_image.php?'.PACSImage::IMAGE_ID.$image_id.'&'.PACSImage::SIZE.'='.$image_size;
 	}
 	//Utility function to get an actual image tag filled in
 	public static function getThumbnail($image_id){
