@@ -96,9 +96,7 @@ class PACSImage {
 
 		$row = oci_fetch_array($query, OCI_RETURN_LOBS);
 
-		print_r($row);
-		print_r($row[0]);
-		return $row[0]->load();
+		return $row[0];
 	}
 
 
