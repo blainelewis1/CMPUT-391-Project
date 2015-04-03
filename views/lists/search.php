@@ -32,11 +32,11 @@
 <script type="text/javascript">
 	function ifSearchTerm(input) {
 			var selectRelevance = document.querySelectorAll("input[value=Relevance]")[0];
-			selectRelavance.disabled = input.value == "";
+			selectRelavance.disabled = input.value == "" ? 'hidden' : 'visible';
 	}
 	
 	var selectRelevance = document.querySelectorAll("input[value=Relevance]")[0];
-	selectRelavance.disabled = <?php echo  $search_term == "" ? 'true' : 'false';
+	selectRelavance.style.visibility = <?php echo  $search_term == "" ? 'hidden' : 'visible';
 
 </script>
 
