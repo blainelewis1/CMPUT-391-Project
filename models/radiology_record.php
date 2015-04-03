@@ -60,7 +60,7 @@ class RadiologyRecord {
 						FROM radiology_record, persons
 						WHERE p.person_id = r.patient_id ";
 
-const SEARCH =
+const SEARCH_QUERY =
 "SELECT radiology_record.record_id, 
 	SCORE
 	image_agg.images,
@@ -262,7 +262,7 @@ WHERE ";
 	public static function search($user, $search_term, $start_date, $end_date){
 		$db = getPDOInstance();
 		
-		$query_string = RadiologyRecord::SELECT_SEARCH;
+		$query_string = RadiologyRecord::SEARCH_QUERY;
 
 		$query_string .= RadiologyRecord::$SEARCH_SECURITY[$user->getClass()];
 
