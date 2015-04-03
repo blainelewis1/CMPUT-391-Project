@@ -60,7 +60,7 @@ class RadiologyRecord {
 						FROM radiology_record, persons
 						WHERE p.person_id = r.patient_id ";
 
-const SEARCH_QUERY =
+const SEARCH =
 "SELECT radiology_record.record_id, 
 	SCORE
 	image_agg.images,
@@ -203,34 +203,24 @@ WHERE ";
 		$db = getPDOInstance();
 
 		$query_string = RadiologyRecord::SELECT_ALL;
-		$delimiter = " ";
+		$delimiter = " AND ";
 
 		//Because there are optional parameters we need to add them manually
 
-		if($search_term != "") {
-
+		if($diagnosis != "") {
 			$query_string .= $delimiter;
-			$query_string .= RadiologyRecord::CONTAINS;
+			$query_string .= "radiology_record.diagnosis = :diagnosis";
 
-			$query_string = str_replace("SCORE", RadiologyRecord::SCORE, $query_string);
-
-			$delimiter = " AND ";
-
-		} else {
-			$query_string = str_replace("SCORE", "", $query_string);
-		}
+		} 
 		if($start_date != "") {
 
 			$query_string .= $delimiter;
 			$query_string .= "radiology_record.test_date >= TO_DATE(:start_date, 'YYYY-MM-DD')";
-			$delimiter = " AND ";
 
 		} 
 		if($end_date != "") {
 			$query_string .= $delimiter;
 			$query_string .= "radiology_record.test_date <= TO_DATE(:end_date, 'YYYY-MM-DD')";
-			$delimiter = " AND ";
-
 		}
 
 
@@ -262,26 +252,40 @@ WHERE ";
 	public static function search($user, $search_term, $start_date, $end_date){
 		$db = getPDOInstance();
 		
-		$query_string = RadiologyRecord::SEARCH_QUERY;
+		$query_string = RadiologyRecord::SELECT_SEARCH;
 
 		$query_string .= RadiologyRecord::$SEARCH_SECURITY[$user->getClass()];
 
 
-		$delimiter = " AND ";
+		$delimiter = " ";
 		if($start_date != "") {
 
 			$query_string .= $delimiter;
 			$query_string .= "radiology_record.test_date >= TO_DATE(:start_date, 'YYYY-MM-DD')";
+
+			$delimiter = " AND ";
 
 		} 
 		
 		if($end_date != "") {
 			$query_string .= $delimiter;
 			$query_string .= "radiology_record.test_date <= TO_DATE(:end_date, 'YYYY-MM-DD')";
+	
+			$delimiter = " AND ";
+	
 		}
 		
 		if($search_term != "") {
+			$query_string .= $delimiter;
 
+			$query_string .= RadiologyRecord::CONTAINS;
+
+			$query_string = str_replace("SCORE", RadiologyRecord::SCORE, $query_string);
+
+			$delimiter = " AND ";
+
+		} else {
+			$query_string = str_replace("SCORE", "", $query_string);
 		}
 
 
@@ -312,6 +316,8 @@ WHERE ";
 			oci_bind_by_name($query, ":first_name", $search_term);
 			oci_bind_by_name($query, ":last_name", $search_term);
 		}
+
+		print($query_string);
 
 		oci_execute($query);
 
