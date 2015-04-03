@@ -20,11 +20,11 @@ include_once('models/person.php');
 			$record->doctor_id); 
 	?>
 
-	<?php echo  
+	<?php /*echo  
 		selectPerson('Radiologist',
 			RadiologyRecord::RADIOLOGIST_ID, 
 			Person::getAllByClass(Person::RADIOLOGIST), 
-			$record->radiologist_id); 
+			$record->radiologist_id); */
 	?>
 
 	<?php echo  

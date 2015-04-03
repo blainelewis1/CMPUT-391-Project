@@ -42,6 +42,8 @@ if(isset($_POST[RadiologyRecord::SUBMIT])) {
 
 	$message = applyAndValidateRecordFields($record);
 
+	$record->radiologist_id = $user->person_id;
+
 	if($message == ""){
 
 		if($record->saveToDatabase()) {
