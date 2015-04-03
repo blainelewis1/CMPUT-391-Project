@@ -1,1 +1,1 @@
-<p>At any point in time if you don't know what to do, click the information button in the top right of the page!</p>
+<p>At any point in time if you don't know what to do, click the information button in the top left of the page!</p>

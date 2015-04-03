@@ -1,0 +1,30 @@
+To install:
+
+Untar the file into your htdocs or web_docs.
+
+From sqlplus do 
+
+@setup.sql 
+@custom_setup.sql
+
+This creates a user admin with password admin.
+
+Set the permission of all files so that the web server can access them eg. 
+
+chmod 777 -R .
+
+Edit misc/dbpass.php and fill in your own Oracle username and password.
+
+
+Each of these files contain a hardcoded csid ~blaine1 
+
+views/lists/people.php	
+views/lists/family_doctors.php
+views/lists/users.php
+views/templates/header.php
+views/templates/head.php
+
+
+If you want links and images to work it is suggested that you change these to whatever your server root is.
+
+Your copy of the Radiology Information System should now be working as expected!

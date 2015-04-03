@@ -32,10 +32,9 @@ class FamilyDoctor {
 						   (patient_id, doctor_id) 
 					VALUES (:patient_id, :doctor_id)";
 
-	const UPDATE = "UPDATE IGNORE family_doctor
+	const UPDATE = "UPDATE family_doctor
 					SET patient_id = :patient_id, doctor_id = :doctor_id 
-					WHERE patient_id = :old_patient_id AND doctor_id=:old_doctor_id;
-					DELETE FROM family_doctor WHERE patient_id = :old_patient_id AND doctor_id=:old_doctor_id";
+					WHERE patient_id = :old_patient_id AND doctor_id=:old_doctor_id";
 
 	const DELETE = "DELETE FROM family_doctor
 					WHERE patient_id = :patient_id AND doctor_id=:doctor_id";
