@@ -74,6 +74,8 @@ class PACSImage {
 
 	public function __construct($image_id = null) {
 		$this->image_id = $image_id;
+
+		print($this->image_id);
 	}
 
 	//Selects an image of size based on the image_id given in the constructor
@@ -92,6 +94,7 @@ class PACSImage {
 
 		oci_bind_by_name($query, ":image_id", $this->image_id);
 		oci_execute($query);
+		print($this->image_id);
 
 		$row = oci_fetch_array($query, OCI_RETURN_LOBS);
 
