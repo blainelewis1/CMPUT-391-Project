@@ -20,12 +20,12 @@
 	function ifDate(checkbox) {
 		if(checkbox.value == "Test Date"){
 			var select = document.getElementsByName("<?php echo RadiologyRecord::DRILL_LEVEL; ?>")[0];
-			select.disabled = checkbox.checked ? "false" : "true";
+			select.disabled = !checkbox.checked ;
 		}
 	}
 	
 	var select = document.getElementsByName("<?php echo RadiologyRecord::DRILL_LEVEL; ?>")[0];
-	select.disabled = <?php echo in_array("Test Date", $columnNames) ? '"false"' : '"true"';?>;
+	select.disabled = <?php echo in_array("Test Date", $columnNames) ? 'false' : 'true';?>;
 
 </script>
 
