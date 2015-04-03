@@ -20,12 +20,12 @@
 	function ifDate(checkbox) {
 		if(checkbox.value == "Test Date"){
 			var select = document.getElementsByName("<?php echo RadiologyRecord::DRILL_LEVEL; ?>")[0];
-			select.visible = checkbox.checked;
+			select.style.visibility = checkbox.checked ? "visible" : "hidden";
 		}
 	}
 	
 	var select = document.getElementsByName("<?php echo RadiologyRecord::DRILL_LEVEL; ?>")[0];
-	select.visible = <?php echo in_array("Test Date", $columnNames);?>;
+	select.style.visibility = <?php echo in_array("Test Date", $columnNames) ? "visible" : "hidden";?>;
 
 </script>
 
