@@ -161,4 +161,3 @@ CREATE INDEX diagnosis_index ON radiology_record (diagnosis) indextype is ctxsys
 CREATE INDEX description_index ON radiology_record (description) indextype is ctxsys.context;
 CREATE INDEX first_index ON persons (first_name) indextype is ctxsys.context;
 CREATE INDEX last_index ON persons (last_name) indextype is ctxsys.context;
-

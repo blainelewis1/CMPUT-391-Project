@@ -287,7 +287,7 @@ WHERE ";
 
 		$query_string .= RadiologyRecord::$SEARCH_SECURITY[$user->getClass()];
 
-		$query_string .= "ORDER BY ".RadiologyRecord::$SEARCH_ORDERS[$order];
+		$query_string .= " ORDER BY ".RadiologyRecord::$SEARCH_ORDERS[$order];
 
 
 		$query = oci_parse($db, $query_string);
