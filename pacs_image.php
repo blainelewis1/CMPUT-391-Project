@@ -15,9 +15,8 @@ $image = new PACSImage($_GET[PACSImage::IMAGE_ID]);
 $size = isset($_GET[PACSImage::SIZE]) ? $_GET[PACSImage::SIZE] : PACSImage::FULL;
 
 $image = $image->getImage($size);
-print("yo yo yo");
 
-#header("Content-Type: image/jpeg");
+header("Content-Type: image/jpeg");
 
 print($image);
 
