@@ -111,7 +111,7 @@
 			<td>
 				<?php 
 					foreach(explode(',', $record->IMAGES) as $image_id) {
-						echo PACSImage::getImageTag($image_id, PACSImage::THUMBNAIL); 
+						echo PACSImage::getThumbnail($image_id, PACSImage::THUMBNAIL); 
 					} 
 				?>
 			</td>
