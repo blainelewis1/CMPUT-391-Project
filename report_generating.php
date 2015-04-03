@@ -28,7 +28,7 @@ $end_date = isset($_GET[RadiologyRecord::TEST_END_DATE]) ?
 $records = RadiologyRecord::selectByDiagnosisAndDate($diagnosis, $start_date, $end_date);
 
 $title = "Reports";
-$content = "views/forms/report_generating.php";
+$content = "views/lists/report_generating.php";
 
 include("views/templates/template.php");
 

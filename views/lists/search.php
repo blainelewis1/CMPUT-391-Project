@@ -133,7 +133,7 @@
 			<td>
 				<?php 
 					foreach(explode(',', $record->IMAGES) as $image_id) {
-						echo PACSImage::getThumbnail($image_id, PACSImage::THUMBNAIL); 
+						echo '<div class="image">'.PACSImage::getThumbnail($image_id, PACSImage::THUMBNAIL).'</div>'; 
 					} 
 				?>
 			</td>

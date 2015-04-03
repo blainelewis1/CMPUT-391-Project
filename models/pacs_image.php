@@ -67,7 +67,7 @@ class PACSImage {
 	}
 	//Utility function to get an actual image tag filled in
 	public static function getThumbnail($image_id){
-		return '<img src="'.PACSImage::getURL($image_id, PACSImage::THUMBNAIL).'" /><br />
+		return '<img src="'.PACSImage::getURL($image_id, PACSImage::THUMBNAIL).'" />
 		<a href="'.PACSImage::getURL($image_id, PACSImage::FULL).'">full<a>
 		<a href="'.PACSImage::getURL($image_id, PACSImage::REGULAR).'">regular<a>';
 	}
