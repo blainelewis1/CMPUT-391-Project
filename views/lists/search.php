@@ -36,7 +36,7 @@
 		selectRelevance.style.display = search_term.value == "" ? 'none' : 'block';
 		if(search_term.value == ""){
 			var select = document.querySelectorAll("select")[0];
-			if(select.options[select.selectedIndex] == 0) {
+			if(select.selectedIndex == 0) {
 				select.selectedIndex++;
 			}
 		}
