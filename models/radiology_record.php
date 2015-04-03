@@ -31,7 +31,7 @@ class RadiologyRecord {
 	const SUBMIT = "submit";
 	const SEARCH = "search";
 
-	public static $SEARCH_ORDERS = array("Relevance" => "myrank", "Test Date Descending" => "radiology_record.test_date DESC", "Test Date Ascending" => "radiology_record.test_date ASC");
+	public static $SEARCH_ORDERS = array("Relevance" => "myrank DESC", "Test Date Descending" => "radiology_record.test_date DESC", "Test Date Ascending" => "radiology_record.test_date ASC");
 
 
 	const ANALYZE_LEVEL = "analyze_level";
@@ -317,10 +317,6 @@ WHERE ";
 			oci_bind_by_name($query, ":first_name", $search_term);
 			oci_bind_by_name($query, ":last_name", $search_term);
 		}
-
-
-
-		print($query_string);
 
 		oci_execute($query);
 
