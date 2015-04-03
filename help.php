@@ -15,7 +15,9 @@ if (empty($_GET['page']) || $_GET['page'] == "radiologyinformationsystem") {
 	$content .= "help.php";
 } else if(in_array($_GET['page'], $user_management)) {
 	$content .= 'manageusers.php';
-}  else {
+}  else if ($_GET['page'] == 'usersettings') {
+	$content .= 'login.php';
+} else {
 	$content .= $_GET['page'].'.php';
 }
 
