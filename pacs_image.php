@@ -9,14 +9,28 @@
 
 include('models/pacs_image.php');
 
-//TODO: validation
+header("Content-Type: image/jpeg");
+
+
+if(!User::isUserLoggedIn){
+	//TODO: permissions could be tightened
+
+	$file = fopen('images/denied.png', 'rb');
+	fpassthru($file);
+}
+
 $image = new PACSImage($_GET[PACSImage::IMAGE_ID]);
 
 $size = isset($_GET[PACSImage::SIZE]) ? $_GET[PACSImage::SIZE] : PACSImage::FULL;
 
 $image = $image->getImage($size);
 
-header("Content-Type: image/jpeg");
+if(!$image) {
+	$file = fopen('images/notfound.png', 'rb');
+	fpassthru($file);
+
+}
+
 
 print($image);
 
