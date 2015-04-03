@@ -35,13 +35,6 @@ class RadiologyRecord {
 
 	public static $DRILL_LEVELS = array("Week", "Month", "Year");
 
-	public static $DRILL_VALUES = array("Week" => "IW", "Month" => "Month", "Year" => "YYYY");
-
-	//If test_date is used, drill level MUST be filled in
-	public static $ANALYZE_COLUMNS = array("Test Type" => "test_type", 
-		"Patient" => "patient_id", 
-		"Test Date" => "to_char(to_date(test_date), 'drill_level')");
-
 
 	const ANALYZE_LEVEL = "analyze_level";
 	const DRILL_LEVEL = "drill_level";
@@ -62,29 +55,14 @@ class RadiologyRecord {
 						  WHERE radiology_record.record_id = :record_id
 						  GROUP BY persons.person_id";
 
-	const SELECT_ALL_BY_DIAGNOSIS_AND_DATE = "SELECT p.first_name,
-							 	p.address, p.phone, r.test_date
-						FROM radiology_record r, persons p
-						WHERE p.person_id = r.patient_id 
-						AND r.diagnosis = :diagnosis 
-						AND r.test_date >= TO_DATE(':start_date')
-						AND r.test_date <= TO_DATE(':end_date')";
-
-	const SELECT_ALL = "SELECT p.first_name,
-							 	p.address, p.phone, r.test_date
-						FROM radiology_record r, persons p
+	const SELECT_ALL = "SELECT persons.first_name,
+							 	persons.address, persons.phone, radiology_record.test_date
+						FROM radiology_record, persons
 						WHERE p.person_id = r.patient_id ";
 
-
-	//Searches for records
-/*	const SELECT_SEARCH = "SELECT *
-							FROM radiology_record r JOIN 
-							 pacs_images p ON r.record_id = p.record_id";
-*/
-
-const SELECT_SEARCH =
+const SEARCH =
 "SELECT radiology_record.record_id, 
-	6*(SCORE(3) + SCORE(4)) + 3*SCORE(1) + SCORE(2) myrank, 
+	SCORE
 	image_agg.images,
 	radiologist.first_name radiologist_first_name, radiologist.last_name radiologist_last_name, radiologist.person_id radiologist_id,
 	doctor.first_name doctor_first_name, doctor.last_name doctor_last_name, doctor.person_id doctor_id,
@@ -103,19 +81,21 @@ persons patient ON radiology_record.patient_id = patient.person_id JOIN
 		FROM pacs_images 
 		GROUP BY pacs_images.record_id
 	) image_agg ON image_agg.record_id = radiology_record.record_id 
-WHERE (CONTAINS(radiology_record.diagnosis, :diagnosis, 1) > 0 OR 
-	CONTAINS(radiology_record.description, :description, 2) > 0 OR 
-	CONTAINS(patient.first_name, :first_name, 3) > 0 OR 
-	CONTAINS(patient.last_name, :last_name, 4) > 0)
-	SECURITY
-ORDER BY myrank";
+WHERE ";
 
+
+	//Search security is applied by appending by one of the following:
 	public static $SEARCH_SECURITY = 
 	array("a" => "", 
 		"d" => " AND :doctor_id IN (SELECT doctor_id FROM family_doctor WHERE family_doctor.patient_id = radiology_record.patient_id) ", 
 		"p" => " AND radiology_record.patient_id = :patient_id ", 
 		"r" => " AND radiology_record.radiologist_id = :radiologist_id ");
 
+	const SCORE = "6*(SCORE(3) + SCORE(4)) + 3*SCORE(1) + SCORE(2) myrank,";
+	const CONTAINS = "(CONTAINS(radiology_record.diagnosis, :diagnosis, 1) > 0 OR 
+					   CONTAINS(radiology_record.description, :description, 2) > 0 OR 
+					   CONTAINS(patient.first_name, :first_name, 3) > 0 OR 
+					   CONTAINS(patient.last_name, :last_name, 4) > 0)";
 
 #select record_id, LISTAGG(image_id, ',') WITHIN GROUP (ORDER BY image_id) "images"  FROM pacs_images GROUP BY record_id
 
@@ -139,7 +119,17 @@ ORDER BY myrank";
 							pacs_images ON radiology_record.record_id = pacs_images.record_id 
 							GROUP BY ROLLUP (columns)
 							ORDER BY COUNT(*) DESC";
-	
+
+
+	//columns is replaced by one of the below
+	public static $ANALYZE_COLUMNS = array("Test Type" => "test_type", 
+		"Patient" => "patient_id", 
+		"Test Date" => "to_char(to_date(test_date), 'drill_level')");
+
+	//if test date is selected then drill_level is replaced by one of the below
+	public static $DRILL_VALUES = array("Week" => "IW", "Month" => "Month", "Year" => "YYYY");
+
+
 	//These correspond directly to the columns in the table
 	public $record_id;
 	public $patient_id;
@@ -213,24 +203,34 @@ ORDER BY myrank";
 		$db = getPDOInstance();
 
 		$query_string = RadiologyRecord::SELECT_ALL;
-		$delimiter = " AND ";
+		$delimiter = " ";
 
 		//Because there are optional parameters we need to add them manually
 
-		if($diagnosis != "") {
-			$query_string .= $delimiter;
-			$query_string .= "r.diagnosis = :diagnosis";
+		if($search_term != "") {
 
-		} 
+			$query_string .= $delimiter;
+			$query_string .= RadiologyRecord::CONTAINS;
+
+			$query_string = str_replace("SCORE", RadiologyRecord::SCORE, $query_string);
+
+			$delimiter = " AND ";
+
+		} else {
+			$query_string = str_replace("SCORE", "", $query_string);
+		}
 		if($start_date != "") {
 
 			$query_string .= $delimiter;
-			$query_string .= "r.test_date >= TO_DATE(:start_date, 'YYYY-MM-DD')";
+			$query_string .= "radiology_record.test_date >= TO_DATE(:start_date, 'YYYY-MM-DD')";
+			$delimiter = " AND ";
 
 		} 
 		if($end_date != "") {
 			$query_string .= $delimiter;
-			$query_string .= "r.test_date <= TO_DATE(:end_date, 'YYYY-MM-DD')";
+			$query_string .= "radiology_record.test_date <= TO_DATE(:end_date, 'YYYY-MM-DD')";
+			$delimiter = " AND ";
+
 		}
 
 
@@ -259,12 +259,31 @@ ORDER BY myrank";
 	
 	//Please fill me in
 	
-	public static function selectBySearch($user, $search_term, $start_date, $end_date){
+	public static function search($user, $search_term, $start_date, $end_date){
 		$db = getPDOInstance();
 		
 		$query_string = RadiologyRecord::SELECT_SEARCH;
 
-		$query_string = str_replace("SECURITY", RadiologyRecord::$SEARCH_SECURITY[$user->getClass()], $query_string);
+		$query_string .= RadiologyRecord::$SEARCH_SECURITY[$user->getClass()];
+
+
+		$delimiter = " AND ";
+		if($start_date != "") {
+
+			$query_string .= $delimiter;
+			$query_string .= "radiology_record.test_date >= TO_DATE(:start_date, 'YYYY-MM-DD')";
+
+		} 
+		
+		if($end_date != "") {
+			$query_string .= $delimiter;
+			$query_string .= "radiology_record.test_date <= TO_DATE(:end_date, 'YYYY-MM-DD')";
+		}
+		
+		if($search_term != "") {
+
+		}
+
 
 		$query = oci_parse($db, $query_string);
 
@@ -279,46 +298,6 @@ ORDER BY myrank";
 			oci_bind_by_name($query, ":radiologist_id", $user->person_id, -1, OCI_B_INT);
 		}
  
-		oci_bind_by_name($query, ":diagnosis", $search_term);
-		oci_bind_by_name($query, ":description", $search_term);
-		oci_bind_by_name($query, ":first_name", $search_term);
-		oci_bind_by_name($query, ":last_name", $search_term);
-
-		oci_execute($query);
-
-		// print($query_string);
-
-		// print_r($query);
-		// print(oci_error());
-		// print(oci_error($db));
-		// print(oci_error($query));
-
-		$results;
-		oci_fetch_all($query, $results, null, null, OCI_ASSOC + OCI_FETCHSTATEMENT_BY_ROW);
-		return $results;
-
-/*
-		//if($search_term != "") {
-			//$query_string .= $delimiter;
-		//} 
-		if($start_date != "") {
-
-			$query_string .= $delimiter;
-			$query_string .= "r.test_date >= TO_DATE(:start_date, 'YYYY-MM-DD')";
-
-		} 
-		if($end_date != "") {
-			$query_string .= $delimiter;
-			$query_string .= "r.test_date <= TO_DATE(:end_date, 'YYYY-MM-DD')";
-		}
-
-
-		$query = oci_parse($db, $query_string);
-
-		if($search_term != ""){
-			oci_bind_by_name($query, ":search_term", $search_term);
-		}
-		
 		if($start_date != ""){
 			oci_bind_by_name($query, ":start_date", $start_date);
 		}
@@ -326,7 +305,14 @@ ORDER BY myrank";
 		if($end_date != ""){
 			oci_bind_by_name($query, ":end_date", $end_date);
 		}
-*/		
+		
+ 		if($search_term != ""){
+			oci_bind_by_name($query, ":diagnosis", $search_term);
+			oci_bind_by_name($query, ":description", $search_term);
+			oci_bind_by_name($query, ":first_name", $search_term);
+			oci_bind_by_name($query, ":last_name", $search_term);
+		}
+
 		oci_execute($query);
 
 		$results;
