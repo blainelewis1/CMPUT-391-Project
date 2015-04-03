@@ -93,12 +93,11 @@ class PACSImage {
 		oci_bind_by_name($query, ":image_id", $this->image_id);
 		oci_execute($query);
 
-
 		$row = oci_fetch_array($query, OCI_RETURN_LOBS);
 
-		if(sizeof($row) == 0) {
+		/*if(sizeof($row) == 0) {
 			return false;
-		}
+		}*/
 
 		return $row[0];
 	}
