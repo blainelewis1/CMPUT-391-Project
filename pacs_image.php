@@ -9,7 +9,7 @@
 
 include('models/pacs_image.php');
 
-header("Content-Type: image/jpeg");
+#header("Content-Type: image/jpeg");
 
 
 if(!User::isUserLoggedIn()){
