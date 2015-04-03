@@ -40,15 +40,12 @@ if(isset($_POST[PACSImage::SUBMIT]) || isset($_POST[PACSImage::SUBMIT_ANOTHER]))
 
 	if($message == ""){
 
-		print($pacs_image->image);
 		$pacs_image->insert();
 
 		if(!empty($_POST[PACSImage::SUBMIT_ANOTHER])){
 
 			addNotice("Image uploaded!");
 
-			#header('Location: upload.php?'.RadiologyRecord::RECORD_ID.'='.$pacs_image->record_id);
-			#die();
 		} else {
 
 			addNotice("Record completed!");

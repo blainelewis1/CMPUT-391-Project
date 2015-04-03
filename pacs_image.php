@@ -25,13 +25,13 @@ $size = isset($_GET[PACSImage::SIZE]) ? $_GET[PACSImage::SIZE] : PACSImage::FULL
 
 $image = $image->getImage($size);
 
-/*if($image === false) {
+if($image === false) {
 
 	$file = fopen('images/notfound.png', 'rb');
 	fpassthru($file);
 
 	die();
-}*/
+}
 
 
 print($image);
