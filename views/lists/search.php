@@ -6,6 +6,7 @@
 		textInput('Search', 
 			RadiologyRecord::SEARCH_TERM, 
 			$search_term,
+			256
 			"ifSearchTerm(this)"); 
 	?>
 	<?php echo 

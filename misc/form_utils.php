@@ -19,12 +19,12 @@ function selectPerson($label, $name, $people, $default) { ?>
 </div>
 <?php } 
 
-function textInput($label, $name, &$default, $maxlength=24){ ?>
+function textInput($label, $name, &$default, $maxlength=24, $onchange=""){ ?>
 <div class="row">
 	<div class="label">
 		<label><?php echo  $label.':' ?></label>
 	</div>
-<input type="text" name="<?php echo  $name; ?>" maxlength="<?php echo  $maxlength ?>" value="<?php echo  $default ?>" />
+<input type="text" name="<?php echo  $name; ?>" maxlength="<?php echo  $maxlength ?>" value="<?php echo  $default ?>" onchange="<?php echo $onchange; ?>" />
 </div>
 <?php } 
 
