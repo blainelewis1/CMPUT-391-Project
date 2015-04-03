@@ -31,13 +31,13 @@
 </form>		
 
 <script type="text/javascript">
-	function ifSearchTerm(input) {
+	function ifSearchTerm(search_term) {
 			var selectRelevance = document.querySelectorAll("option[value=Relevance]")[0];
-			selectRelavance.disabled = input.value == "" ? 'hidden' : 'visible';
+			selectRelavance.style.visibility = search_term.value == "" ? 'hidden' : 'visible';
 	}
 	
 	var selectRelevance = document.querySelectorAll("option[value=Relevance]")[0];
-	selectRelavance.style.visibility = <?php echo  $search_term == "" ? 'hidden' : 'visible';
+	selectRelavance.style.visibility = <?php echo  $search_term == "" ? 'hidden' : 'visible'; ?> ;
 
 </script>
 
