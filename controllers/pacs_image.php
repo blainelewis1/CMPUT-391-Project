@@ -19,7 +19,7 @@ function applyAndValidatePacsImage($image) {
 		return '<div class="error">File extension not supported. Only jpg is supported.</div>';
 	}
 
-	$pacs_image->image = $_FILES[PACSImage::IMAGE]["temp_name"];
+	$pacs_image->image = $_FILES[PACSImage::IMAGE]["tmp_name"];
 
 	return "";	
 }
