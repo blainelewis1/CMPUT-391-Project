@@ -20,7 +20,7 @@
 	function ifDate(checkbox) {
 		if(checkbox.value == "Test Date"){
 			var select = document.getElementsByName("<?php echo RadiologyRecord::DRILL_LEVEL; ?>")[0];
-			select.parentNode.style.visibility = checkbox.checked ? "false" : "true";
+			select.disabled = checkbox.checked ? "false" : "true";
 		}
 	}
 	
