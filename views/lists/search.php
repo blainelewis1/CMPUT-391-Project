@@ -44,10 +44,9 @@
 	
 	var selectRelevance = document.querySelectorAll("option[value=Relevance]")[0];
 	selectRelevance.style.display = <?php echo $search_term == "" ? '"none"' : '"block"'; ?>;
+	
 	var select = document.querySelectorAll("select")[0];
-	if(select.options[select.selectedIndex] == 0) {
-		select.options[select.selectedIndex]++;
-	}
+	<?php echo $search_term == "" ? select.selectedIndex = 1 : ""; ?>
 
 </script>
 
