@@ -15,7 +15,6 @@ chmod 777 -R .
 
 Edit misc/dbpass.php and fill in your own Oracle username and password.
 
-
 Each of these files contain a hardcoded csid ~blaine1 
 
 views/lists/people.php	
