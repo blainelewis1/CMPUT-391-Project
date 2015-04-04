@@ -125,7 +125,7 @@ WHERE ";
 		"Test Date" => "to_char(to_date(test_date), 'drill_level')");
 
 	//if test date is selected then drill_level is replaced by one of the below
-	public static $DRILL_VALUES = array("Week" => "IW, YYYY", "Month" => "Month, YYYY", "Year" => "YYYY");
+	public static $DRILL_VALUES = array("Week" => "fmWW, YYYY", "Month" => "fmMonth, YYYY", "Year" => "YYYY");
 
 
 	//These correspond directly to the columns in the table
