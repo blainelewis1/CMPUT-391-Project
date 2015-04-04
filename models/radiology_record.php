@@ -58,6 +58,9 @@ class RadiologyRecord {
 						FROM radiology_record, persons
 						WHERE persons.person_id = radiology_record.patient_id ";
 
+
+// This query is extremely complex and requires SCORE to be filled in as well and a security clause to be added
+// In order to search on a search term, RadiolgyRecord::CONTAINS must be added
 const SEARCH_QUERY =
 "SELECT radiology_record.record_id, 
 	SCORE
@@ -94,8 +97,6 @@ WHERE ";
 					   CONTAINS(radiology_record.description, :description, 2) > 0 OR 
 					   CONTAINS(patient.first_name, :first_name, 3) > 0 OR 
 					   CONTAINS(patient.last_name, :last_name, 4) > 0)";
-
-#select record_id, LISTAGG(image_id, ',') WITHIN GROUP (ORDER BY image_id) "images"  FROM pacs_images GROUP BY record_id
 
 						
 	const INSERT = "INSERT INTO radiology_record (patient_id,
