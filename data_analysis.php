@@ -1,5 +1,9 @@
 <?php
 
+/*
+	Provides data analysis
+*/
+
 include_once('models/user.php');
 include_once('models/radiology_record.php');
 

@@ -1,4 +1,13 @@
-<?php include('misc/form_utils.php'); ?>
+<?php
+/*
+	Takes $columnNames to name the columns as well prefill fields
+	It also takes $drill_level
+
+	$rows contains a series of rows to be displayed
+*/
+
+include('misc/form_utils.php');
+?>
 
 <form action="" method="GET">
 	<?php echo checkboxes('Analyze', 

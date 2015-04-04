@@ -2,6 +2,8 @@
 
 /*
 	From here a user can search for any record
+
+	Takes all parameters via GET
 */
 
 include_once('models/user.php');

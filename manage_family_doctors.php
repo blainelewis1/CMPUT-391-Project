@@ -1,5 +1,9 @@
 <?php
 
+/*
+	Lists all family_doctors and allows for creation and deletion
+*/
+
 
 include_once('misc/utils.php');
 include_once('models/user.php');

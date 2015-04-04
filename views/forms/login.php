@@ -1,4 +1,8 @@
 <?php 
+/*
+	takes $username to prefill the field
+*/
+
 include("misc/form_utils.php")
 ?>
 <?php

@@ -1,5 +1,11 @@
 <?php
 
+/*
+	Lists all users to an admin. If a user is set in the GET parameter it is deleted. We redirect upon completion in 
+	order to avoid duplicate deletion
+
+*/
+
 include_once('misc/utils.php');
 include_once('models/user.php');
 include_once('models/person.php');

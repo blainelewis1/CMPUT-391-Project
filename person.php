@@ -1,5 +1,12 @@
 <?php
 
+/*
+	Allows person to be edited and is a part of the user management module
+	Redirects to manage_people upon completion.
+
+	
+*/
+
 include_once('misc/utils.php');
 include_once('models/user.php');
 include_once('models/person.php');

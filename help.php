@@ -1,5 +1,10 @@
 <?php
 
+/*
+	Takes a GET['page'] to determine which section of help to display
+
+*/
+
 include_once("models/user.php");
 include_once("misc/utils.php");
 

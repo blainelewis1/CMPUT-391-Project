@@ -1,5 +1,17 @@
-<?php include_once('misc/form_utils.php'); ?>
-<?php include_once('models/pacs_image.php'); ?>
+<?php 
+/*
+	This view displays a series of search results
+
+	Takes a $search_term, $start_date, $end_date, $search_order to show the 
+	current parameters
+
+	$records is a list of all the records
+
+*/
+
+include_once('misc/form_utils.php');
+include_once('models/pacs_image.php'); 
+?>
 <form action="" method="GET">
 
 	<?php echo  

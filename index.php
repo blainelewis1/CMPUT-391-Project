@@ -1,5 +1,9 @@
 <?php
 
+/*
+	Basic landing page
+*/
+
 include_once('models/user.php');
 
 $user = User::getLoggedInUser();

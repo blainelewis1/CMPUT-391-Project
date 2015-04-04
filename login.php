@@ -1,5 +1,9 @@
 <?php
 
+/*
+	Logs a user in
+*/
+
 include_once("models/user.php");
 include_once("misc/utils.php");
 

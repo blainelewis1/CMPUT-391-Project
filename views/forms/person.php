@@ -1,4 +1,8 @@
 <?php 
+/*
+	Takes a $person to prefill all the fields
+*/
+
 include('misc/form_utils.php'); 
 include('form_error.php');
 ?>

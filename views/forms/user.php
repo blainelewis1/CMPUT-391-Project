@@ -1,4 +1,8 @@
 <?php 
+/*
+	Takes a User as $editing_user to prefill all fields
+*/
+
 include('misc/form_utils.php'); 
 include('form_error.php');
 ?>

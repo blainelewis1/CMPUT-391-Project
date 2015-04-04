@@ -1,7 +1,7 @@
 <?php 
 
 /*
-	Lists all peoplr given by $peopls
+	Lists all people given by $peopls
 */
 
 include("views/templates/user_management_sub_nav.php"); 

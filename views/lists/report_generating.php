@@ -1,3 +1,10 @@
+<?php
+/*
+	Takes $diagnosis, $start_date, $end_date to prefill the fields
+
+	Takes records as $records to list them
+*/
+?>
 <div id="personal_information">
 
 <?php include('misc/form_utils.php'); ?>

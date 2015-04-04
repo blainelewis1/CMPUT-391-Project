@@ -1,4 +1,8 @@
 <?php
+/*
+	Takes a $record to prefill fields
+*/
+
 include('misc/form_utils.php'); 
 include('form_error.php');
 include_once('models/person.php');

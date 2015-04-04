@@ -1,5 +1,7 @@
 <?php
 /*
+	Displays a pacs_image using GET parameters
+
 	Easiest way to display an image is using the PACSImage model. There are static methods
 	that return URLs for a given image
 */
@@ -11,8 +13,6 @@ header("Content-Type: image/jpeg");
 
 
 if(!User::isUserLoggedIn()){
-	//TODO: permissions could be tightened
-
 	$file = fopen('images/denied.png', 'rb');
 	fpassthru($file);
 
